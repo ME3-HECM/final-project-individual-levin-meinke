@@ -7,16 +7,27 @@
 #pragma config WDTE = OFF        // WDT operating mode (WDT enabled regardless of sleep)
 
 #include <xc.h>
-#include "rc_servo.h"
+#include <stdio.h>
+#include "ADC.h"
+#include "color.h"
 #include "dc_motor.h"
+#include "i2c.h"
+#include "interrupts.h"
+#include "serial.h"
 #include "timers.h"
 
 #define _XTAL_FREQ 64000000 //note intrinsic _delay function is 62.5ns at 64,000,000Hz  
 
 void main(void){
-    //init all required inits
-    Timer0_init();
-    initDCmotorsPWM(99);
+    //init all inits for used modules
+    Timer0_init(); //timer
+    I2C_2_Master_Init(); //i2c coms
+    color_click_init(); //color click module
+    initDCmotorsPWM(99); //dc motors pwm
+    initUSART4(); //init USART if needed for debugging via serial
+  
+    //turn on color click LEDs
+    color_click_toggleLED();
     
 	//???don't forget TRIS for your output!
     
@@ -42,10 +53,15 @@ void main(void){
     char *pmR; //declare pointer motor right
     pmL = &motorL; // assign pmL to the address of motorL
     pmR = &motorR; // assign pmR to the address of motorR
+    
+    char red_val[20];
+    char *pred_val; 
+    pred_val = &red_val[0];
 
     while(1){
-		//write your code to call angle2PWM() to set the servo angle
-        turnLeft(pmL, pmR);
+        //read red value every second and send to serial
+        sprintf(red_val,"red = %d \r\n",color_read_Red());
+        sendStringSerial4(pred_val);
         __delay_ms(1000);
     }
 }

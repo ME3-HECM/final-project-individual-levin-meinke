@@ -1,7 +1,6 @@
 #include <xc.h>
 #include "interrupts.h"
 #include "ADC.h"
-#include "LCD.h"
 #include "serial.h"
 
 // Function to turn on interrupts
@@ -39,7 +38,7 @@ void __interrupt(high_priority) HighISR()
     }
     //serial com receive interrupt
     if (PIR4bits.RC4IF) {
-        return RC4REG
+    //    return RC4REG;
     }
 }
 

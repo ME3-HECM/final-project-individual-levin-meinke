@@ -5,13 +5,21 @@
 void color_click_init(void){   
     //setup colour sensor via i2c interface
     I2C_2_Master_Init();      //Initialise i2c Master
-     //set device PON
-	color_writetoaddr(0x00, 0x01);
+	color_writetoaddr(0x00, 0x01); //turn on - write 1 to PON bit in device register)
     __delay_ms(3); //need to wait 3ms for everything to start up
-    //turn on device ADC
-	color_writetoaddr(0x00, 0x03);
-    //set integration time
-	color_writetoaddr(0x01, 0xD5);
+	color_writetoaddr(0x00, 0x03); //turn on device ADC
+	color_writetoaddr(0x01, 0xD5); //set integration time
+    
+    //set initial value for LEDS on the color click to off (toggle with toggle function)
+    LATGbits.LATG0=0; //red LED
+    LATAbits.LATA3=0; //blue LED
+    LATEbits.LATE7=0; //green LED
+    
+    //set tris values for pins to output corresponding to the LEDs on color click
+    TRISGbits.TRISG0=0;
+    TRISAbits.TRISA3=0;
+    TRISEbits.TRISE7=0;
+    
 }
 
 void color_writetoaddr(char address, char value){
@@ -33,5 +41,12 @@ unsigned int color_read_Red(void){
 	tmp=tmp | (I2C_2_Master_Read(0)<<8); //read the Red MSB (don't acknowledge as this is the last read)
 	I2C_2_Master_Stop();          //Stop condition
 	return tmp;
+}
+
+//function to toggle LEDs on the color click
+void color_click_toggleLED(void){
+    LATGbits.LATG0 = !LATGbits.LATG0;
+    LATAbits.LATA3 = !LATAbits.LATA3;
+    LATEbits.LATE7 = !LATEbits.LATE7;
 }
 

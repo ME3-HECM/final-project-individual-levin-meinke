@@ -1,0 +1,893 @@
+%CMF
+# %PSECTS Section
+# For each object file, details of its psects are enumerated here.
+# The begining of the section is indicated by %PSECTS.  The first
+# line indicates the name of the first object file, e.g.
+#    $foo.obj
+# Each line that follows describes a psect in that object file, until
+# the next object file.  The lines that describe a psect have the
+# format:
+#    <psect name> <class name> <space> <link address> <load addresses> <length> <delta> <reloc>
+# All addresses and the length are given in unqualified hexadecimal
+# in delta units.  Any other numeric values are decimal.
+%PSECTS
+$dist/default/production\final-project-individual-levin-meinke.X.production.o
+cinit CODE 0 14FC 14FC 2A 1 2
+text0 CODE 0 112A 112A AC 1 2
+text1 CODE 0 1494 1494 34 1 2
+text2 CODE 0 145A 145A 3A 1 2
+text3 CODE 0 E0E E0E 1A8 1 2
+text4 CODE 0 11D6 11D6 AA 1 2
+text5 CODE 0 1646 1646 2 1 2
+text6 CODE 0 14C8 14C8 34 1 2
+text7 CODE 0 107A 107A B0 1 2
+text8 CODE 0 FB6 FB6 C4 1 2
+text9 CODE 0 1526 1526 2A 1 2
+text10 CODE 0 1604 1604 18 1 2
+text11 CODE 0 15E6 15E6 1E 1 2
+text12 CODE 0 1280 1280 A2 1 2
+text13 CODE 0 1388 1388 50 1 2
+text14 CODE 0 1628 1628 A 1 2
+text15 CODE 0 13D8 13D8 42 1 2
+text16 CODE 0 1322 1322 66 1 2
+text17 CODE 0 141A 141A 40 1 2
+text18 CODE 0 15C6 15C6 20 1 2
+text19 CODE 0 161C 161C C 1 2
+text20 CODE 0 1632 1632 A 1 2
+text21 CODE 0 163C 163C A 1 2
+text22 CODE 0 157A 157A 28 1 2
+text23 CODE 0 1550 1550 2A 1 2
+text24 CODE 0 15A2 15A2 24 1 2
+cstackCOMRAM COMRAM 1 1 1 54 1 1
+temp COMRAM 1 5E 5E 1 1 1
+bssBANK0 BANK0 1 60 60 70 1 1
+intcode CODE 0 8 8 58 1 2
+smallconst SMALLCONST 0 E00 E00 E 1 2
+bssCOMRAM COMRAM 1 55 55 9 1 1
+config CONFIG 4 300000 300000 6 1 1
+$C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_14.o
+init CODE 0 60 60 4 1 2
+reset_vec CODE 0 0 0 4 1 2
+config CONFIG 4 300000 300000 6 1 1
+# %UNUSED Section
+# This section enumerates the unused ranges of each CLASS. Each entry
+# is described on a single line as follows:
+#    <class name> <range> <delta>
+# Addresses given in the range are in hexadecimal and units of delta.
+%UNUSED
+RAM D0-DE9 1
+SFR DEF-FFF 1
+BANK0 D0-FF 1
+BANK1 100-1FF 1
+BANK2 200-2FF 1
+BANK3 300-3FF 1
+BANK4 400-4FF 1
+BANK5 500-5FF 1
+BANK6 600-6FF 1
+BANK7 700-7FF 1
+BANK8 800-8FF 1
+BANK9 900-9FF 1
+CONST 4-7 1
+CONST 64-DFF 1
+CONST 1648-1FFFF 1
+IDLOC 200000-20000F 1
+SMALLCONST 1648-1FFFF 1
+CODE 4-7 1
+CODE 64-DFF 1
+CODE 1648-1FFFF 1
+BANK10 A00-AFF 1
+BANK11 B00-BFF 1
+BANK12 C00-CFF 1
+BANK13 D00-DE9 1
+BIGRAM 5F-5F 1
+BIGRAM D0-DE9 1
+BIGSFR DEF-FFF 1
+COMRAM 5F-5F 1
+CONFIG 300006-30000B 1
+EEDATA 310000-3103FF 1
+MEDIUMCONST 1648-FFFF 1
+MEDIUMCONST 10E00-1FFFF 1
+# %LINETAB Section
+# This section enumerates the file/line to address mappings.
+# The beginning of the section is indicated by %LINETAB.
+# The first line indicates the name of the first object file, e.g.
+#   $foo.obj
+# Each line that follows describes a single mapping until the next
+# object file.  Mappings have the following format:
+#    <address> <psect name> <class name> ><line number>:<file name>
+# The address is absolute and given given in unqualified hex 
+# in delta units of the psect. All mappings within an object file
+# are in ascending order of addresses.
+# All other numeric values are in decimal.
+%LINETAB
+$dist/default/production\final-project-individual-levin-meinke.X.production.o
+8 intcode CODE >14819:C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_1.s
+8 intcode CODE >19:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\interrupts.c
+A intcode CODE >22:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\interrupts.c
+1A intcode CODE >23:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\interrupts.c
+3E intcode CODE >27:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\interrupts.c
+42 intcode CODE >31:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\interrupts.c
+50 intcode CODE >34:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\interrupts.c
+54 intcode CODE >35:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\interrupts.c
+58 intcode CODE >37:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\interrupts.c
+5A intcode CODE >40:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\interrupts.c
+5C intcode CODE >43:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\interrupts.c
+15A2 text24 CODE >7:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\timers.c
+15A2 text24 CODE >9:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\timers.c
+15AA text24 CODE >10:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\timers.c
+15AC text24 CODE >11:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\timers.c
+15B4 text24 CODE >12:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\timers.c
+15B8 text24 CODE >14:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\timers.c
+15BA text24 CODE >17:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\timers.c
+15BE text24 CODE >18:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\timers.c
+15C2 text24 CODE >20:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\timers.c
+15C4 text24 CODE >21:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\timers.c
+1550 text23 CODE >4:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+1550 text23 CODE >6:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+155A text23 CODE >7:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+155C text23 CODE >8:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+1560 text23 CODE >11:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+1562 text23 CODE >12:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+1564 text23 CODE >13:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+1566 text23 CODE >14:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+1568 text23 CODE >15:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+156C text23 CODE >16:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+1570 text23 CODE >17:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+1574 text23 CODE >18:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+1578 text23 CODE >19:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+157A text22 CODE >21:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+157A text22 CODE >22:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+15A0 text22 CODE >23:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+163C text21 CODE >25:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+163C text21 CODE >26:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+1640 text21 CODE >27:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+1644 text21 CODE >28:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+1632 text20 CODE >35:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+1632 text20 CODE >36:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+1636 text20 CODE >37:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+163A text20 CODE >38:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+161C text19 CODE >40:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+161E text19 CODE >41:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+1622 text19 CODE >42:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+1626 text19 CODE >43:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+15C6 text18 CODE >25:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+15C8 text18 CODE >26:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+15CC text18 CODE >27:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+15D2 text18 CODE >28:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+15DA text18 CODE >29:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+15E0 text18 CODE >30:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+15E4 text18 CODE >31:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+141A text17 CODE >5:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+141A text17 CODE >7:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+141E text17 CODE >8:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+1428 text17 CODE >9:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+1438 text17 CODE >10:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+1442 text17 CODE >11:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+144C text17 CODE >14:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+144E text17 CODE >15:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+1450 text17 CODE >16:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+1452 text17 CODE >19:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+1454 text17 CODE >20:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+1456 text17 CODE >21:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+1458 text17 CODE >23:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+1322 text16 CODE >47:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+1322 text16 CODE >48:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+1340 text16 CODE >49:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+1364 text16 CODE >50:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+1386 text16 CODE >51:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+13D8 text15 CODE >45:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+13DA text15 CODE >47:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+13DE text15 CODE >48:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+13E2 text15 CODE >49:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+13E6 text15 CODE >50:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+13EA text15 CODE >51:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+13EE text15 CODE >52:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+1414 text15 CODE >53:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+1416 text15 CODE >54:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+1418 text15 CODE >55:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+1628 text14 CODE >30:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+1628 text14 CODE >31:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+162C text14 CODE >32:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+1630 text14 CODE >33:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\i2c.c
+1388 text13 CODE >33:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+1388 text13 CODE >35:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+138C text13 CODE >36:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+1392 text13 CODE >37:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+1398 text13 CODE >38:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+139C text13 CODE >39:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+13A2 text13 CODE >40:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+13B0 text13 CODE >41:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+13CA text13 CODE >42:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+13CE text13 CODE >43:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+13D6 text13 CODE >44:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\color.c
+1280 text12 CODE >6:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+1280 text12 CODE >10:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+1286 text12 CODE >11:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+128A text12 CODE >12:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+128E text12 CODE >13:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+1292 text12 CODE >16:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+129A text12 CODE >17:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+129E text12 CODE >18:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+12A6 text12 CODE >22:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+12AA text12 CODE >23:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+12AC text12 CODE >27:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+12B0 text12 CODE >28:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+12B4 text12 CODE >29:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+12BA text12 CODE >30:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+12BE text12 CODE >33:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+12C2 text12 CODE >34:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+12C6 text12 CODE >35:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+12CA text12 CODE >36:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+12CE text12 CODE >39:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+12D0 text12 CODE >40:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+12D8 text12 CODE >41:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+12DA text12 CODE >43:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+12DC text12 CODE >44:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+12E4 text12 CODE >45:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+12E6 text12 CODE >47:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+12E8 text12 CODE >48:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+12F0 text12 CODE >49:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+12F2 text12 CODE >51:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+12F4 text12 CODE >52:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+12FC text12 CODE >53:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+12FE text12 CODE >56:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+1304 text12 CODE >57:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+1308 text12 CODE >58:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+130C text12 CODE >59:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+1310 text12 CODE >62:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+1312 text12 CODE >63:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+1314 text12 CODE >64:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+1316 text12 CODE >65:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+1318 text12 CODE >68:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+131A text12 CODE >69:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+131C text12 CODE >70:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+131E text12 CODE >71:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+1320 text12 CODE >72:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
+15E6 text11 CODE >4:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\serial.c
+15E6 text11 CODE >8:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\serial.c
+15EC text11 CODE >9:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\serial.c
+15F0 text11 CODE >12:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\serial.c
+15F2 text11 CODE >13:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\serial.c
+15F4 text11 CODE >15:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\serial.c
+15F8 text11 CODE >16:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\serial.c
+15FC text11 CODE >19:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\serial.c
+15FE text11 CODE >20:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\serial.c
+1600 text11 CODE >21:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\serial.c
+1602 text11 CODE >22:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\serial.c
+1604 text10 CODE >31:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\serial.c
+1606 text10 CODE >32:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\serial.c
+1616 text10 CODE >33:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\serial.c
+161A text10 CODE >34:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\serial.c
+1526 text9 CODE >38:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\serial.c
+1526 text9 CODE >40:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\serial.c
+152A text9 CODE >41:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\serial.c
+1538 text9 CODE >40:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\serial.c
+154E text9 CODE >43:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\serial.c
+FB6 text8 CODE >7:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awdiv.c
+FB6 text8 CODE >13:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awdiv.c
+FBA text8 CODE >14:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awdiv.c
+FC8 text8 CODE >15:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awdiv.c
+FD0 text8 CODE >16:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awdiv.c
+FD4 text8 CODE >18:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awdiv.c
+FE2 text8 CODE >19:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awdiv.c
+FEA text8 CODE >20:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awdiv.c
+FEE text8 CODE >22:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awdiv.c
+FF6 text8 CODE >23:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awdiv.c
+1008 text8 CODE >24:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awdiv.c
+100C text8 CODE >25:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awdiv.c
+1010 text8 CODE >26:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awdiv.c
+1016 text8 CODE >27:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awdiv.c
+1018 text8 CODE >25:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awdiv.c
+1026 text8 CODE >30:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awdiv.c
+102C text8 CODE >31:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awdiv.c
+1042 text8 CODE >32:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awdiv.c
+104A text8 CODE >33:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awdiv.c
+104C text8 CODE >35:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awdiv.c
+1052 text8 CODE >36:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awdiv.c
+1058 text8 CODE >38:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awdiv.c
+1068 text8 CODE >39:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awdiv.c
+1070 text8 CODE >40:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awdiv.c
+1078 text8 CODE >41:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awdiv.c
+107A text7 CODE >7:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awmod.c
+107A text7 CODE >12:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awmod.c
+107E text7 CODE >13:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awmod.c
+108C text7 CODE >14:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awmod.c
+1094 text7 CODE >15:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awmod.c
+1098 text7 CODE >17:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awmod.c
+10A6 text7 CODE >18:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awmod.c
+10AE text7 CODE >19:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awmod.c
+10C0 text7 CODE >20:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awmod.c
+10C4 text7 CODE >21:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awmod.c
+10C8 text7 CODE >22:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awmod.c
+10CE text7 CODE >23:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awmod.c
+10D0 text7 CODE >21:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awmod.c
+10DE text7 CODE >26:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awmod.c
+10F4 text7 CODE >27:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awmod.c
+10FC text7 CODE >28:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awmod.c
+1102 text7 CODE >29:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awmod.c
+1108 text7 CODE >31:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awmod.c
+1118 text7 CODE >32:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awmod.c
+1120 text7 CODE >33:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awmod.c
+1128 text7 CODE >34:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\awmod.c
+14C8 text6 CODE >1:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\abs.c
+14C8 text6 CODE >3:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\abs.c
+14FA text6 CODE >4:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\abs.c
+1646 text5 CODE >7:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\putch.c
+1646 text5 CODE >9:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\putch.c
+11D6 text4 CODE >8:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\nf_fputc.c
+11D6 text4 CODE >12:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\nf_fputc.c
+11F6 text4 CODE >13:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\nf_fputc.c
+11FC text4 CODE >14:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\nf_fputc.c
+1200 text4 CODE >15:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\nf_fputc.c
+124E text4 CODE >18:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\nf_fputc.c
+126E text4 CODE >20:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\nf_fputc.c
+127E text4 CODE >24:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\nf_fputc.c
+E0E text3 CODE >1177:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
+E0E text3 CODE >1201:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
+E2C text3 CODE >1202:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
+E34 text3 CODE >1204:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
+E40 text3 CODE >1205:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
+E44 text3 CODE >1291:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
+E4E text3 CODE >1361:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
+E7E text3 CODE >1404:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
+E96 text3 CODE >1406:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
+EA0 text3 CODE >1408:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
+EA4 text3 CODE >1409:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
+EB8 text3 CODE >1411:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
+EE8 text3 CODE >1412:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
+F04 text3 CODE >1416:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
+F26 text3 CODE >1417:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
+F46 text3 CODE >1418:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
+F58 text3 CODE >1424:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
+F74 text3 CODE >1423:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
+F8A text3 CODE >1806:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
+F96 text3 CODE >1811:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
+FB4 text3 CODE >1814:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
+145A text2 CODE >1817:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
+145A text2 CODE >1822:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
+145E text2 CODE >1826:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
+1462 text2 CODE >1830:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
+1472 text2 CODE >1826:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
+148A text2 CODE >1835:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
+1492 text2 CODE >1840:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\doprnt.c
+1494 text1 CODE >9:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\nf_sprintf.c
+1494 text1 CODE >15:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\nf_sprintf.c
+1498 text1 CODE >16:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\nf_sprintf.c
+149C text1 CODE >17:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\nf_sprintf.c
+14A4 text1 CODE >18:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\nf_sprintf.c
+14AC text1 CODE >19:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\nf_sprintf.c
+14BC text1 CODE >20:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\nf_sprintf.c
+14C6 text1 CODE >23:C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\nf_sprintf.c
+112A text0 CODE >21:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\main.c
+112A text0 CODE >23:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\main.c
+112E text0 CODE >24:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\main.c
+1132 text0 CODE >25:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\main.c
+1136 text0 CODE >26:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\main.c
+1142 text0 CODE >27:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\main.c
+1146 text0 CODE >30:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\main.c
+114A text0 CODE >36:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\main.c
+114A text0 CODE >38:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\main.c
+114E text0 CODE >39:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\main.c
+1152 text0 CODE >40:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\main.c
+1156 text0 CODE >41:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\main.c
+115E text0 CODE >42:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\main.c
+1166 text0 CODE >43:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\main.c
+116E text0 CODE >45:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\main.c
+1172 text0 CODE >46:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\main.c
+1176 text0 CODE >47:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\main.c
+117A text0 CODE >48:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\main.c
+1182 text0 CODE >49:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\main.c
+118A text0 CODE >50:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\main.c
+1192 text0 CODE >54:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\main.c
+1192 text0 CODE >55:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\main.c
+1192 text0 CODE >59:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\main.c
+1196 text0 CODE >63:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\main.c
+11AE text0 CODE >64:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\main.c
+11B6 text0 CODE >65:C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\main.c
+14FC cinit CODE >10842:C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_1.s
+14FC cinit CODE >10844:C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_1.s
+14FC cinit CODE >10847:C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_1.s
+14FC cinit CODE >10885:C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_1.s
+1500 cinit CODE >10886:C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_1.s
+1502 cinit CODE >10887:C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_1.s
+1502 cinit CODE >10888:C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_1.s
+1504 cinit CODE >10889:C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_1.s
+1506 cinit CODE >10890:C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_1.s
+1508 cinit CODE >10893:C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_1.s
+150C cinit CODE >10894:C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_1.s
+150E cinit CODE >10895:C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_1.s
+150E cinit CODE >10896:C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_1.s
+1510 cinit CODE >10897:C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_1.s
+1512 cinit CODE >10898:C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_1.s
+1514 cinit CODE >10904:C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_1.s
+1514 cinit CODE >10906:C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_1.s
+1516 cinit CODE >10907:C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_1.s
+1518 cinit CODE >10909:C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_1.s
+151A cinit CODE >10910:C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_1.s
+151C cinit CODE >10911:C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_1.s
+151E cinit CODE >10912:C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_1.s
+1520 cinit CODE >10913:C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_1.s
+1522 cinit CODE >10914:C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_1.s
+# %SYMTAB Section
+# An enumeration of all symbols in the program.
+# The beginning of the section is indicated by %SYMTAB.
+# Each line describes a single symbol as follows:
+#    <label> <value> [-]<load-adj> <class> <space> <psect> <file-name>
+# The value and load-adj are both in unqualified hexadecimal.
+# All other numeric values are in decimal.  The load-adj is the
+# quantity one needs to add to the symbol value in order to obtain the load
+# address of the symbol.  This value may be signed. If the symbol
+# was defined in a psect then <psect> will be "-". File-name
+# is the name of the object file in which the symbol was defined.
+%SYMTAB
+___awdiv@counter 6 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lmediumconst 0 0 MEDIUMCONST 0 mediumconst dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hspace_0 1648 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hspace_1 D0 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hspace_2 0 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hspace_4 600006 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+color_writetoaddr@address 5 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+_sendCharSerial4 1604 0 CODE 0 text10 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hibigdata 0 0 CODE 0 ibigdata dist/default/production\final-project-individual-levin-meinke.X.production.o
+__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_14.o
+__Heeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\final-project-individual-levin-meinke.X.production.o
+__L__absolute__ 0 0 ABS 0 __absolute__ dist/default/production\final-project-individual-levin-meinke.X.production.o
+?_abs 8 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+?_vfprintf 17 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lsmallconst E00 0 SMALLCONST 0 smallconst dist/default/production\final-project-individual-levin-meinke.X.production.o
+_T2PR FBC 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+___sp 0 0 STACK 2 stack C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_14.o
+_dbuf 9C 0 BANK0 1 bssBANK0 dist/default/production\final-project-individual-levin-meinke.X.production.o
+_main 112A 0 CODE 0 text0 dist/default/production\final-project-individual-levin-meinke.X.production.o
+_prec 57 0 COMRAM 1 bssCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+abs@a 8 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+btemp 5E 0 COMRAM 1 temp dist/default/production\final-project-individual-levin-meinke.X.production.o
+___stack_hi 0 0 STACK 2 stack C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_14.o
+___stack_lo 0 0 STACK 2 stack C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_14.o
+start 60 0 CODE 0 init C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_14.o
+__HbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+_RxBufReadCnt 5C 0 COMRAM 1 bssCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hpowerup 60 0 CODE 0 powerup dist/default/production\final-project-individual-levin-meinke.X.production.o
+__end_of_vfpfcnvrt FB6 0 CODE 0 text3 dist/default/production\final-project-individual-levin-meinke.X.production.o
+___awmod@sign 7 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+ttemp5 5F 0 COMRAM 1 temp dist/default/production\final-project-individual-levin-meinke.X.production.o
+ttemp6 62 0 COMRAM 1 temp dist/default/production\final-project-individual-levin-meinke.X.production.o
+ttemp7 66 0 COMRAM 1 temp dist/default/production\final-project-individual-levin-meinke.X.production.o
+__accesstop 60 0 ABS 0 - C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_14.o
+intlevel0 0 0 CODE 0 text C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_14.o
+intlevel1 0 0 CODE 0 text C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_14.o
+intlevel2 0 0 CODE 0 text C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_14.o
+intlevel3 0 0 CODE 0 text C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_14.o
+__LbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+__LnvFARRAM 0 0 FARRAM 0 nvFARRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+wtemp8 5F 0 COMRAM 1 temp dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hifardata 0 0 CODE 0 ifardata dist/default/production\final-project-individual-levin-meinke.X.production.o
+___awdiv@sign 7 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hclrtext 0 0 ABS 0 clrtext dist/default/production\final-project-individual-levin-meinke.X.production.o
+_vfpfcnvrt E0E 0 CODE 0 text3 dist/default/production\final-project-individual-levin-meinke.X.production.o
+_ADRESH F64 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+___awdiv@dividend 2 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+___inthi_sp 0 0 STACK 2 stack C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_14.o
+___intlo_sp 0 0 STACK 2 stack C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_14.o
+I2C_2_Master_Read@ack 4 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+I2C_2_Master_Read@tmp 5 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+_CCPR1H FAA 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_CCPR2H FA6 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_CCPR3H F25 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_CCPR4H F21 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+color_writetoaddr@value 4 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hintcode_body 0 0 ABS 0 intcode_body dist/default/production\final-project-individual-levin-meinke.X.production.o
+_TxBufWriteCnt 5B 0 COMRAM 1 bssCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lintsave_regs 0 0 BIGRAM 1 intsave_regs dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hmediumconst 0 0 MEDIUMCONST 0 mediumconst dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hintcodelo 60 0 CODE 0 intcodelo dist/default/production\final-project-individual-levin-meinke.X.production.o
+___awdiv@divisor 4 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+__end_of___awdiv 107A 0 CODE 0 text8 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__end_of___awmod 112A 0 CODE 0 text7 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lintcodelo 60 0 CODE 0 intcodelo dist/default/production\final-project-individual-levin-meinke.X.production.o
+_SSP2CON1bits ED9 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+start_initialization 14FC 0 CODE 0 cinit dist/default/production\final-project-individual-levin-meinke.X.production.o
+_SSP2CON2bits EDA 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+__HnvFARRAM 0 0 FARRAM 0 nvFARRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+_TRISAbits F81 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_TRISCbits F83 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_TRISDbits F84 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_TRISEbits F85 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_TRISGbits F87 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+___rparam_used 1 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_RC0PPS E62 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_RC4REG EE3 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_RC7PPS E69 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_RD5PPS E6F 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_RD6PPS E70 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_RE2PPS E74 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_RE4PPS E76 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_ADREFbits F58 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_RG6PPS E88 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_RX4PPS E15 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+__end_of_I2C_2_Master_Start 1646 0 CODE 0 text21 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__end_of_I2C_2_Master_Write 1628 0 CODE 0 text19 dist/default/production\final-project-individual-levin-meinke.X.production.o
+_TX4REG EE4 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+I2C_2_Master_Write@data_byte 3 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+isa$xinst 0 0 ABS 0 - C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_14.o
+fputc@fp 4 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+vfpfcnvrt@done 10 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hbank0 0 0 ABS 0 bank0 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hbank1 0 0 ABS 0 bank1 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hbank2 0 0 ABS 0 bank2 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hbank3 0 0 ABS 0 bank3 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hbank4 0 0 ABS 0 bank4 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hbank5 0 0 ABS 0 bank5 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hbank6 0 0 ABS 0 bank6 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hbank7 0 0 ABS 0 bank7 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hbank8 0 0 ABS 0 bank8 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hbank9 0 0 ABS 0 bank9 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hcinit 0 0 ABS 0 cinit dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hconst 0 0 CONST 0 const dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hidata 0 0 CODE 0 idata dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hidloc 0 0 ABS 0 idloc dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hnvbit 0 0 COMRAM 1 nvbit dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hparam 0 0 COMRAM 1 rparam dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hrdata 0 0 COMRAM 1 rdata dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hstack 0 0 STACK 2 stack dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Htext0 0 0 ABS 0 text0 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Htext1 0 0 ABS 0 text1 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Htext2 0 0 ABS 0 text2 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Htext3 0 0 ABS 0 text3 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Htext4 0 0 ABS 0 text4 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Htext5 0 0 ABS 0 text5 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Htext6 0 0 ABS 0 text6 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Htext7 0 0 ABS 0 text7 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Htext8 0 0 ABS 0 text8 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Htext9 0 0 ABS 0 text9 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hbank10 0 0 ABS 0 bank10 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hbank11 0 0 ABS 0 bank11 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hbank12 0 0 ABS 0 bank12 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hbank13 0 0 ABS 0 bank13 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hbigbss 0 0 BIGRAM 1 bigbss dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hbigram 0 0 ABS 0 bigram dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hbigsfr 0 0 ABS 0 bigsfr dist/default/production\final-project-individual-levin-meinke.X.production.o
+__smallconst E00 0 SMALLCONST 0 smallconst C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_14.o
+__end_of_sprintf 14C8 0 CODE 0 text1 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__end_of_HighISR 60 0 CODE 0 intcode dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hcomram 0 0 ABS 0 comram dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hconfig 300006 0 CONFIG 4 config dist/default/production\final-project-individual-levin-meinke.X.production.o
+_T2HLTbits FBE 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lbank0 0 0 ABS 0 bank0 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lbank1 0 0 ABS 0 bank1 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lbank2 0 0 ABS 0 bank2 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lbank3 0 0 ABS 0 bank3 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lbank4 0 0 ABS 0 bank4 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lbank5 0 0 ABS 0 bank5 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lbank6 0 0 ABS 0 bank6 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lbank7 0 0 ABS 0 bank7 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lbank8 0 0 ABS 0 bank8 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lbank9 0 0 ABS 0 bank9 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lcinit 0 0 ABS 0 cinit dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lconst 0 0 CONST 0 const dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lidata 0 0 CODE 0 idata dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lidloc 0 0 ABS 0 idloc dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lnvbit 0 0 COMRAM 1 nvbit dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lparam 0 0 COMRAM 1 rparam dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lrdata 0 0 COMRAM 1 rdata dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lstack 0 0 STACK 2 stack dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Ltext0 0 0 ABS 0 text0 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Ltext1 0 0 ABS 0 text1 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Ltext2 0 0 ABS 0 text2 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Ltext3 0 0 ABS 0 text3 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Ltext4 0 0 ABS 0 text4 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Ltext5 0 0 ABS 0 text5 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Ltext6 0 0 ABS 0 text6 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Ltext7 0 0 ABS 0 text7 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Ltext8 0 0 ABS 0 text8 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Ltext9 0 0 ABS 0 text9 dist/default/production\final-project-individual-levin-meinke.X.production.o
+_I2C_2_Master_Start 163C 0 CODE 0 text21 dist/default/production\final-project-individual-levin-meinke.X.production.o
+initDCmotorsPWM@PWMperiod 2 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+_I2C_2_Master_Write 161C 0 CODE 0 text19 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hfarbss 0 0 FARRAM 0 farbss dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lintcode_body 0 0 ABS 0 intcode_body dist/default/production\final-project-individual-levin-meinke.X.production.o
+_INTCONbits FF2 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Habs1 0 0 ABS 0 abs1 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hdata 0 0 ABS 0 data dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hheap 0 0 HEAP 7 heap dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hinit 64 0 CODE 0 init dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hrbit 0 0 COMRAM 1 rbit dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hrbss 0 0 COMRAM 1 rbss dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Htemp 5F 0 COMRAM 1 temp dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Htext 0 0 ABS 0 text dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Labs1 0 0 ABS 0 abs1 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Ldata 0 0 ABS 0 data dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lheap 0 0 HEAP 7 heap dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Linit 60 0 CODE 0 init dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lrbit 0 0 COMRAM 1 rbit dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lrbss 0 0 COMRAM 1 rbss dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Ltemp 5E 0 COMRAM 1 temp dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Ltext 0 0 ABS 0 text dist/default/production\final-project-individual-levin-meinke.X.production.o
+__end_of_color_click_toggleLED 1388 0 CODE 0 text16 dist/default/production\final-project-individual-levin-meinke.X.production.o
+_SSP2CON2 EDA 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_SSP2STAT ED8 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_TxBufReadCnt 5A 0 COMRAM 1 bssCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+int$flags 5E 0 COMRAM 1 temp dist/default/production\final-project-individual-levin-meinke.X.production.o
+__HcstackCOMRAM 0 0 ABS 0 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+_Timer0_init 15A2 0 CODE 0 text24 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hintret 0 0 ABS 0 intret dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hirdata 0 0 CODE 0 irdata dist/default/production\final-project-individual-levin-meinke.X.production.o
+__S0 1648 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+__S1 D0 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+__S4 0 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+__S5 0 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_abs 14C8 0 CODE 0 text6 dist/default/production\final-project-individual-levin-meinke.X.production.o
+_TX4STAbits EE8 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_color_read_Red 1388 0 CODE 0 text13 dist/default/production\final-project-individual-levin-meinke.X.production.o
+_color_click_toggleLED 1322 0 CODE 0 text16 dist/default/production\final-project-individual-levin-meinke.X.production.o
+_BAUD4CONbits EE9 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lbigdata 0 0 BIGRAM 1 bigdata dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hnvrram 0 0 COMRAM 1 nvrram dist/default/production\final-project-individual-levin-meinke.X.production.o
+sprintf@fmt 1C 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+__end_of_abs 14FC 0 CODE 0 text6 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lintentry 0 0 ABS 0 intentry dist/default/production\final-project-individual-levin-meinke.X.production.o
+_color_click_init 141A 0 CODE 0 text17 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hramtop E00 0 RAM 0 ramtop dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hrparam 0 0 COMRAM 1 rparam dist/default/production\final-project-individual-levin-meinke.X.production.o
+_CCPTMRS0bits FAD 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+__activetblptr 1 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hstruct 0 0 COMRAM 1 struct dist/default/production\final-project-individual-levin-meinke.X.production.o
+__LbssBANK0 0 0 ABS 0 bssBANK0 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Htext10 0 0 ABS 0 text10 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Htext11 0 0 ABS 0 text11 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Htext12 0 0 ABS 0 text12 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Htext13 0 0 ABS 0 text13 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Htext14 0 0 ABS 0 text14 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Htext15 0 0 ABS 0 text15 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Htext16 0 0 ABS 0 text16 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Htext17 0 0 ABS 0 text17 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Htext18 0 0 ABS 0 text18 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Htext19 0 0 ABS 0 text19 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Htext20 0 0 ABS 0 text20 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Htext21 0 0 ABS 0 text21 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Htext22 0 0 ABS 0 text22 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Htext23 0 0 ABS 0 text23 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Htext24 0 0 ABS 0 text24 dist/default/production\final-project-individual-levin-meinke.X.production.o
+vfpfcnvrt@fmt D 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+___awmod@counter 6 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+_PIE0bits E29 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_PIE2bits E2B 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_PIE4bits E2D 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+__end_of_sendStringSerial4 1550 0 CODE 0 text9 dist/default/production\final-project-individual-levin-meinke.X.production.o
+_RxBufWriteCnt 5D 0 COMRAM 1 bssCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+__ptext10 1604 0 CODE 0 text10 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__ptext11 15E6 0 CODE 0 text11 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__ptext12 1280 0 CODE 0 text12 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__ptext13 1388 0 CODE 0 text13 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__ptext14 1628 0 CODE 0 text14 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__ptext15 13D8 0 CODE 0 text15 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__ptext16 1322 0 CODE 0 text16 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__ptext17 141A 0 CODE 0 text17 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__ptext18 15C6 0 CODE 0 text18 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__ptext19 161C 0 CODE 0 text19 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__ptext20 1632 0 CODE 0 text20 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__ptext21 163C 0 CODE 0 text21 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__ptext22 157A 0 CODE 0 text22 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__ptext23 1550 0 CODE 0 text23 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__ptext24 15A2 0 CODE 0 text24 dist/default/production\final-project-individual-levin-meinke.X.production.o
+___awdiv FB6 0 CODE 0 text8 dist/default/production\final-project-individual-levin-meinke.X.production.o
+___awmod 107A 0 CODE 0 text7 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lbank10 0 0 ABS 0 bank10 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lbank11 0 0 ABS 0 bank11 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lbank12 0 0 ABS 0 bank12 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lbank13 0 0 ABS 0 bank13 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lbigbss 0 0 BIGRAM 1 bigbss dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lbigram 0 0 ABS 0 bigram dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lbigsfr 0 0 ABS 0 bigsfr dist/default/production\final-project-individual-levin-meinke.X.production.o
+color_read_Red@tmp B 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+__end_of_color_read_Red 13D8 0 CODE 0 text13 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lcomram 0 0 ABS 0 comram dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lconfig 0 0 CONFIG 4 config dist/default/production\final-project-individual-levin-meinke.X.production.o
+_LATAbits F79 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_LATCbits F7B 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_LATEbits F7D 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_LATGbits F7F 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_LATHbits F80 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+__end_of_I2C_2_Master_Idle 15A2 0 CODE 0 text22 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__end_of_I2C_2_Master_Init 157A 0 CODE 0 text23 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__end_of_I2C_2_Master_Read 141A 0 CODE 0 text15 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__end_of_I2C_2_Master_Stop 163C 0 CODE 0 text20 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lfarbss 0 0 FARRAM 0 farbss dist/default/production\final-project-individual-levin-meinke.X.production.o
+___inthi_stack_hi 0 0 STACK 2 stack C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_14.o
+___inthi_stack_lo 0 0 STACK 2 stack C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_14.o
+?_color_read_Red 6 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lfardata 0 0 FARRAM 0 fardata dist/default/production\final-project-individual-levin-meinke.X.production.o
+isa$std 1 0 ABS 0 - C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_14.o
+_EUSART4RXbuf BC 0 BANK0 1 bssBANK0 dist/default/production\final-project-individual-levin-meinke.X.production.o
+_EUSART4TXbuf 60 0 BANK0 1 bssBANK0 dist/default/production\final-project-individual-levin-meinke.X.production.o
+stackhi 0 0 ABS 0 - C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_14.o
+stacklo 0 0 ABS 0 - C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_14.o
+__Lintcode 8 0 CODE 0 intcode dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lintret 0 0 ABS 0 intret dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lirdata 0 0 CODE 0 irdata dist/default/production\final-project-individual-levin-meinke.X.production.o
+_ADCON0bits F60 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_initUSART4 15E6 0 CODE 0 text11 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lspace_0 0 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lspace_1 0 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lspace_2 0 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lspace_4 0 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+__pbssCOMRAM 55 0 COMRAM 1 bssCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+_PIR0bits E33 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_PIR2bits E35 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_PIR4bits E37 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+vfpfcnvrt@convarg 12 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+__LcstackCOMRAM 0 0 ABS 0 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+main@red_val 2E 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+end_of_initialization 1514 0 CODE 0 cinit dist/default/production\final-project-individual-levin-meinke.X.production.o
+__end_of_color_click_init 145A 0 CODE 0 text17 dist/default/production\final-project-individual-levin-meinke.X.production.o
+_T2CLKCONbits FBF 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lnvrram 0 0 COMRAM 1 nvrram dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hintentry 0 0 ABS 0 intentry dist/default/production\final-project-individual-levin-meinke.X.production.o
+fputc@c 2 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+___awdiv@quotient 8 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+?___awdiv 2 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+?___awmod 2 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+vfprintf@fmt 18 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+_CCP4CONbits F22 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hreset_vec 4 0 CODE 0 reset_vec dist/default/production\final-project-individual-levin-meinke.X.production.o
+__HbssBANK0 0 0 ABS 0 bssBANK0 dist/default/production\final-project-individual-levin-meinke.X.production.o
+sendStringSerial4@string 3 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+___awmod@dividend 2 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+__end_of_initDCmotorsPWM 1322 0 CODE 0 text12 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lramtop E00 0 RAM 0 ramtop dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lrparam 0 0 COMRAM 1 rparam dist/default/production\final-project-individual-levin-meinke.X.production.o
+__pcinit 14FC 0 CODE 0 cinit dist/default/production\final-project-individual-levin-meinke.X.production.o
+vfpfcnvrt@ap E 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+vfpfcnvrt@cp 11 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+vfpfcnvrt@fp C 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+__ptext0 112A 0 CODE 0 text0 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__ptext1 1494 0 CODE 0 text1 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__ptext2 145A 0 CODE 0 text2 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__ptext3 E0E 0 CODE 0 text3 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__ptext4 11D6 0 CODE 0 text4 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__ptext5 1646 0 CODE 0 text5 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__ptext6 14C8 0 CODE 0 text6 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__ptext7 107A 0 CODE 0 text7 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__ptext8 FB6 0 CODE 0 text8 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__ptext9 1526 0 CODE 0 text9 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__end_of_I2C_2_Master_RepStart 1632 0 CODE 0 text14 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lstruct 0 0 COMRAM 1 struct dist/default/production\final-project-individual-levin-meinke.X.production.o
+vfprintf@ap 19 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+vfprintf@fp 17 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+sendCharSerial4@charToSend 2 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+vfprintf@cfmt 1A 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Ltext10 0 0 ABS 0 text10 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Ltext11 0 0 ABS 0 text11 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Ltext12 0 0 ABS 0 text12 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Ltext13 0 0 ABS 0 text13 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Ltext14 0 0 ABS 0 text14 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Ltext15 0 0 ABS 0 text15 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Ltext16 0 0 ABS 0 text16 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Ltext17 0 0 ABS 0 text17 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Ltext18 0 0 ABS 0 text18 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Ltext19 0 0 ABS 0 text19 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Ltext20 0 0 ABS 0 text20 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Ltext21 0 0 ABS 0 text21 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Ltext22 0 0 ABS 0 text22 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Ltext23 0 0 ABS 0 text23 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Ltext24 0 0 ABS 0 text24 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__end_of_color_writetoaddr 15E6 0 CODE 0 text18 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__ramtop E00 0 RAM 0 ramtop C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_14.o
+_sprintf 1494 0 CODE 0 text1 dist/default/production\final-project-individual-levin-meinke.X.production.o
+_sendStringSerial4 1526 0 CODE 0 text9 dist/default/production\final-project-individual-levin-meinke.X.production.o
+_HighISR 8 0 CODE 0 intcode dist/default/production\final-project-individual-levin-meinke.X.production.o
+_vfprintf 145A 0 CODE 0 text2 dist/default/production\final-project-individual-levin-meinke.X.production.o
+main@motorL 43 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+main@motorR 4C 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lpowerup 60 0 CODE 0 powerup dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Leeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\final-project-individual-levin-meinke.X.production.o
+sprintf@ap 1F 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+__H__absolute__ 0 0 ABS 0 __absolute__ dist/default/production\final-project-individual-levin-meinke.X.production.o
+__psmallconst E00 0 SMALLCONST 0 smallconst dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lreset_vec 0 0 CODE 0 reset_vec dist/default/production\final-project-individual-levin-meinke.X.production.o
+__end_of_vfprintf 1494 0 CODE 0 text2 dist/default/production\final-project-individual-levin-meinke.X.production.o
+_I2C_2_Master_RepStart 1628 0 CODE 0 text14 dist/default/production\final-project-individual-levin-meinke.X.production.o
+_CCP3CONbits F26 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+___heap_hi 0 0 ABS 0 - C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_14.o
+___heap_lo 0 0 ABS 0 - C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_14.o
+_I2C_2_Master_Idle 157A 0 CODE 0 text22 dist/default/production\final-project-individual-levin-meinke.X.production.o
+_I2C_2_Master_Init 1550 0 CODE 0 text23 dist/default/production\final-project-individual-levin-meinke.X.production.o
+_I2C_2_Master_Read 13D8 0 CODE 0 text15 dist/default/production\final-project-individual-levin-meinke.X.production.o
+_I2C_2_Master_Stop 1632 0 CODE 0 text20 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__end_of_initUSART4 1604 0 CODE 0 text11 dist/default/production\final-project-individual-levin-meinke.X.production.o
+___param_bank 0 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+___intlo_stack_hi 0 0 STACK 2 stack C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_14.o
+___intlo_stack_lo 0 0 STACK 2 stack C:\Users\LEVINM~1\AppData\Local\Temp\xcAs9c8.\driver_tmp_14.o
+__Hbigdata 0 0 BIGRAM 1 bigdata dist/default/production\final-project-individual-levin-meinke.X.production.o
+__end_of__initialization 1514 0 CODE 0 cinit dist/default/production\final-project-individual-levin-meinke.X.production.o
+___awmod@divisor 4 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Libigdata 0 0 CODE 0 ibigdata dist/default/production\final-project-individual-levin-meinke.X.production.o
+_SP4BRGH EE6 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_SP4BRGL EE5 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lclrtext 0 0 ABS 0 clrtext dist/default/production\final-project-individual-levin-meinke.X.production.o
+__end_of_Timer0_init 15C6 0 CODE 0 text24 dist/default/production\final-project-individual-levin-meinke.X.production.o
+_initDCmotorsPWM 1280 0 CODE 0 text12 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__pcstackCOMRAM 1 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+_T0CON0bits FD5 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_T0CON1bits FD6 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_SSP2ADD ED6 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_SSP2BUF ED5 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+vfpfcnvrt@c 16 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+sprintf@f 20 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+sprintf@s 1B 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+__end_of_main 11D6 0 CODE 0 text0 dist/default/production\final-project-individual-levin-meinke.X.production.o
+_CCP2CONbits FA7 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+__end_of_sendCharSerial4 161C 0 CODE 0 text10 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__pintcode 8 0 CODE 0 intcode dist/default/production\final-project-individual-levin-meinke.X.production.o
+_ADPCH F5F 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+main@pred_val 42 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+__end_of_fputc 1280 0 CODE 0 text4 dist/default/production\final-project-individual-levin-meinke.X.production.o
+?_sprintf 1B 0 COMRAM 1 cstackCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+_TMR0H FD4 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_TMR0L FD3 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+__end_of_putch 1648 0 CODE 0 text5 dist/default/production\final-project-individual-levin-meinke.X.production.o
+_RC4STAbits EE7 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+__HRAM 0 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hbss 0 0 RAM 1 bss dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hram 0 0 ABS 0 ram dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hsfr 0 0 ABS 0 sfr dist/default/production\final-project-individual-levin-meinke.X.production.o
+__LRAM 1 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lbss 0 0 RAM 1 bss dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lram 0 0 ABS 0 ram dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lsfr 0 0 ABS 0 sfr dist/default/production\final-project-individual-levin-meinke.X.production.o
+_flags 59 0 COMRAM 1 bssCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+_fputc 11D6 0 CODE 0 text4 dist/default/production\final-project-individual-levin-meinke.X.production.o
+_putch 1646 0 CODE 0 text5 dist/default/production\final-project-individual-levin-meinke.X.production.o
+_width 55 0 COMRAM 1 bssCOMRAM dist/default/production\final-project-individual-levin-meinke.X.production.o
+__initialization 14FC 0 CODE 0 cinit dist/default/production\final-project-individual-levin-meinke.X.production.o
+__pbssBANK0 60 0 BANK0 1 bssBANK0 dist/default/production\final-project-individual-levin-meinke.X.production.o
+_T2CONbits FBD 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hfardata 0 0 FARRAM 0 fardata dist/default/production\final-project-individual-levin-meinke.X.production.o
+_color_writetoaddr 15C6 0 CODE 0 text18 dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hsmallconst E0E 0 SMALLCONST 0 smallconst dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Lifardata 0 0 CODE 0 ifardata dist/default/production\final-project-individual-levin-meinke.X.production.o
+_SSP2CLKPPS E1C 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_CCP1CONbits FAB 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_ANSELAbits E92 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+_ANSELDbits EA7 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hintsave_regs 0 0 BIGRAM 1 intsave_regs dist/default/production\final-project-individual-levin-meinke.X.production.o
+_SSP2DATPPS E1D 0 ABS 0 - dist/default/production\final-project-individual-levin-meinke.X.production.o
+__Hintcode 60 0 CODE 0 intcode dist/default/production\final-project-individual-levin-meinke.X.production.o
+# %SPLITSTAB Section
+# This section enumerates all the psect splits performed by the assembler.
+# The beginning of the section is indicated by %SPLITSTAB.
+# Each line is a record a particular split, where the parent psect is on
+# the left and the child on the right.  Note that a child psect is always
+# split form the top of the parent psect. All splits from a given parent
+# are listed in the order in which they occurred.
+%SPLITSTAB
+# %DABS Section
+# This section contains a table of all usuage of the assember
+# directive DABS in the program. Each line has the following format:
+#   <name> <space> <address> <size>
+# If the DABS was originally labelled then that shall be <name>,
+# otherwise name will be "-".  The <space> number is in decimal.
+# <address> and <size> are in byte units as unqaulified hexadecimal
+%DABS
+# %SEGMENTS Section
+# This sections enumerates the segments of the program.  Each segment
+# is described on a single line as follows:
+#    <name> <space> <link address> <file address> <size> <delta>
+# Addresses and size are in unqualified hexadecimal.  The link address
+# and size are in units of delta. The file address is in units of bytes.
+# All other numeric quantities are in decimal.
+%SEGMENTS
+text3 0 E0E E0E 83A 1
+cstackCOMRAM 1 1 1 5E 1
+reset_vec 0 0 0 4 1
+bssBANK0 1 60 60 70 1
+intcode 0 8 8 5C 1
+smallconst 0 E00 E00 E 1
+# %NOTES Section
+# This section contains data of all the note-psects.  The beginning of the section
+# is indicated by %NOTES. The first line indicates the name and decimal
+# byte-length of the first note-psect, e.g.
+#   $codecov_info_hdr 16
+# Each line that follows contains the byte-data of the psect in hexadecimal as a
+# space-separated list. These lines are limited to 16 bytes of data.
+%NOTES
