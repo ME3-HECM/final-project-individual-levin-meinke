@@ -2,20 +2,16 @@
 #include "color.h"
 #include "i2c.h"
 
-void color_click_init(void)
-{   
+void color_click_init(void){   
     //setup colour sensor via i2c interface
     I2C_2_Master_Init();      //Initialise i2c Master
-
      //set device PON
-	 color_writetoaddr(0x00, 0x01)
-    __delay_ms(3); //need to wait 3ms for everthing to start up
-    
+	color_writetoaddr(0x00, 0x01);
+    __delay_ms(3); //need to wait 3ms for everything to start up
     //turn on device ADC
-	color_writetoaddr(0x00, 0x03)
-
+	color_writetoaddr(0x00, 0x03);
     //set integration time
-	color_writetoaddr(0x01, 0xD5)
+	color_writetoaddr(0x01, 0xD5);
 }
 
 void color_writetoaddr(char address, char value){
@@ -26,8 +22,7 @@ void color_writetoaddr(char address, char value){
     I2C_2_Master_Stop();          //Stop condition
 }
 
-unsigned int color_read_Red(void)
-{
+unsigned int color_read_Red(void){
 	unsigned int tmp;
 	I2C_2_Master_Start();         //Start condition
 	I2C_2_Master_Write(0x52 | 0x00);     //7 bit address + Write mode
