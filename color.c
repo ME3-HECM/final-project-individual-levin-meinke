@@ -8,7 +8,7 @@ void color_click_init(void){
 	color_writetoaddr(0x00, 0x01); //turn on - write 1 to PON bit in device register)
     __delay_ms(3); //need to wait 3ms for everything to start up
 	color_writetoaddr(0x00, 0x03); //turn on device ADC
-	color_writetoaddr(0x01, 0xD5); //set integration time
+	color_writetoaddr(0x01, 0xFF); //set integration time
     color_writetoaddr(0x03, 0xFF); //set wait time (WTIME)
     
     //set-up interrupts to stop the buggy when it approaches a color card

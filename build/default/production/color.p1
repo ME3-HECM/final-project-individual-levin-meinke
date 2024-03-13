@@ -2111,8 +2111,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;color.c: 10:  color_writetoaddr(0x00, 0x03);
 [e ( _color_writetoaddr (2 , -> -> 0 `i `uc -> -> 3 `i `uc ]
 "11
-[; ;color.c: 11:  color_writetoaddr(0x01, 0xD5);
-[e ( _color_writetoaddr (2 , -> -> 1 `i `uc -> -> 213 `i `uc ]
+[; ;color.c: 11:  color_writetoaddr(0x01, 0xFF);
+[e ( _color_writetoaddr (2 , -> -> 1 `i `uc -> -> 255 `i `uc ]
 "12
 [; ;color.c: 12:     color_writetoaddr(0x03, 0xFF);
 [e ( _color_writetoaddr (2 , -> -> 3 `i `uc -> -> 255 `i `uc ]

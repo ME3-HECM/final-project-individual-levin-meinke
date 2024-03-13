@@ -97,8 +97,8 @@ void setMotorPWM(struct DC_motor *m)
 
 //function to make the robot go straight
 void fullSpeedAhead(struct DC_motor *mL, struct DC_motor *mR){
-    mL->direction = 1; //left side forward
-    mR->direction = 1; //right side forward
+    mL->direction = 0; //left side forward
+    mR->direction = 0; //right side forward
     
     while ((mL->power) < 100 || (mR->power) < 100){ //while motors are below 100 power
         if ((mL->power) < 100) (mL->power) += 1; //increment left
@@ -118,7 +118,7 @@ void stop(struct DC_motor *mL, struct DC_motor *mR){
         //call set motorPWM functions
         setMotorPWM(mL);
         setMotorPWM(mR);
-        __delay_ms(1); //delay before repeating (gradual decrease in speed)
+        __delay_us(25); //delay before repeating (gradual decrease in speed)
     }
 }
 

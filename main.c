@@ -60,17 +60,21 @@ void main(void){
     motorR.negDutyHighByte=(unsigned char *)(&CCPR4H);  //store address of CCP4 duty high byte
     motorR.PWMperiod=PWMcycle; 			//store PWMperiod for motor (value of T2PR in this case)
     
-    char *pmL; //declare pointer motor left
-    char *pmR; //declare pointer motor right
-    pmL = &motorL; // assign pmL to the address of motorL
-    pmR = &motorR; // assign pmR to the address of motorR
+    //create pointers for motorL and motorR
+    struct DC_motor *pmL= &motorL;  
+    struct DC_motor *pmR= &motorR;
     
     //struct to store the values of the color sensor with corresponding pointer
     struct RGBC_val RGBC;
-    char *pRGBC;
-    pRGBC = &RGBC;
+    RGBC.R = 0;
+    RGBC.B = 0;
+    RGBC.G = 0;
+    RGBC.C = 0;
     
-    //USED FOR DEBUGGING OVER SERIAL
+    //create a pointer for our rgbc structure
+    struct RGBC_val *pRGBC= &RGBC;
+    
+    //----------USED FOR DEBUGGING OVER SERIAL-----------
     char clear_val[20];
     char red_val[20];
     char green_val[20];
@@ -83,7 +87,35 @@ void main(void){
     pred_val = &red_val[0];
     pgreen_val = &green_val[0];
     pblue_val = &blue_val[0];
-     
+    
+    unsigned int lum; //luminosity reading to detect wall/color card
+    bool going_forward = false;
+    unsigned int previously_measured_time, measured_time;
+    int action_to_do;
+    unsigned int timings[20];
+    int actions[20];
+    int actions_completed = 0;
+    
+    //------- luminosity calibration routine ----------
+    
+    // turn right 90: 0
+    // turn left 90: 1
+    // turn 180: 2
+    // reverse one square and turn right 90: 3
+    // reverse one square and turn left 90: 4
+    // turn right 135:  5
+    // turn left 135: 6
+    // turn around and retrace: 7
+    // before start
+
+    //start loop (doesnt work????)
+    //while(1){
+    //    if (PORTFbits.RF2){ //start with button press
+    //        break;
+    //    }
+    //}
+    
+    
     //----------------- testing timer0 --------------------
     // resetTimer0();
     // for(int i = 0; i < 5; i +=1){
@@ -95,31 +127,57 @@ void main(void){
     //     sprintf(blue_val,"time2 = %d \r\n",get16bitTMR0val());
     //     sendStringSerial4(pblue_val);
     //}
-
-
-    unsigned int lum; //luminosity reading to detect wall/color card
-    bool going_forward = false;
-    unsigned int previously_measured_time, measured_time;
-    int action_to_do;
-    unsigned int timings[20];
-    int actions[20];
-    int actions_completed = 0;
-    // turn right 90: 0
-    // turn left 90: 1
-    // turn 180: 2
-    // reverse one square and turn right 90: 3
-    // reverse one square and turn left 90: 4
-    // turn right 135:  5
-    // turn left 135: 6
-    // turn around and retrace: 7
-    // before start
-
-    //start loop
+    
+    //----------------- testing stopping & color readings --------------------
+    // test loop
     while(1){
-        if (PORTFbits.RF2){ //start with button press
-            break;
+        if(!going_forward){
+            // if in here : started program or just finished action.
+            // time to reset timer and start moving forward
+            resetTimer0();
+            fullSpeedAhead(pmL, pmR);
+            going_forward = true;
         }
+            // read the colour sensor
+        lum = color_read_Clear();
+        //if above threshold you want to stop and find card color
+        if (lum > 30){
+            //stop buggy
+            measured_time = get16bitTMR0val(); //measure time going forward
+            stop(pmL, pmR);
+            //say you've stopped going forward to satisfy the if statement above later
+            going_forward = false;
+
+            // store the measured time so we can use it later in retracing
+            timings[actions_completed] = measured_time;
+            //get color info
+            color_read(pRGBC);
+            __delay_ms(500);
+            //change the integration & write times for better performance
+            color_writetoaddr(0x01, 0xD5); //set integration time
+            color_writetoaddr(0x03, 0xAB); //set wait time (WTIME)
+            __delay_ms(200);//let sensor adjust settings
+            
+            sprintf(red_val,"red = %d \r\n",color_read_Red());
+            sendStringSerial4(pred_val);
+            sprintf(green_val,"green = %d \r\n",color_read_Green());
+            sendStringSerial4(pgreen_val);
+            sprintf(blue_val,"blue = %d \r\n",color_read_Blue());
+            sendStringSerial4(pblue_val);
+            sprintf(clear_val,"clear = %d \r\n",color_read_Clear());
+            sendStringSerial4(pclear_val);
+            __delay_ms(3000);
+            __delay_ms(3000);
+            __delay_ms(3000);
+            
+            //reset
+            color_writetoaddr(0x01, 0xFF); //set integration time
+            color_writetoaddr(0x03, 0xFF); //set wait time (WTIME)
+
+        }
+        __delay_ms(1);
     }
+            
 
     //main loop 
     while(1){
@@ -146,7 +204,7 @@ void main(void){
             //get color info
             color_read(pRGBC);
             //decide what colour it is
-            action_to_do = decide_action(pRGBC); // TODO this function returns one of the codes for each of the actions we named above
+            //action_to_do = decide_action(pRGBC); // TODO this function returns one of the codes for each of the actions we named above
             //store the action to do so you can use it later when retracing
             actions[actions_completed] = action_to_do;
 
@@ -154,27 +212,47 @@ void main(void){
             actions_completed += 1;
 
             //give the robot a command based on the actions its supposed to do
-            if(action_to_do == 0){turn_right_90();} 
-            else if(action_to_do == 1){turn_left_90();}
-            if(action_to_do == 2){
-                turn_left_90();
+            if(action_to_do == 0){ //turn right 90
+                reverse_after_read(pmL, pmR);
+                turn_right_90(pmL, pmR);
             }
-            else if(action_to_do == 3){
-                turn_r_90();
+            else if(action_to_do == 1){ //turn left
+                reverse_after_read(pmL, pmR);
+                turn_left_90(pmL, pmR);
             }
-            else if(action_to_do == 4){
-                turn_right_90();
+            else if(action_to_do == 2){ //180 turn -> turn right twice (less calibration error)
+                reverse_after_read(pmL, pmR);
+                turn_right_90(pmL, pmR);
+                turn_right_90(pmL, pmR);
             }
-            else if(action_to_do == 5){
-                turn_right_90();
+            else if(action_to_do == 3){ //reverse one square and then turn right 90
+                reverse_after_read(pmL, pmR);
+                reverse_one_square(pmL, pmR);
+                turn_right_90(pmL, pmR);
+            }
+            else if(action_to_do == 4){ //reverse one square and then turn left 90
+                reverse_after_read(pmL, pmR);
+                reverse_one_square(pmL, pmR);
+                turn_left_90(pmL, pmR);
+            }
+            else if(action_to_do == 5){ //turn left 135
+                reverse_after_read(pmL, pmR);
+                turn_left_135(pmL, pmR);
+            }
+            else if(action_to_do == 6){ //turn right 135
+                reverse_after_read(pmL, pmR);
+                turn_right_135(pmL, pmR);
             }
             // we've reached the white wall we need to turn around, and  leave this loop
             // then we will go to retrace loop
             else if(action_to_do == 7){
-                turn_180();
+                reverse_after_read(pmL, pmR);
+                turn_right_90(pmL, pmR);
+                turn_right_90(pmL, pmR);
                 break;
             }
-        };
+        __delay_ms(5);
+        }
     }
 
     
@@ -198,7 +276,7 @@ void main(void){
         if(measured_time > timings[upcoming_action + 1]){
             stop(pmL, pmR);
             going_forward = false;
-            action_to_do = invert_instruction(actions[upcoming_action]);
+            //action_to_do = invert_instruction(actions[upcoming_action]);
             // DO THIS ACTION
             if(action_to_do == 0){;} 
             else if(action_to_do == 1){;}
@@ -208,10 +286,11 @@ void main(void){
             else if(action_to_do == 5){;}
             else if(action_to_do == 6){;}
             upcoming_action -=1 ;
-        }
+            }
         __delay_ms(10);
         }
     stop(pmL, pmR); //make sure buggy is stopped
-}
+    }
+
 
 

@@ -24109,10 +24109,14 @@ struct DC_motor {
 
 void initDCmotorsPWM(int PWMperiod);
 void setMotorPWM(struct DC_motor *m);
-void stop(struct DC_motor *mL, struct DC_motor *mR);
-void turnLeft(struct DC_motor *mL, struct DC_motor *mR);
-void turnRight(struct DC_motor *mL, struct DC_motor *mR);
 void fullSpeedAhead(struct DC_motor *mL, struct DC_motor *mR);
+void stop(struct DC_motor *mL, struct DC_motor *mR);
+void turn_left_90(struct DC_motor *mL, struct DC_motor *mR);
+void turn_right_90(struct DC_motor *mL, struct DC_motor *mR);
+void turn_left_135(struct DC_motor *mL, struct DC_motor *mR);
+void turn_right_135(struct DC_motor *mL, struct DC_motor *mR);
+void reverse_after_read(struct DC_motor *mL, struct DC_motor *mR);
+void reverse_one_square(struct DC_motor *mL, struct DC_motor *mR);
 # 2 "dc_motor.c" 2
 
 
@@ -24211,10 +24215,13 @@ void setMotorPWM(struct DC_motor *m)
 }
 
 
-void stop(struct DC_motor *mL, struct DC_motor *mR){
-    while ((mL->power) > 0 || (mR->power) > 0){
-        if ((mL->power) > 0) (mL->power) -= 1;
-        if ((mR->power) > 0) (mR->power) -= 1;
+void fullSpeedAhead(struct DC_motor *mL, struct DC_motor *mR){
+    mL->direction = 0;
+    mR->direction = 0;
+
+    while ((mL->power) < 100 || (mR->power) < 100){
+        if ((mL->power) < 100) (mL->power) += 1;
+        if ((mR->power) < 100) (mR->power) += 1;
 
         setMotorPWM(mL);
         setMotorPWM(mR);
@@ -24223,7 +24230,19 @@ void stop(struct DC_motor *mL, struct DC_motor *mR){
 }
 
 
-void turnLeft(struct DC_motor *mL, struct DC_motor *mR){
+void stop(struct DC_motor *mL, struct DC_motor *mR){
+    while ((mL->power) > 0 || (mR->power) > 0){
+        if ((mL->power) > 0) (mL->power) -= 1;
+        if ((mR->power) > 0) (mR->power) -= 1;
+
+        setMotorPWM(mL);
+        setMotorPWM(mR);
+        _delay((unsigned long)((25)*(64000000/4000000.0)));
+    }
+}
+
+
+void turn_left_90(struct DC_motor *mL, struct DC_motor *mR){
     mL->direction = 0;
     mR->direction = 1;
 
@@ -24240,7 +24259,7 @@ void turnLeft(struct DC_motor *mL, struct DC_motor *mR){
 }
 
 
-void turnRight(struct DC_motor *mL, struct DC_motor *mR){
+void turn_right_90(struct DC_motor *mL, struct DC_motor *mR){
     mL->direction = 1;
     mR->direction = 0;
 
@@ -24257,16 +24276,67 @@ void turnRight(struct DC_motor *mL, struct DC_motor *mR){
 }
 
 
-void fullSpeedAhead(struct DC_motor *mL, struct DC_motor *mR){
-    mL->direction = 1;
+void turn_left_135(struct DC_motor *mL, struct DC_motor *mR){
+    mL->direction = 0;
     mR->direction = 1;
 
-    while ((mL->power) < 100 || (mR->power) < 100){
-        if ((mL->power) < 100) (mL->power) += 1;
-        if ((mR->power) < 100) (mR->power) += 1;
+    while ((mL->power) < 70 || (mR->power) < 70){
+        if ((mL->power) < 70) (mL->power) += 1;
+        if ((mR->power) < 70) (mR->power) += 1;
 
         setMotorPWM(mL);
         setMotorPWM(mR);
         _delay((unsigned long)((1)*(64000000/4000.0)));
     }
+    _delay((unsigned long)((500)*(64000000/4000.0)));
+    stop(mL, mR);
+}
+
+
+void turn_right_135(struct DC_motor *mL, struct DC_motor *mR){
+    mL->direction = 1;
+    mR->direction = 0;
+
+    while ((mL->power) < 70 || (mR->power) < 70){
+        if ((mL->power) < 70) (mL->power) += 1;
+        if ((mR->power) < 70) (mR->power) += 1;
+
+        setMotorPWM(mL);
+        setMotorPWM(mR);
+        _delay((unsigned long)((1)*(64000000/4000.0)));
+    }
+    _delay((unsigned long)((500)*(64000000/4000.0)));
+    stop(mL, mR);
+}
+
+void reverse_after_read(struct DC_motor *mL, struct DC_motor *mR){
+    mL->direction = 0;
+    mR->direction = 0;
+
+    while ((mL->power) < 70 || (mR->power) < 70){
+        if ((mL->power) < 70) (mL->power) += 1;
+        if ((mR->power) < 70) (mR->power) += 1;
+
+        setMotorPWM(mL);
+        setMotorPWM(mR);
+        _delay((unsigned long)((1)*(64000000/4000.0)));
+    }
+    _delay((unsigned long)((100)*(64000000/4000.0)));
+    stop(mL, mR);
+}
+
+void reverse_one_square(struct DC_motor *mL, struct DC_motor *mR){
+    mL->direction = 0;
+    mR->direction = 0;
+
+    while ((mL->power) < 70 || (mR->power) < 70){
+        if ((mL->power) < 70) (mL->power) += 1;
+        if ((mR->power) < 70) (mR->power) += 1;
+
+        setMotorPWM(mL);
+        setMotorPWM(mR);
+        _delay((unsigned long)((1)*(64000000/4000.0)));
+    }
+    _delay((unsigned long)((500)*(64000000/4000.0)));
+    stop(mL, mR);
 }

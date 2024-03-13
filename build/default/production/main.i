@@ -24328,10 +24328,14 @@ struct DC_motor {
 
 void initDCmotorsPWM(int PWMperiod);
 void setMotorPWM(struct DC_motor *m);
-void stop(struct DC_motor *mL, struct DC_motor *mR);
-void turnLeft(struct DC_motor *mL, struct DC_motor *mR);
-void turnRight(struct DC_motor *mL, struct DC_motor *mR);
 void fullSpeedAhead(struct DC_motor *mL, struct DC_motor *mR);
+void stop(struct DC_motor *mL, struct DC_motor *mR);
+void turn_left_90(struct DC_motor *mL, struct DC_motor *mR);
+void turn_right_90(struct DC_motor *mL, struct DC_motor *mR);
+void turn_left_135(struct DC_motor *mL, struct DC_motor *mR);
+void turn_right_135(struct DC_motor *mL, struct DC_motor *mR);
+void reverse_after_read(struct DC_motor *mL, struct DC_motor *mR);
+void reverse_one_square(struct DC_motor *mL, struct DC_motor *mR);
 # 14 "main.c" 2
 
 # 1 "./i2c.h" 1
@@ -24468,15 +24472,19 @@ void main(void){
     motorR.negDutyHighByte=(unsigned char *)(&CCPR4H);
     motorR.PWMperiod=PWMcycle;
 
-    char *pmL;
-    char *pmR;
-    pmL = &motorL;
-    pmR = &motorR;
+
+    struct DC_motor *pmL= &motorL;
+    struct DC_motor *pmR= &motorR;
 
 
     struct RGBC_val RGBC;
-    char *pRGBC;
-    pRGBC = &RGBC;
+    RGBC.R = 0;
+    RGBC.B = 0;
+    RGBC.G = 0;
+    RGBC.C = 0;
+
+
+    struct RGBC_val *pRGBC= &RGBC;
 
 
     char clear_val[20];
@@ -24491,7 +24499,7 @@ void main(void){
     pred_val = &red_val[0];
     pgreen_val = &green_val[0];
     pblue_val = &blue_val[0];
-# 100 "main.c"
+
     unsigned int lum;
     _Bool going_forward = 0;
     unsigned int previously_measured_time, measured_time;
@@ -24499,12 +24507,55 @@ void main(void){
     unsigned int timings[20];
     int actions[20];
     int actions_completed = 0;
-# 118 "main.c"
+# 133 "main.c"
     while(1){
-        if (PORTFbits.RF2){
-            break;
+        if(!going_forward){
+
+
+            resetTimer0();
+            fullSpeedAhead(pmL, pmR);
+            going_forward = 1;
         }
+
+        lum = color_read_Clear();
+
+        if (lum > 30){
+
+            measured_time = get16bitTMR0val();
+            stop(pmL, pmR);
+
+            going_forward = 0;
+
+
+            timings[actions_completed] = measured_time;
+
+            color_read(pRGBC);
+            _delay((unsigned long)((500)*(64000000/4000.0)));
+
+            color_writetoaddr(0x01, 0xD5);
+            color_writetoaddr(0x03, 0xAB);
+            _delay((unsigned long)((200)*(64000000/4000.0)));
+
+            sprintf(red_val,"red = %d \r\n",color_read_Red());
+            sendStringSerial4(pred_val);
+            sprintf(green_val,"green = %d \r\n",color_read_Green());
+            sendStringSerial4(pgreen_val);
+            sprintf(blue_val,"blue = %d \r\n",color_read_Blue());
+            sendStringSerial4(pblue_val);
+            sprintf(clear_val,"clear = %d \r\n",color_read_Clear());
+            sendStringSerial4(pclear_val);
+            _delay((unsigned long)((3000)*(64000000/4000.0)));
+            _delay((unsigned long)((3000)*(64000000/4000.0)));
+            _delay((unsigned long)((3000)*(64000000/4000.0)));
+
+
+            color_writetoaddr(0x01, 0xFF);
+            color_writetoaddr(0x03, 0xFF);
+
+        }
+        _delay((unsigned long)((1)*(64000000/4000.0)));
     }
+
 
 
     while(1){
@@ -24531,7 +24582,7 @@ void main(void){
 
             color_read(pRGBC);
 
-            action_to_do = decide_action(pRGBC);
+
 
             actions[actions_completed] = action_to_do;
 
@@ -24539,27 +24590,47 @@ void main(void){
             actions_completed += 1;
 
 
-            if(action_to_do == 0){turn_right_90();}
-            else if(action_to_do == 1){turn_left_90();}
-            if(action_to_do == 2){
-                turn_left_90();
+            if(action_to_do == 0){
+                reverse_after_read(pmL, pmR);
+                turn_right_90(pmL, pmR);
+            }
+            else if(action_to_do == 1){
+                reverse_after_read(pmL, pmR);
+                turn_left_90(pmL, pmR);
+            }
+            else if(action_to_do == 2){
+                reverse_after_read(pmL, pmR);
+                turn_right_90(pmL, pmR);
+                turn_right_90(pmL, pmR);
             }
             else if(action_to_do == 3){
-                turn_r_90();
+                reverse_after_read(pmL, pmR);
+                reverse_one_square(pmL, pmR);
+                turn_right_90(pmL, pmR);
             }
             else if(action_to_do == 4){
-                turn_right_90();
+                reverse_after_read(pmL, pmR);
+                reverse_one_square(pmL, pmR);
+                turn_left_90(pmL, pmR);
             }
             else if(action_to_do == 5){
-                turn_right_90();
+                reverse_after_read(pmL, pmR);
+                turn_left_135(pmL, pmR);
+            }
+            else if(action_to_do == 6){
+                reverse_after_read(pmL, pmR);
+                turn_right_135(pmL, pmR);
             }
 
 
             else if(action_to_do == 7){
-                turn_180();
+                reverse_after_read(pmL, pmR);
+                turn_right_90(pmL, pmR);
+                turn_right_90(pmL, pmR);
                 break;
             }
-        };
+        _delay((unsigned long)((5)*(64000000/4000.0)));
+        }
     }
 
 
@@ -24583,7 +24654,7 @@ void main(void){
         if(measured_time > timings[upcoming_action + 1]){
             stop(pmL, pmR);
             going_forward = 0;
-            action_to_do = invert_instruction(actions[upcoming_action]);
+
 
             if(action_to_do == 0){;}
             else if(action_to_do == 1){;}
@@ -24593,8 +24664,8 @@ void main(void){
             else if(action_to_do == 5){;}
             else if(action_to_do == 6){;}
             upcoming_action -=1 ;
-        }
+            }
         _delay((unsigned long)((10)*(64000000/4000.0)));
         }
     stop(pmL, pmR);
-}
+    }
