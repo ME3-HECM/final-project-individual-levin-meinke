@@ -24251,9 +24251,6 @@ char *ctermid(char *);
 char *tempnam(const char *, const char *);
 # 10 "main.c" 2
 
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\c99\\stdbool.h" 1 3
-# 11 "main.c" 2
-
 # 1 "./ADC.h" 1
 
 
@@ -24264,7 +24261,7 @@ char *tempnam(const char *, const char *);
 
 void ADC_init(void);
 unsigned int ADC_getval(void);
-# 12 "main.c" 2
+# 11 "main.c" 2
 
 # 1 "./color.h" 1
 
@@ -24305,7 +24302,7 @@ void color_read(struct RGBC_val *p);
 
 
 void color_click_toggleLED(void);
-# 13 "main.c" 2
+# 12 "main.c" 2
 
 # 1 "./dc_motor.h" 1
 
@@ -24315,7 +24312,7 @@ void color_click_toggleLED(void);
 
 
 
-struct DC_motor {
+typedef struct DC_motor {
     char power;
     char direction;
     char brakemode;
@@ -24332,7 +24329,7 @@ void stop(struct DC_motor *mL, struct DC_motor *mR);
 void turnLeft(struct DC_motor *mL, struct DC_motor *mR);
 void turnRight(struct DC_motor *mL, struct DC_motor *mR);
 void fullSpeedAhead(struct DC_motor *mL, struct DC_motor *mR);
-# 14 "main.c" 2
+# 13 "main.c" 2
 
 # 1 "./i2c.h" 1
 # 13 "./i2c.h"
@@ -24367,7 +24364,7 @@ void I2C_2_Master_Write(unsigned char data_byte);
 
 
 unsigned char I2C_2_Master_Read(unsigned char ack);
-# 15 "main.c" 2
+# 14 "main.c" 2
 
 # 1 "./interrupts.h" 1
 
@@ -24379,7 +24376,7 @@ unsigned char I2C_2_Master_Read(unsigned char ack);
 
 void Interrupts_init(void);
 void __attribute__((picinterrupt(("high_priority")))) HighISR();
-# 16 "main.c" 2
+# 15 "main.c" 2
 
 # 1 "./serial.h" 1
 # 13 "./serial.h"
@@ -24409,7 +24406,7 @@ void putCharToTxBuf(char byte);
 char isDataInTxBuf (void);
 void TxBufferedString(char *string);
 void sendTxBuf(void);
-# 17 "main.c" 2
+# 16 "main.c" 2
 
 # 1 "./timers.h" 1
 
@@ -24420,10 +24417,8 @@ void sendTxBuf(void);
 
 
 void Timer0_init(void);
-void resetTimer0(void);
 unsigned int get16bitTMR0val(void);
-# 18 "main.c" 2
-
+# 17 "main.c" 2
 
 
 
@@ -24431,7 +24426,6 @@ unsigned int get16bitTMR0val(void);
 void main(void){
 
     Timer0_init();
-    Interrupts_init();
     I2C_2_Master_Init();
     color_click_init();
     initDCmotorsPWM(99);
@@ -24441,12 +24435,9 @@ void main(void){
     color_click_toggleLED();
 
 
+
     LATHbits.LATH3=1;
     TRISHbits.TRISH3=0;
-
-
-    TRISFbits.TRISF2=1;
-    ANSELFbits.ANSELF2=0;
 
 
 
@@ -24474,11 +24465,6 @@ void main(void){
     pmR = &motorR;
 
 
-    struct RGBC_val RGBC;
-    char *pRGBC;
-    pRGBC = &RGBC;
-
-
     char clear_val[20];
     char red_val[20];
     char green_val[20];
@@ -24491,110 +24477,16 @@ void main(void){
     pred_val = &red_val[0];
     pgreen_val = &green_val[0];
     pblue_val = &blue_val[0];
-# 100 "main.c"
-    unsigned int lum;
-    _Bool going_forward = 0;
-    unsigned int previously_measured_time, measured_time;
-    int action_to_do;
-    unsigned int timings[20];
-    int actions[20];
-    int actions_completed = 0;
-# 118 "main.c"
-    while(1){
-        if (PORTFbits.RF2){
-            break;
-        }
-    }
 
+    struct RGBC_val RGBC;
+    char *pRGBC;
+    pRGBC = &RGBC;
 
     while(1){
-        if(!going_forward){
-
-
-            resetTimer0();
-            fullSpeedAhead(pmL, pmR);
-            going_forward = 1;
-        }
-
-        lum = color_read_Clear();
-
-        if (lum > 1500){
-
-            measured_time = get16bitTMR0val();
-            stop(pmL, pmR);
-
-
-            going_forward = 0;
-
-
-            timings[actions_completed] = measured_time;
-
-            color_read(pRGBC);
-
-            action_to_do = decide_action(pRGBC);
-
-            actions[actions_completed] = action_to_do;
-
-
-            actions_completed += 1;
-
-
-            if(action_to_do == 0){turn_right_90();}
-            else if(action_to_do == 1){turn_left_90();}
-            if(action_to_do == 2){
-                turn_left_90();
-            }
-            else if(action_to_do == 3){
-                turn_r_90();
-            }
-            else if(action_to_do == 4){
-                turn_right_90();
-            }
-            else if(action_to_do == 5){
-                turn_right_90();
-            }
-
-
-            else if(action_to_do == 7){
-                turn_180();
-                break;
-            }
-        };
+# 92 "main.c"
+        printf(clear_val,"clear = %d \r\n",1);
+        sendStringSerial4(pclear_val);
+        sendCharSerial4('a');
+        _delay((unsigned long)((1000)*(64000000/4000.0)));
     }
-
-
-
-
-
-    int upcoming_action = actions_completed - 2;
-
-
-    going_forward = 0;
-
-
-    while(upcoming_action >= 0){
-        if(!going_forward){
-            resetTimer0();
-            fullSpeedAhead(pmL, pmR);
-            going_forward = 1;
-        }
-
-        measured_time = get16bitTMR0val();
-        if(measured_time > timings[upcoming_action + 1]){
-            stop(pmL, pmR);
-            going_forward = 0;
-            action_to_do = invert_instruction(actions[upcoming_action]);
-
-            if(action_to_do == 0){;}
-            else if(action_to_do == 1){;}
-            else if(action_to_do == 2){;}
-            else if(action_to_do == 3){;}
-            else if(action_to_do == 4){;}
-            else if(action_to_do == 5){;}
-            else if(action_to_do == 6){;}
-            upcoming_action -=1 ;
-        }
-        _delay((unsigned long)((10)*(64000000/4000.0)));
-        }
-    stop(pmL, pmR);
 }

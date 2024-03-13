@@ -5,10 +5,11 @@
 
 #define _XTAL_FREQ 64000000 //note intrinsic _delay function is 62.5ns at 64,000,000Hz  
 
-struct RBG_val{
-    unsigned int R;
-    unsigned int G;
-    unsigned int B;
+struct RGBC_val{
+    unsigned int R; //red
+    unsigned int G; //green
+    unsigned int B; //blue
+    unsigned int C; //clear
 };
 
 /********************************************//**
@@ -23,11 +24,15 @@ void color_click_init(void);
  ***********************************************/
 void color_writetoaddr(char address, char value);
 
-/********************************************//**
- *  Function to read the red channel
- *	Returns a 16 bit ADC value representing colour intensity
- ***********************************************/
+//functions to read clear red, green, blue and clear values
+//Returns a 16 bit ADC value representing colour intensity
+unsigned int color_read_Clear(void);
 unsigned int color_read_Red(void);
+unsigned int color_read_Green(void);
+unsigned int color_read_Blue(void);
+
+//function to read all colors and store in struct RGBC_val
+void color_read(struct RGBC_val *p);
 
 //function to turn LEDs on and off
 void color_click_toggleLED(void);

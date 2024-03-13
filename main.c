@@ -8,6 +8,7 @@
 
 #include <xc.h>
 #include <stdio.h>
+#include <stdbool.h>
 #include "ADC.h"
 #include "color.h"
 #include "dc_motor.h"
@@ -16,11 +17,13 @@
 #include "serial.h"
 #include "timers.h"
 
+
 #define _XTAL_FREQ 64000000 //note intrinsic _delay function is 62.5ns at 64,000,000Hz  
 
 void main(void){
     //init all inits for used modules
     Timer0_init(); //timer
+    Interrupts_init(); //interrupts
     I2C_2_Master_Init(); //i2c coms
     color_click_init(); //color click module
     initDCmotorsPWM(99); //dc motors pwm
@@ -28,6 +31,14 @@ void main(void){
   
     //turn on color click LEDs
     color_click_toggleLED();
+    
+    //enable led
+    LATHbits.LATH3=1; //set initial output state for RH3
+    TRISHbits.TRISH3=0; //set TRIS value for pin (output)
+    
+    //enable the ON button (RF2)
+    TRISFbits.TRISF2=1; //set TRIS value for pin (input)
+    ANSELFbits.ANSELF2=0; //turn off analogue input on pin
     
 	//???don't forget TRIS for your output!
     
@@ -54,14 +65,153 @@ void main(void){
     pmL = &motorL; // assign pmL to the address of motorL
     pmR = &motorR; // assign pmR to the address of motorR
     
+    //struct to store the values of the color sensor with corresponding pointer
+    struct RGBC_val RGBC;
+    char *pRGBC;
+    pRGBC = &RGBC;
+    
+    //USED FOR DEBUGGING OVER SERIAL
+    char clear_val[20];
     char red_val[20];
+    char green_val[20];
+    char blue_val[20];
+    char *pclear_val;
     char *pred_val; 
+    char *pblue_val;
+    char *pgreen_val;
+    pclear_val = &clear_val[0];
     pred_val = &red_val[0];
+    pgreen_val = &green_val[0];
+    pblue_val = &blue_val[0];
+     
+    //----------------- testing timer0 --------------------
+    // resetTimer0();
+    // for(int i = 0; i < 5; i +=1){
+    //     sprintf(blue_val,"time1 = %d \r\n",get16bitTMR0val());
+    //     sendStringSerial4(pblue_val);
+    // }
+    // resetTimer0();
+    // for(int i = 0; i < 5; i +=1){
+    //     sprintf(blue_val,"time2 = %d \r\n",get16bitTMR0val());
+    //     sendStringSerial4(pblue_val);
+    //}
 
+
+    unsigned int lum; //luminosity reading to detect wall/color card
+    bool going_forward = false;
+    unsigned int previously_measured_time, measured_time;
+    int action_to_do;
+    unsigned int timings[20];
+    int actions[20];
+    int actions_completed = 0;
+    // turn right 90: 0
+    // turn left 90: 1
+    // turn 180: 2
+    // reverse one square and turn right 90: 3
+    // reverse one square and turn left 90: 4
+    // turn right 135:  5
+    // turn left 135: 6
+    // turn around and retrace: 7
+    // before start
+
+    //start loop
     while(1){
-        //read red value every second and send to serial
-        sprintf(red_val,"red = %d \r\n",color_read_Red());
-        sendStringSerial4(pred_val);
-        __delay_ms(1000);
+        if (PORTFbits.RF2){ //start with button press
+            break;
+        }
     }
+
+    //main loop 
+    while(1){
+        if(!going_forward){
+            // if in here : started program or just finished action.
+            // time to reset timer and start moving forward
+            resetTimer0();
+            fullSpeedAhead(pmL, pmR);
+            going_forward = true;
+        }
+        // read the colour sensor
+        lum = color_read_Clear();
+        //if above 1500 you want to stop and find color
+        if (lum > 1500){
+            //stop buggy
+            measured_time = get16bitTMR0val(); //measure time going forward
+            stop(pmL, pmR);
+
+            //say you've stopped going forward to satisfy the if statement above later
+            going_forward = false;
+
+            // store the measured time so we can use it later in retracing
+            timings[actions_completed] = measured_time;
+            //get color info
+            color_read(pRGBC);
+            //decide what colour it is
+            action_to_do = decide_action(pRGBC); // TODO this function returns one of the codes for each of the actions we named above
+            //store the action to do so you can use it later when retracing
+            actions[actions_completed] = action_to_do;
+
+            // we have stored all data from this action. We now can increment 'actions completed'
+            actions_completed += 1;
+
+            //give the robot a command based on the actions its supposed to do
+            if(action_to_do == 0){turn_right_90();} 
+            else if(action_to_do == 1){turn_left_90();}
+            if(action_to_do == 2){
+                turn_left_90();
+            }
+            else if(action_to_do == 3){
+                turn_r_90();
+            }
+            else if(action_to_do == 4){
+                turn_right_90();
+            }
+            else if(action_to_do == 5){
+                turn_right_90();
+            }
+            // we've reached the white wall we need to turn around, and  leave this loop
+            // then we will go to retrace loop
+            else if(action_to_do == 7){
+                turn_180();
+                break;
+            }
+        };
+    }
+
+    
+    //example history could be:
+    //timings: [2,5,4,7,8,3,8]
+    //actions: [R,L,R,R,R,L,END]
+    int upcoming_action = actions_completed - 2;
+    // we will iterate backwards through the array of actions done in our history
+    // this while loop ends once the index is less than 0 (we have completed all actions)
+    going_forward = false;
+
+    // RETRACE LOOP
+    while(upcoming_action >= 0){
+        if(!going_forward){
+            resetTimer0();
+            fullSpeedAhead(pmL, pmR);
+            going_forward = true;
+        }
+        //instead of measuring a colour, you meaure if you're above the length of time you went forwarrd when you were on this path
+        measured_time = get16bitTMR0val();
+        if(measured_time > timings[upcoming_action + 1]){
+            stop(pmL, pmR);
+            going_forward = false;
+            action_to_do = invert_instruction(actions[upcoming_action]);
+            // DO THIS ACTION
+            if(action_to_do == 0){;} 
+            else if(action_to_do == 1){;}
+            else if(action_to_do == 2){;}
+            else if(action_to_do == 3){;}
+            else if(action_to_do == 4){;}
+            else if(action_to_do == 5){;}
+            else if(action_to_do == 6){;}
+            upcoming_action -=1 ;
+        }
+        __delay_ms(10);
+        }
+    stop(pmL, pmR); //make sure buggy is stopped
 }
+
+

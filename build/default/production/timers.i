@@ -24097,6 +24097,7 @@ unsigned char __t3rd16on(void);
 
 
 void Timer0_init(void);
+void resetTimer0(void);
 unsigned int get16bitTMR0val(void);
 # 2 "timers.c" 2
 
@@ -24108,7 +24109,7 @@ void Timer0_init(void)
 {
     T0CON1bits.T0CS=0b010;
     T0CON1bits.T0ASYNC=1;
-    T0CON1bits.T0CKPS=0b1000;
+    T0CON1bits.T0CKPS=0b1111;
     T0CON0bits.T0OUTPS=0b000;
 
     T0CON0bits.T016BIT=1;
@@ -24126,4 +24127,12 @@ void Timer0_init(void)
 
 unsigned int get16bitTMR0val(void){
 
+    unsigned int timer_val = TMR0L;
+    timer_val |= (TMR0H << 8);
+    return timer_val;
+}
+
+void resetTimer0(void){
+    TMR0H = 0;
+    TMR0L = 0;
 }

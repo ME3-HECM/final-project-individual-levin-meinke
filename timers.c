@@ -8,7 +8,7 @@ void Timer0_init(void)
 {
     T0CON1bits.T0CS=0b010; // Fosc/4, setting clock source to 16Mz
     T0CON1bits.T0ASYNC=1; // See datasheet errata - needed to ensure correct operation when Fosc/4 used as clock source
-    T0CON1bits.T0CKPS=0b1000; // 1:256
+    T0CON1bits.T0CKPS=0b1111; // 1:32768
     T0CON0bits.T0OUTPS=0b000; // 1:1
     
     T0CON0bits.T016BIT=1; // 16-bit mode	
@@ -26,5 +26,13 @@ void Timer0_init(void)
 ************************************/
 unsigned int get16bitTMR0val(void){
 	//add your code to get the full 16 bit timer value here
+    unsigned int timer_val = TMR0L;
+    timer_val |= (TMR0H << 8); //shift 8 bits to the left (8 most significant bits))
+    return timer_val;
+}
+
+void resetTimer0(void){
+    TMR0H = 0;
+    TMR0L = 0;
 }
 

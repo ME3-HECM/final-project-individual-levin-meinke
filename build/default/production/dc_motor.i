@@ -24096,7 +24096,7 @@ unsigned char __t3rd16on(void);
 
 
 
-typedef struct DC_motor {
+struct DC_motor {
     char power;
     char direction;
     char brakemode;
@@ -24227,9 +24227,9 @@ void turnLeft(struct DC_motor *mL, struct DC_motor *mR){
     mL->direction = 0;
     mR->direction = 1;
 
-    while ((mL->power) < 75 || (mR->power) < 75){
-        if ((mL->power) < 75) (mL->power) += 1;
-        if ((mR->power) < 75) (mR->power) += 1;
+    while ((mL->power) < 70 || (mR->power) < 70){
+        if ((mL->power) < 70) (mL->power) += 1;
+        if ((mR->power) < 70) (mR->power) += 1;
 
         setMotorPWM(mL);
         setMotorPWM(mR);
@@ -24244,9 +24244,9 @@ void turnRight(struct DC_motor *mL, struct DC_motor *mR){
     mL->direction = 1;
     mR->direction = 0;
 
-    while ((mL->power) < 75 || (mR->power) < 75){
-        if ((mL->power) < 75) (mL->power) += 1;
-        if ((mR->power) < 75) (mR->power) += 1;
+    while ((mL->power) < 70 || (mR->power) < 70){
+        if ((mL->power) < 70) (mL->power) += 1;
+        if ((mR->power) < 70) (mR->power) += 1;
 
         setMotorPWM(mL);
         setMotorPWM(mR);

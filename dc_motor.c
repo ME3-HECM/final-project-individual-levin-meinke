@@ -95,52 +95,6 @@ void setMotorPWM(struct DC_motor *m)
     }
 }
 
-//function to stop the robot gradually 
-void stop(struct DC_motor *mL, struct DC_motor *mR){
-    while ((mL->power) > 0 || (mR->power) > 0){ //while motors are running
-        if ((mL->power) > 0) (mL->power) -= 1; //increment down left
-        if ((mR->power) > 0) (mR->power) -= 1; //increment down right
-        //call set motorPWM functions
-        setMotorPWM(mL);
-        setMotorPWM(mR);
-        __delay_ms(1); //delay before repeating (gradual decrease in speed)
-    }
-}
-
-//function to make the robot turn left 
-void turnLeft(struct DC_motor *mL, struct DC_motor *mR){
-    mL->direction = 0; //left side backwards
-    mR->direction = 1; //right side forward
-            
-    while ((mL->power) < 75 || (mR->power) < 75){ //while motors are below 100 power
-        if ((mL->power) < 75) (mL->power) += 1; //increment down left
-        if ((mR->power) < 75) (mR->power) += 1; //increment down right
-        //call set motorPWM functions
-        setMotorPWM(mL);
-        setMotorPWM(mR);
-        __delay_ms(1); //delay before repeating (gradual decrease in speed)
-    }    
-    __delay_ms(225); //calibrate for how long it takes to turn
-    stop(mL, mR);
-}
-
-//function to make the robot turn right 
-void turnRight(struct DC_motor *mL, struct DC_motor *mR){
-    mL->direction = 1; //left side forward
-    mR->direction = 0; //right side backwards
-            
-    while ((mL->power) < 75 || (mR->power) < 75){ //while motors are below 100 power
-        if ((mL->power) < 75) (mL->power) += 1; //increment down left
-        if ((mR->power) < 75) (mR->power) += 1; //increment down right
-        //call set motorPWM functions
-        setMotorPWM(mL);
-        setMotorPWM(mR);
-        __delay_ms(1); //delay before repeating (gradual decrease in speed)
-    }
-    __delay_ms(225); //calibrate for how long it takes to turn
-    stop(mL, mR);
-}
-
 //function to make the robot go straight
 void fullSpeedAhead(struct DC_motor *mL, struct DC_motor *mR){
     mL->direction = 1; //left side forward
@@ -155,4 +109,120 @@ void fullSpeedAhead(struct DC_motor *mL, struct DC_motor *mR){
         __delay_ms(1); //delay before repeating (gradual increase in speed)
     }
 }
+
+//function to stop the robot 
+void stop(struct DC_motor *mL, struct DC_motor *mR){
+    while ((mL->power) > 0 || (mR->power) > 0){ //while motors are running
+        if ((mL->power) > 0) (mL->power) -= 1; //increment down left
+        if ((mR->power) > 0) (mR->power) -= 1; //increment down right
+        //call set motorPWM functions
+        setMotorPWM(mL);
+        setMotorPWM(mR);
+        __delay_ms(1); //delay before repeating (gradual decrease in speed)
+    }
+}
+
+//function to make the robot turn left 90 deg
+void turn_left_90(struct DC_motor *mL, struct DC_motor *mR){
+    mL->direction = 0; //left side backwards
+    mR->direction = 1; //right side forward
+            
+    while ((mL->power) < 70 || (mR->power) < 70){ //while motors are below 70 power
+        if ((mL->power) < 70) (mL->power) += 1; //increment down left
+        if ((mR->power) < 70) (mR->power) += 1; //increment down right
+        //call set motorPWM functions
+        setMotorPWM(mL);
+        setMotorPWM(mR);
+        __delay_ms(1); //delay before repeating (gradual decrease in speed)
+    }    
+    __delay_ms(225); //calibrate for how long it takes to turn
+    stop(mL, mR);
+}
+
+//function to make the robot turn right 90 deg
+void turn_right_90(struct DC_motor *mL, struct DC_motor *mR){
+    mL->direction = 1; //left side forward
+    mR->direction = 0; //right side backwards
+            
+    while ((mL->power) < 70 || (mR->power) < 70){ //while motors are below 100 power
+        if ((mL->power) < 70) (mL->power) += 1; //increment down left
+        if ((mR->power) < 70) (mR->power) += 1; //increment down right
+        //call set motorPWM functions
+        setMotorPWM(mL);
+        setMotorPWM(mR);
+        __delay_ms(1); //delay before repeating (gradual decrease in speed)
+    }
+    __delay_ms(225); //calibrate for how long it takes to turn
+    stop(mL, mR);
+}
+
+//function to make the robot left right 135 deg
+void turn_left_135(struct DC_motor *mL, struct DC_motor *mR){
+    mL->direction = 0; //left side backwards
+    mR->direction = 1; //right side forward
+            
+    while ((mL->power) < 70 || (mR->power) < 70){ //while motors are below 70 power
+        if ((mL->power) < 70) (mL->power) += 1; //increment down left
+        if ((mR->power) < 70) (mR->power) += 1; //increment down right
+        //call set motorPWM functions
+        setMotorPWM(mL);
+        setMotorPWM(mR);
+        __delay_ms(1); //delay before repeating (gradual decrease in speed)
+    }    
+    __delay_ms(500); //calibrate for how long it takes to turn
+    stop(mL, mR);
+}
+
+//function to make the robot turn right 135 deg
+void turn_right_135(struct DC_motor *mL, struct DC_motor *mR){
+    mL->direction = 1; //left side forward
+    mR->direction = 0; //right side backwards
+            
+    while ((mL->power) < 70 || (mR->power) < 70){ //while motors are below 100 power
+        if ((mL->power) < 70) (mL->power) += 1; //increment down left
+        if ((mR->power) < 70) (mR->power) += 1; //increment down right
+        //call set motorPWM functions
+        setMotorPWM(mL);
+        setMotorPWM(mR);
+        __delay_ms(1); //delay before repeating (gradual decrease in speed)
+    }
+    __delay_ms(500); //calibrate for how long it takes to turn
+    stop(mL, mR);
+}
+
+void reverse_after_read(struct DC_motor *mL, struct DC_motor *mR){
+    mL->direction = 0; //left side forward
+    mR->direction = 0; //right side forward
+    
+    while ((mL->power) < 70 || (mR->power) < 70){ //while motors are below 100 power
+        if ((mL->power) < 70) (mL->power) += 1; //increment left
+        if ((mR->power) < 70) (mR->power) += 1; //increment right
+        //call set motorPWM functions
+        setMotorPWM(mL);
+        setMotorPWM(mR);
+        __delay_ms(1); //delay before repeating (gradual increase in speed)
+    }
+    __delay_ms(100); //calibrate for how long it takes to go back
+    stop(mL, mR);
+}
+
+void reverse_one_square(struct DC_motor *mL, struct DC_motor *mR){
+    mL->direction = 0; //left side forward
+    mR->direction = 0; //right side forward
+    
+    while ((mL->power) < 70 || (mR->power) < 70){ //while motors are below 100 power
+        if ((mL->power) < 70) (mL->power) += 1; //increment left
+        if ((mR->power) < 70) (mR->power) += 1; //increment right
+        //call set motorPWM functions
+        setMotorPWM(mL);
+        setMotorPWM(mR);
+        __delay_ms(1); //delay before repeating (gradual increase in speed)
+    }
+    __delay_ms(500); //calibrate for how long it takes to go back
+    stop(mL, mR);
+}
+
+
+
+
 

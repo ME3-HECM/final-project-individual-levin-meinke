@@ -24096,10 +24096,11 @@ unsigned char __t3rd16on(void);
 
 
 
-struct RBG_val{
+struct RGBC_val{
     unsigned int R;
     unsigned int G;
     unsigned int B;
+    unsigned int C;
 };
 
 
@@ -24116,9 +24117,13 @@ void color_writetoaddr(char address, char value);
 
 
 
-
-
+unsigned int color_read_Clear(void);
 unsigned int color_read_Red(void);
+unsigned int color_read_Green(void);
+unsigned int color_read_Blue(void);
+
+
+void color_read(struct RGBC_val *p);
 
 
 void color_click_toggleLED(void);
@@ -24167,8 +24172,8 @@ void color_click_init(void){
     _delay((unsigned long)((3)*(64000000/4000.0)));
  color_writetoaddr(0x00, 0x03);
  color_writetoaddr(0x01, 0xD5);
-
-
+    color_writetoaddr(0x03, 0xFF);
+# 24 "color.c"
     LATGbits.LATG0=0;
     LATAbits.LATA3=0;
     LATEbits.LATE7=0;
@@ -24188,6 +24193,27 @@ void color_writetoaddr(char address, char value){
     I2C_2_Master_Stop();
 }
 
+
+void color_read(struct RGBC_val *p){
+    (p->R) = color_read_Red();
+    (p->G) = color_read_Green();
+    (p->B) = color_read_Blue();
+    (p->C) = color_read_Clear();
+}
+
+unsigned int color_read_Clear(void){
+ unsigned int tmp;
+ I2C_2_Master_Start();
+ I2C_2_Master_Write(0x52 | 0x00);
+ I2C_2_Master_Write(0xA0 | 0x14);
+ I2C_2_Master_RepStart();
+ I2C_2_Master_Write(0x52 | 0x01);
+ tmp=I2C_2_Master_Read(1);
+ tmp=tmp | (I2C_2_Master_Read(0)<<8);
+ I2C_2_Master_Stop();
+ return tmp;
+}
+
 unsigned int color_read_Red(void){
  unsigned int tmp;
  I2C_2_Master_Start();
@@ -24200,6 +24226,34 @@ unsigned int color_read_Red(void){
  I2C_2_Master_Stop();
  return tmp;
 }
+
+unsigned int color_read_Green(void){
+ unsigned int tmp;
+ I2C_2_Master_Start();
+ I2C_2_Master_Write(0x52 | 0x00);
+ I2C_2_Master_Write(0xA0 | 0x18);
+ I2C_2_Master_RepStart();
+ I2C_2_Master_Write(0x52 | 0x01);
+ tmp=I2C_2_Master_Read(1);
+ tmp=tmp | (I2C_2_Master_Read(0)<<8);
+ I2C_2_Master_Stop();
+ return tmp;
+}
+
+unsigned int color_read_Blue(void){
+ unsigned int tmp;
+ I2C_2_Master_Start();
+ I2C_2_Master_Write(0x52 | 0x00);
+ I2C_2_Master_Write(0xA0 | 0x1A);
+ I2C_2_Master_RepStart();
+ I2C_2_Master_Write(0x52 | 0x01);
+ tmp=I2C_2_Master_Read(1);
+ tmp=tmp | (I2C_2_Master_Read(0)<<8);
+ I2C_2_Master_Stop();
+ return tmp;
+}
+
+
 
 
 void color_click_toggleLED(void){

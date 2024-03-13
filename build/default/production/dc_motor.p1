@@ -285,7 +285,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18F-K_DFP/1.11.281/xc8\pic\include\proc\pic18f67k40.h: 28841: extern volatile LATGbits_t LATGbits __attribute__((address(0xF7F)));
 [v _LATGbits `VS1357 ~T0 @X0 0 e@3967 ]
 "8 ./dc_motor.h
-[; ;./dc_motor.h: 8: typedef struct DC_motor {
+[; ;./dc_motor.h: 8: struct DC_motor {
 [s S2015 `uc 1 `uc 1 `uc 1 `ui 1 `*uc 1 `*uc 1 ]
 [n S2015 DC_motor power direction brakemode PWMperiod posDutyHighByte negDutyHighByte ]
 [v F205 `(v ~T0 @X0 1 tf1`ul ]
@@ -2534,18 +2534,18 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;dc_motor.c: 113:     mR->direction = 1;
 [e = . *U _mR 1 -> -> 1 `i `uc ]
 "115
-[; ;dc_motor.c: 115:     while ((mL->power) < 75 || (mR->power) < 75){
+[; ;dc_motor.c: 115:     while ((mL->power) < 70 || (mR->power) < 70){
 [e $U 2029  ]
 [e :U 2030 ]
 {
 "116
-[; ;dc_motor.c: 116:         if ((mL->power) < 75) (mL->power) += 1;
-[e $ ! < -> . *U _mL 0 `i -> 75 `i 2032  ]
+[; ;dc_motor.c: 116:         if ((mL->power) < 70) (mL->power) += 1;
+[e $ ! < -> . *U _mL 0 `i -> 70 `i 2032  ]
 [e =+ . *U _mL 0 -> -> 1 `i `uc ]
 [e :U 2032 ]
 "117
-[; ;dc_motor.c: 117:         if ((mR->power) < 75) (mR->power) += 1;
-[e $ ! < -> . *U _mR 0 `i -> 75 `i 2033  ]
+[; ;dc_motor.c: 117:         if ((mR->power) < 70) (mR->power) += 1;
+[e $ ! < -> . *U _mR 0 `i -> 70 `i 2033  ]
 [e =+ . *U _mR 0 -> -> 1 `i `uc ]
 [e :U 2033 ]
 "119
@@ -2562,8 +2562,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e :U 2029 ]
 "115
-[; ;dc_motor.c: 115:     while ((mL->power) < 75 || (mR->power) < 75){
-[e $ || < -> . *U _mL 0 `i -> 75 `i < -> . *U _mR 0 `i -> 75 `i 2030  ]
+[; ;dc_motor.c: 115:     while ((mL->power) < 70 || (mR->power) < 70){
+[e $ || < -> . *U _mL 0 `i -> 70 `i < -> . *U _mR 0 `i -> 70 `i 2030  ]
 [e :U 2031 ]
 "123
 [; ;dc_motor.c: 123:     _delay((unsigned long)((225)*(64000000/4000.0)));
@@ -2590,18 +2590,18 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;dc_motor.c: 130:     mR->direction = 0;
 [e = . *U _mR 1 -> -> 0 `i `uc ]
 "132
-[; ;dc_motor.c: 132:     while ((mL->power) < 75 || (mR->power) < 75){
+[; ;dc_motor.c: 132:     while ((mL->power) < 70 || (mR->power) < 70){
 [e $U 2035  ]
 [e :U 2036 ]
 {
 "133
-[; ;dc_motor.c: 133:         if ((mL->power) < 75) (mL->power) += 1;
-[e $ ! < -> . *U _mL 0 `i -> 75 `i 2038  ]
+[; ;dc_motor.c: 133:         if ((mL->power) < 70) (mL->power) += 1;
+[e $ ! < -> . *U _mL 0 `i -> 70 `i 2038  ]
 [e =+ . *U _mL 0 -> -> 1 `i `uc ]
 [e :U 2038 ]
 "134
-[; ;dc_motor.c: 134:         if ((mR->power) < 75) (mR->power) += 1;
-[e $ ! < -> . *U _mR 0 `i -> 75 `i 2039  ]
+[; ;dc_motor.c: 134:         if ((mR->power) < 70) (mR->power) += 1;
+[e $ ! < -> . *U _mR 0 `i -> 70 `i 2039  ]
 [e =+ . *U _mR 0 -> -> 1 `i `uc ]
 [e :U 2039 ]
 "136
@@ -2618,8 +2618,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e :U 2035 ]
 "132
-[; ;dc_motor.c: 132:     while ((mL->power) < 75 || (mR->power) < 75){
-[e $ || < -> . *U _mL 0 `i -> 75 `i < -> . *U _mR 0 `i -> 75 `i 2036  ]
+[; ;dc_motor.c: 132:     while ((mL->power) < 70 || (mR->power) < 70){
+[e $ || < -> . *U _mL 0 `i -> 70 `i < -> . *U _mR 0 `i -> 70 `i 2036  ]
 [e :U 2037 ]
 "140
 [; ;dc_motor.c: 140:     _delay((unsigned long)((225)*(64000000/4000.0)));

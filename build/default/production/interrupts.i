@@ -24148,36 +24148,26 @@ void Interrupts_init(void)
 {
     INTCONbits.PEIE=1;
     PIE2bits.C1IE=1;
-    PIE0bits.TMR0IE=1;
-    PIE4bits.RC4IE=1;
-    PIE4bits.TX4IE=1;
+
+
+
+    PIE0bits.IOCIE=1;
     INTCONbits.GIE=1;
+
+
+
 
 }
 
 
 void __attribute__((picinterrupt(("high_priority")))) HighISR()
 {
+# 48 "interrupts.c"
+    if (PORTBbits.RB0){
+        LATHbits.LATH3 = 0;
+        sendCharSerial4('a');
 
- if(PIR2bits.C1IF){
-        LATHbits.LATH3 = !LATHbits.LATH3;
 
-
-
-        PIR2bits.C1IF=0;
     }
 
-
-    if (PIR0bits.TMR0IF) {
-
-
-        TMR0H=0b00001011;
-        TMR0L=0b11011011;
-
-        PIR0bits.TMR0IF=0;
-    }
-
-    if (PIR4bits.RC4IF) {
-
-    }
 }
