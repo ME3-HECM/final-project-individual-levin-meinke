@@ -120,31 +120,34 @@ Version 4.0 HI-TECH Software Intermediate Code
 "22 ./dc_motor.h
 [; ;./dc_motor.h: 22: void stop(struct DC_motor *mL, struct DC_motor *mR);
 [v _stop `(v ~T0 @X0 0 ef2`*S2018`*S2018 ]
-"35 ./color.h
-[; ;./color.h: 35: void color_read(struct RGBC_val *p);
-[v _color_read `(v ~T0 @X0 0 ef1`*S2017 ]
 [v F205 `(v ~T0 @X0 1 tf1`ul ]
 "20 C:\Program Files\Microchip\xc8\v2.45\pic\include\builtins.h
 [v __delay `JF205 ~T0 @X0 0 e ]
 [p i __delay ]
-"25 ./color.h
-[; ;./color.h: 25: void color_writetoaddr(char address, char value);
-[v _color_writetoaddr `(v ~T0 @X0 0 ef2`uc`uc ]
 "121 C:\Program Files\Microchip\xc8\v2.45\pic\include\c99\stdio.h
 [; ;C:\Program Files\Microchip\xc8\v2.45\pic\include\c99\stdio.h: 121: int sprintf(char *restrict, const char *restrict, ...);
 [v _sprintf `(i ~T0 @X0 0 e1v`*uc`*Cuc ]
-"30 ./color.h
-[; ;./color.h: 30: unsigned int color_read_Red(void);
-[v _color_read_Red `(ui ~T0 @X0 0 ef ]
+"41 ./color.h
+[; ;./color.h: 41: char decide_action(void);
+[v _decide_action `(uc ~T0 @X0 0 ef ]
 "26 ./serial.h
 [; ;./serial.h: 26: void sendStringSerial4(char *string);
 [v _sendStringSerial4 `(v ~T0 @X0 0 ef1`*uc ]
-"31 ./color.h
+"25 ./color.h
+[; ;./color.h: 25: void color_writetoaddr(char address, char value);
+[v _color_writetoaddr `(v ~T0 @X0 0 ef2`uc`uc ]
+"30
+[; ;./color.h: 30: unsigned int color_read_Red(void);
+[v _color_read_Red `(ui ~T0 @X0 0 ef ]
+"31
 [; ;./color.h: 31: unsigned int color_read_Green(void);
 [v _color_read_Green `(ui ~T0 @X0 0 ef ]
 "32
 [; ;./color.h: 32: unsigned int color_read_Blue(void);
 [v _color_read_Blue `(ui ~T0 @X0 0 ef ]
+"35
+[; ;./color.h: 35: void color_read(struct RGBC_val *p);
+[v _color_read `(v ~T0 @X0 0 ef1`*S2017 ]
 "27 ./dc_motor.h
 [; ;./dc_motor.h: 27: void reverse_after_read(struct DC_motor *mL, struct DC_motor *mR);
 [v _reverse_after_read `(v ~T0 @X0 0 ef2`*S2018`*S2018 ]
@@ -2383,402 +2386,514 @@ Version 4.0 HI-TECH Software Intermediate Code
 "149
 [; ;main.c: 149:             going_forward = 0;
 [e = _going_forward -> -> 0 `i `a ]
+"150
+[; ;main.c: 150:             _delay((unsigned long)((100)*(64000000/4000.0)));
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
 "152
-[; ;main.c: 152:             timings[actions_completed] = measured_time;
-[e = *U + &U _timings * -> -> _actions_completed `ui `ux -> -> # *U &U _timings `ui `ux _measured_time ]
-"154
-[; ;main.c: 154:             color_read(pRGBC);
-[e ( _color_read (1 _pRGBC ]
-"155
-[; ;main.c: 155:             _delay((unsigned long)((500)*(64000000/4000.0)));
-[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-"157
-[; ;main.c: 157:             color_writetoaddr(0x01, 0xD5);
-[e ( _color_writetoaddr (2 , -> -> 1 `i `uc -> -> 213 `i `uc ]
-"158
-[; ;main.c: 158:             color_writetoaddr(0x03, 0xAB);
-[e ( _color_writetoaddr (2 , -> -> 3 `i `uc -> -> 171 `i `uc ]
-"159
-[; ;main.c: 159:             _delay((unsigned long)((200)*(64000000/4000.0)));
-[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-"161
-[; ;main.c: 161:             sprintf(red_val,"red = %d \r\n",color_read_Red());
-[e ( _sprintf (1 , (. , &U _red_val :s 1C ( _color_read_Red ..  ]
-"162
-[; ;main.c: 162:             sendStringSerial4(pred_val);
+[; ;main.c: 152:             sprintf(red_val,"action = %d \r\n",decide_action());
+[e ( _sprintf (1 , (. , &U _red_val :s 1C -> ( _decide_action ..  `i ]
+"153
+[; ;main.c: 153:             sendStringSerial4(pred_val);
 [e ( _sendStringSerial4 (1 _pred_val ]
-"163
-[; ;main.c: 163:             sprintf(green_val,"green = %d \r\n",color_read_Green());
-[e ( _sprintf (1 , (. , &U _green_val :s 2C ( _color_read_Green ..  ]
-"164
-[; ;main.c: 164:             sendStringSerial4(pgreen_val);
+"155
+[; ;main.c: 155:             color_writetoaddr(0x01, 0xD5);
+[e ( _color_writetoaddr (2 , -> -> 1 `i `uc -> -> 213 `i `uc ]
+"156
+[; ;main.c: 156:             color_writetoaddr(0x03, 0xAB);
+[e ( _color_writetoaddr (2 , -> -> 3 `i `uc -> -> 171 `i `uc ]
+"157
+[; ;main.c: 157:             _delay((unsigned long)((200)*(64000000/4000.0)));
+[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+"158
+[; ;main.c: 158:             sprintf(red_val,"red = %d \r\n",color_read_Red());
+[e ( _sprintf (1 , (. , &U _red_val :s 2C ( _color_read_Red ..  ]
+"159
+[; ;main.c: 159:             sendStringSerial4(pred_val);
+[e ( _sendStringSerial4 (1 _pred_val ]
+"160
+[; ;main.c: 160:             sprintf(green_val,"green = %d \r\n",color_read_Green());
+[e ( _sprintf (1 , (. , &U _green_val :s 3C ( _color_read_Green ..  ]
+"161
+[; ;main.c: 161:             sendStringSerial4(pgreen_val);
 [e ( _sendStringSerial4 (1 _pgreen_val ]
-"165
-[; ;main.c: 165:             sprintf(blue_val,"blue = %d \r\n",color_read_Blue());
-[e ( _sprintf (1 , (. , &U _blue_val :s 3C ( _color_read_Blue ..  ]
-"166
-[; ;main.c: 166:             sendStringSerial4(pblue_val);
+"162
+[; ;main.c: 162:             sprintf(blue_val,"blue = %d \r\n",color_read_Blue());
+[e ( _sprintf (1 , (. , &U _blue_val :s 4C ( _color_read_Blue ..  ]
+"163
+[; ;main.c: 163:             sendStringSerial4(pblue_val);
 [e ( _sendStringSerial4 (1 _pblue_val ]
-"167
-[; ;main.c: 167:             sprintf(clear_val,"clear = %d \r\n",color_read_Clear());
-[e ( _sprintf (1 , (. , &U _clear_val :s 4C ( _color_read_Clear ..  ]
-"168
-[; ;main.c: 168:             sendStringSerial4(pclear_val);
+"164
+[; ;main.c: 164:             sprintf(clear_val,"clear = %d \r\n\r\n",color_read_Clear());
+[e ( _sprintf (1 , (. , &U _clear_val :s 5C ( _color_read_Clear ..  ]
+"165
+[; ;main.c: 165:             sendStringSerial4(pclear_val);
 [e ( _sendStringSerial4 (1 _pclear_val ]
-"169
-[; ;main.c: 169:             _delay((unsigned long)((3000)*(64000000/4000.0)));
+"166
+[; ;main.c: 166:             _delay((unsigned long)((3000)*(64000000/4000.0)));
 [e ( __delay (1 -> * -> -> 3000 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-"170
-[; ;main.c: 170:             _delay((unsigned long)((3000)*(64000000/4000.0)));
+"167
+[; ;main.c: 167:             _delay((unsigned long)((3000)*(64000000/4000.0)));
+[e ( __delay (1 -> * -> -> 3000 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+"168
+[; ;main.c: 168:             _delay((unsigned long)((3000)*(64000000/4000.0)));
 [e ( __delay (1 -> * -> -> 3000 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
 "171
-[; ;main.c: 171:             _delay((unsigned long)((3000)*(64000000/4000.0)));
-[e ( __delay (1 -> * -> -> 3000 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-"174
-[; ;main.c: 174:             color_writetoaddr(0x01, 0xFF);
+[; ;main.c: 171:             color_writetoaddr(0x01, 0xFF);
 [e ( _color_writetoaddr (2 , -> -> 1 `i `uc -> -> 255 `i `uc ]
-"175
-[; ;main.c: 175:             color_writetoaddr(0x03, 0xFF);
+"172
+[; ;main.c: 172:             color_writetoaddr(0x03, 0xFF);
 [e ( _color_writetoaddr (2 , -> -> 3 `i `uc -> -> 255 `i `uc ]
-"177
-[; ;main.c: 177:         }
+"173
+[; ;main.c: 173:         }
 }
 [e :U 2024 ]
-"178
-[; ;main.c: 178:         _delay((unsigned long)((1)*(64000000/4000.0)));
-[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-"179
-[; ;main.c: 179:     }
+"174
+[; ;main.c: 174:     }
 }
 [e :U 2020 ]
 [e $U 2021  ]
 [e :U 2022 ]
-"183
-[; ;main.c: 183:     while(1){
+"177
+[; ;main.c: 177:     while(1){
 [e :U 2026 ]
 {
-"184
-[; ;main.c: 184:         if(!going_forward){
+"178
+[; ;main.c: 178:         if(!going_forward){
 [e $ ! ! != -> _going_forward `i -> 0 `i 2028  ]
 {
-"187
-[; ;main.c: 187:             resetTimer0();
+"181
+[; ;main.c: 181:             resetTimer0();
 [e ( _resetTimer0 ..  ]
-"188
-[; ;main.c: 188:             fullSpeedAhead(pmL, pmR);
+"182
+[; ;main.c: 182:             fullSpeedAhead(pmL, pmR);
 [e ( _fullSpeedAhead (2 , _pmL _pmR ]
-"189
-[; ;main.c: 189:             going_forward = 1;
+"183
+[; ;main.c: 183:             going_forward = 1;
 [e = _going_forward -> -> 1 `i `a ]
-"190
-[; ;main.c: 190:         }
+"184
+[; ;main.c: 184:         }
 }
 [e :U 2028 ]
-"192
-[; ;main.c: 192:         lum = color_read_Clear();
+"186
+[; ;main.c: 186:         lum = color_read_Clear();
 [e = _lum ( _color_read_Clear ..  ]
-"194
-[; ;main.c: 194:         if (lum > 1500){
-[e $ ! > _lum -> -> 1500 `i `ui 2029  ]
+"188
+[; ;main.c: 188:         if (lum > 30){
+[e $ ! > _lum -> -> 30 `i `ui 2029  ]
 {
-"196
-[; ;main.c: 196:             measured_time = get16bitTMR0val();
+"190
+[; ;main.c: 190:             measured_time = get16bitTMR0val();
 [e = _measured_time ( _get16bitTMR0val ..  ]
-"197
-[; ;main.c: 197:             stop(pmL, pmR);
+"191
+[; ;main.c: 191:             stop(pmL, pmR);
 [e ( _stop (2 , _pmL _pmR ]
-"200
-[; ;main.c: 200:             going_forward = 0;
+"193
+[; ;main.c: 193:             going_forward = 0;
 [e = _going_forward -> -> 0 `i `a ]
-"203
-[; ;main.c: 203:             timings[actions_completed] = measured_time;
+"196
+[; ;main.c: 196:             timings[actions_completed] = measured_time;
 [e = *U + &U _timings * -> -> _actions_completed `ui `ux -> -> # *U &U _timings `ui `ux _measured_time ]
-"205
-[; ;main.c: 205:             color_read(pRGBC);
-[e ( _color_read (1 _pRGBC ]
+"198
+[; ;main.c: 198:             _delay((unsigned long)((100)*(64000000/4000.0)));
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+"200
+[; ;main.c: 200:             _delay((unsigned long)((500)*(64000000/4000.0)));
+[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+"202
+[; ;main.c: 202:             color_writetoaddr(0x01, 0xD5);
+[e ( _color_writetoaddr (2 , -> -> 1 `i `uc -> -> 213 `i `uc ]
+"203
+[; ;main.c: 203:             color_writetoaddr(0x03, 0xAB);
+[e ( _color_writetoaddr (2 , -> -> 3 `i `uc -> -> 171 `i `uc ]
+"204
+[; ;main.c: 204:             _delay((unsigned long)((200)*(64000000/4000.0)));
+[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+"206
+[; ;main.c: 206:             sprintf(red_val,"red = %d \r\n",color_read_Red());
+[e ( _sprintf (1 , (. , &U _red_val :s 6C ( _color_read_Red ..  ]
+"207
+[; ;main.c: 207:             sendStringSerial4(pred_val);
+[e ( _sendStringSerial4 (1 _pred_val ]
+"208
+[; ;main.c: 208:             sprintf(green_val,"green = %d \r\n",color_read_Green());
+[e ( _sprintf (1 , (. , &U _green_val :s 7C ( _color_read_Green ..  ]
 "209
-[; ;main.c: 209:             actions[actions_completed] = action_to_do;
-[e = *U + &U _actions * -> -> _actions_completed `ui `ux -> -> # *U &U _actions `ui `ux _action_to_do ]
+[; ;main.c: 209:             sendStringSerial4(pgreen_val);
+[e ( _sendStringSerial4 (1 _pgreen_val ]
+"210
+[; ;main.c: 210:             sprintf(blue_val,"blue = %d \r\n",color_read_Blue());
+[e ( _sprintf (1 , (. , &U _blue_val :s 8C ( _color_read_Blue ..  ]
+"211
+[; ;main.c: 211:             sendStringSerial4(pblue_val);
+[e ( _sendStringSerial4 (1 _pblue_val ]
 "212
-[; ;main.c: 212:             actions_completed += 1;
-[e =+ _actions_completed -> 1 `i ]
+[; ;main.c: 212:             sprintf(clear_val,"clear = %d \r\n",color_read_Clear());
+[e ( _sprintf (1 , (. , &U _clear_val :s 9C ( _color_read_Clear ..  ]
+"213
+[; ;main.c: 213:             sendStringSerial4(pclear_val);
+[e ( _sendStringSerial4 (1 _pclear_val ]
+"214
+[; ;main.c: 214:             _delay((unsigned long)((3000)*(64000000/4000.0)));
+[e ( __delay (1 -> * -> -> 3000 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
 "215
-[; ;main.c: 215:             if(action_to_do == 0){
-[e $ ! == _action_to_do -> 0 `i 2030  ]
-{
+[; ;main.c: 215:             _delay((unsigned long)((3000)*(64000000/4000.0)));
+[e ( __delay (1 -> * -> -> 3000 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
 "216
-[; ;main.c: 216:                 reverse_after_read(pmL, pmR);
-[e ( _reverse_after_read (2 , _pmL _pmR ]
-"217
-[; ;main.c: 217:                 turn_right_90(pmL, pmR);
-[e ( _turn_right_90 (2 , _pmL _pmR ]
-"218
-[; ;main.c: 218:             }
-}
-[e $U 2031  ]
+[; ;main.c: 216:             _delay((unsigned long)((3000)*(64000000/4000.0)));
+[e ( __delay (1 -> * -> -> 3000 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
 "219
-[; ;main.c: 219:             else if(action_to_do == 1){
-[e :U 2030 ]
-[e $ ! == _action_to_do -> 1 `i 2032  ]
-{
+[; ;main.c: 219:             color_writetoaddr(0x01, 0xFF);
+[e ( _color_writetoaddr (2 , -> -> 1 `i `uc -> -> 255 `i `uc ]
 "220
-[; ;main.c: 220:                 reverse_after_read(pmL, pmR);
-[e ( _reverse_after_read (2 , _pmL _pmR ]
-"221
-[; ;main.c: 221:                 turn_left_90(pmL, pmR);
-[e ( _turn_left_90 (2 , _pmL _pmR ]
+[; ;main.c: 220:             color_writetoaddr(0x03, 0xFF);
+[e ( _color_writetoaddr (2 , -> -> 3 `i `uc -> -> 255 `i `uc ]
 "222
-[; ;main.c: 222:             }
-}
-[e $U 2033  ]
-"223
-[; ;main.c: 223:             else if(action_to_do == 2){
-[e :U 2032 ]
-[e $ ! == _action_to_do -> 2 `i 2034  ]
-{
-"224
-[; ;main.c: 224:                 reverse_after_read(pmL, pmR);
-[e ( _reverse_after_read (2 , _pmL _pmR ]
-"225
-[; ;main.c: 225:                 turn_right_90(pmL, pmR);
-[e ( _turn_right_90 (2 , _pmL _pmR ]
-"226
-[; ;main.c: 226:                 turn_right_90(pmL, pmR);
-[e ( _turn_right_90 (2 , _pmL _pmR ]
-"227
-[; ;main.c: 227:             }
-}
-[e $U 2035  ]
-"228
-[; ;main.c: 228:             else if(action_to_do == 3){
-[e :U 2034 ]
-[e $ ! == _action_to_do -> 3 `i 2036  ]
-{
-"229
-[; ;main.c: 229:                 reverse_after_read(pmL, pmR);
-[e ( _reverse_after_read (2 , _pmL _pmR ]
-"230
-[; ;main.c: 230:                 reverse_one_square(pmL, pmR);
-[e ( _reverse_one_square (2 , _pmL _pmR ]
-"231
-[; ;main.c: 231:                 turn_right_90(pmL, pmR);
-[e ( _turn_right_90 (2 , _pmL _pmR ]
-"232
-[; ;main.c: 232:             }
-}
-[e $U 2037  ]
-"233
-[; ;main.c: 233:             else if(action_to_do == 4){
-[e :U 2036 ]
-[e $ ! == _action_to_do -> 4 `i 2038  ]
-{
-"234
-[; ;main.c: 234:                 reverse_after_read(pmL, pmR);
-[e ( _reverse_after_read (2 , _pmL _pmR ]
-"235
-[; ;main.c: 235:                 reverse_one_square(pmL, pmR);
-[e ( _reverse_one_square (2 , _pmL _pmR ]
-"236
-[; ;main.c: 236:                 turn_left_90(pmL, pmR);
-[e ( _turn_left_90 (2 , _pmL _pmR ]
-"237
-[; ;main.c: 237:             }
-}
-[e $U 2039  ]
-"238
-[; ;main.c: 238:             else if(action_to_do == 5){
-[e :U 2038 ]
-[e $ ! == _action_to_do -> 5 `i 2040  ]
-{
-"239
-[; ;main.c: 239:                 reverse_after_read(pmL, pmR);
-[e ( _reverse_after_read (2 , _pmL _pmR ]
-"240
-[; ;main.c: 240:                 turn_left_135(pmL, pmR);
-[e ( _turn_left_135 (2 , _pmL _pmR ]
-"241
-[; ;main.c: 241:             }
-}
-[e $U 2041  ]
-"242
-[; ;main.c: 242:             else if(action_to_do == 6){
-[e :U 2040 ]
-[e $ ! == _action_to_do -> 6 `i 2042  ]
-{
-"243
-[; ;main.c: 243:                 reverse_after_read(pmL, pmR);
-[e ( _reverse_after_read (2 , _pmL _pmR ]
-"244
-[; ;main.c: 244:                 turn_right_135(pmL, pmR);
-[e ( _turn_right_135 (2 , _pmL _pmR ]
-"245
-[; ;main.c: 245:             }
-}
-[e $U 2043  ]
-"248
-[; ;main.c: 248:             else if(action_to_do == 7){
-[e :U 2042 ]
-[e $ ! == _action_to_do -> 7 `i 2044  ]
-{
-"249
-[; ;main.c: 249:                 reverse_after_read(pmL, pmR);
-[e ( _reverse_after_read (2 , _pmL _pmR ]
-"250
-[; ;main.c: 250:                 turn_right_90(pmL, pmR);
-[e ( _turn_right_90 (2 , _pmL _pmR ]
-"251
-[; ;main.c: 251:                 turn_right_90(pmL, pmR);
-[e ( _turn_right_90 (2 , _pmL _pmR ]
-"252
-[; ;main.c: 252:                 break;
-[e $U 2027  ]
-"253
-[; ;main.c: 253:             }
-}
-[e :U 2044 ]
-[e :U 2043 ]
-[e :U 2041 ]
-[e :U 2039 ]
-[e :U 2037 ]
-[e :U 2035 ]
-[e :U 2033 ]
-[e :U 2031 ]
-"254
-[; ;main.c: 254:         _delay((unsigned long)((5)*(64000000/4000.0)));
-[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-"255
-[; ;main.c: 255:         }
+[; ;main.c: 222:         }
 }
 [e :U 2029 ]
-"256
-[; ;main.c: 256:     }
+"223
+[; ;main.c: 223:         _delay((unsigned long)((1)*(64000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+"224
+[; ;main.c: 224:     }
 }
 [e :U 2025 ]
 [e $U 2026  ]
 [e :U 2027 ]
-"262
-[; ;main.c: 262:     int upcoming_action = actions_completed - 2;
-[v _upcoming_action `i ~T0 @X0 1 a ]
-[e = _upcoming_action - _actions_completed -> 2 `i ]
-"265
-[; ;main.c: 265:     going_forward = 0;
-[e = _going_forward -> -> 0 `i `a ]
-"268
-[; ;main.c: 268:     while(upcoming_action >= 0){
-[e $U 2045  ]
-[e :U 2046 ]
+"228
+[; ;main.c: 228:     while(1){
+[e :U 2031 ]
 {
+"229
+[; ;main.c: 229:         if(!going_forward){
+[e $ ! ! != -> _going_forward `i -> 0 `i 2033  ]
+{
+"232
+[; ;main.c: 232:             resetTimer0();
+[e ( _resetTimer0 ..  ]
+"233
+[; ;main.c: 233:             fullSpeedAhead(pmL, pmR);
+[e ( _fullSpeedAhead (2 , _pmL _pmR ]
+"234
+[; ;main.c: 234:             going_forward = 1;
+[e = _going_forward -> -> 1 `i `a ]
+"235
+[; ;main.c: 235:         }
+}
+[e :U 2033 ]
+"237
+[; ;main.c: 237:         lum = color_read_Clear();
+[e = _lum ( _color_read_Clear ..  ]
+"239
+[; ;main.c: 239:         if (lum > 1500){
+[e $ ! > _lum -> -> 1500 `i `ui 2034  ]
+{
+"241
+[; ;main.c: 241:             measured_time = get16bitTMR0val();
+[e = _measured_time ( _get16bitTMR0val ..  ]
+"242
+[; ;main.c: 242:             stop(pmL, pmR);
+[e ( _stop (2 , _pmL _pmR ]
+"243
+[; ;main.c: 243:             _delay((unsigned long)((250)*(64000000/4000.0)));
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+"246
+[; ;main.c: 246:             going_forward = 0;
+[e = _going_forward -> -> 0 `i `a ]
+"249
+[; ;main.c: 249:             timings[actions_completed] = measured_time;
+[e = *U + &U _timings * -> -> _actions_completed `ui `ux -> -> # *U &U _timings `ui `ux _measured_time ]
+"251
+[; ;main.c: 251:             color_read(pRGBC);
+[e ( _color_read (1 _pRGBC ]
+"255
+[; ;main.c: 255:             actions[actions_completed] = action_to_do;
+[e = *U + &U _actions * -> -> _actions_completed `ui `ux -> -> # *U &U _actions `ui `ux _action_to_do ]
+"258
+[; ;main.c: 258:             actions_completed += 1;
+[e =+ _actions_completed -> 1 `i ]
+"261
+[; ;main.c: 261:             if(action_to_do == 0){
+[e $ ! == _action_to_do -> 0 `i 2035  ]
+{
+"262
+[; ;main.c: 262:                 reverse_after_read(pmL, pmR);
+[e ( _reverse_after_read (2 , _pmL _pmR ]
+"263
+[; ;main.c: 263:                 turn_right_90(pmL, pmR);
+[e ( _turn_right_90 (2 , _pmL _pmR ]
+"264
+[; ;main.c: 264:             }
+}
+[e $U 2036  ]
+"265
+[; ;main.c: 265:             else if(action_to_do == 1){
+[e :U 2035 ]
+[e $ ! == _action_to_do -> 1 `i 2037  ]
+{
+"266
+[; ;main.c: 266:                 reverse_after_read(pmL, pmR);
+[e ( _reverse_after_read (2 , _pmL _pmR ]
+"267
+[; ;main.c: 267:                 turn_left_90(pmL, pmR);
+[e ( _turn_left_90 (2 , _pmL _pmR ]
+"268
+[; ;main.c: 268:             }
+}
+[e $U 2038  ]
 "269
-[; ;main.c: 269:         if(!going_forward){
-[e $ ! ! != -> _going_forward `i -> 0 `i 2048  ]
+[; ;main.c: 269:             else if(action_to_do == 2){
+[e :U 2037 ]
+[e $ ! == _action_to_do -> 2 `i 2039  ]
 {
 "270
-[; ;main.c: 270:             resetTimer0();
-[e ( _resetTimer0 ..  ]
+[; ;main.c: 270:                 reverse_after_read(pmL, pmR);
+[e ( _reverse_after_read (2 , _pmL _pmR ]
 "271
-[; ;main.c: 271:             fullSpeedAhead(pmL, pmR);
-[e ( _fullSpeedAhead (2 , _pmL _pmR ]
+[; ;main.c: 271:                 turn_right_90(pmL, pmR);
+[e ( _turn_right_90 (2 , _pmL _pmR ]
 "272
-[; ;main.c: 272:             going_forward = 1;
-[e = _going_forward -> -> 1 `i `a ]
+[; ;main.c: 272:                 turn_right_90(pmL, pmR);
+[e ( _turn_right_90 (2 , _pmL _pmR ]
 "273
-[; ;main.c: 273:         }
+[; ;main.c: 273:             }
 }
-[e :U 2048 ]
+[e $U 2040  ]
+"274
+[; ;main.c: 274:             else if(action_to_do == 3){
+[e :U 2039 ]
+[e $ ! == _action_to_do -> 3 `i 2041  ]
+{
 "275
-[; ;main.c: 275:         measured_time = get16bitTMR0val();
-[e = _measured_time ( _get16bitTMR0val ..  ]
+[; ;main.c: 275:                 reverse_after_read(pmL, pmR);
+[e ( _reverse_after_read (2 , _pmL _pmR ]
 "276
-[; ;main.c: 276:         if(measured_time > timings[upcoming_action + 1]){
-[e $ ! > _measured_time *U + &U _timings * -> -> + _upcoming_action -> 1 `i `ui `ux -> -> # *U &U _timings `ui `ux 2049  ]
-{
+[; ;main.c: 276:                 reverse_one_square(pmL, pmR);
+[e ( _reverse_one_square (2 , _pmL _pmR ]
 "277
-[; ;main.c: 277:             stop(pmL, pmR);
-[e ( _stop (2 , _pmL _pmR ]
+[; ;main.c: 277:                 turn_right_90(pmL, pmR);
+[e ( _turn_right_90 (2 , _pmL _pmR ]
 "278
-[; ;main.c: 278:             going_forward = 0;
-[e = _going_forward -> -> 0 `i `a ]
+[; ;main.c: 278:             }
+}
+[e $U 2042  ]
+"279
+[; ;main.c: 279:             else if(action_to_do == 4){
+[e :U 2041 ]
+[e $ ! == _action_to_do -> 4 `i 2043  ]
+{
+"280
+[; ;main.c: 280:                 reverse_after_read(pmL, pmR);
+[e ( _reverse_after_read (2 , _pmL _pmR ]
 "281
-[; ;main.c: 281:             if(action_to_do == 0){;}
-[e $ ! == _action_to_do -> 0 `i 2050  ]
-{
-}
-[e $U 2051  ]
+[; ;main.c: 281:                 reverse_one_square(pmL, pmR);
+[e ( _reverse_one_square (2 , _pmL _pmR ]
 "282
-[; ;main.c: 282:             else if(action_to_do == 1){;}
-[e :U 2050 ]
-[e $ ! == _action_to_do -> 1 `i 2052  ]
-{
-}
-[e $U 2053  ]
+[; ;main.c: 282:                 turn_left_90(pmL, pmR);
+[e ( _turn_left_90 (2 , _pmL _pmR ]
 "283
-[; ;main.c: 283:             else if(action_to_do == 2){;}
-[e :U 2052 ]
-[e $ ! == _action_to_do -> 2 `i 2054  ]
-{
+[; ;main.c: 283:             }
 }
-[e $U 2055  ]
+[e $U 2044  ]
 "284
-[; ;main.c: 284:             else if(action_to_do == 3){;}
-[e :U 2054 ]
-[e $ ! == _action_to_do -> 3 `i 2056  ]
+[; ;main.c: 284:             else if(action_to_do == 5){
+[e :U 2043 ]
+[e $ ! == _action_to_do -> 5 `i 2045  ]
 {
-}
-[e $U 2057  ]
 "285
-[; ;main.c: 285:             else if(action_to_do == 4){;}
-[e :U 2056 ]
-[e $ ! == _action_to_do -> 4 `i 2058  ]
-{
-}
-[e $U 2059  ]
+[; ;main.c: 285:                 reverse_after_read(pmL, pmR);
+[e ( _reverse_after_read (2 , _pmL _pmR ]
 "286
-[; ;main.c: 286:             else if(action_to_do == 5){;}
-[e :U 2058 ]
-[e $ ! == _action_to_do -> 5 `i 2060  ]
-{
-}
-[e $U 2061  ]
+[; ;main.c: 286:                 turn_left_135(pmL, pmR);
+[e ( _turn_left_135 (2 , _pmL _pmR ]
 "287
-[; ;main.c: 287:             else if(action_to_do == 6){;}
-[e :U 2060 ]
-[e $ ! == _action_to_do -> 6 `i 2062  ]
-{
+[; ;main.c: 287:             }
 }
-[e :U 2062 ]
-[e :U 2061 ]
-[e :U 2059 ]
-[e :U 2057 ]
-[e :U 2055 ]
-[e :U 2053 ]
-[e :U 2051 ]
+[e $U 2046  ]
 "288
-[; ;main.c: 288:             upcoming_action -=1 ;
-[e =- _upcoming_action -> 1 `i ]
+[; ;main.c: 288:             else if(action_to_do == 6){
+[e :U 2045 ]
+[e $ ! == _action_to_do -> 6 `i 2047  ]
+{
 "289
-[; ;main.c: 289:             }
+[; ;main.c: 289:                 reverse_after_read(pmL, pmR);
+[e ( _reverse_after_read (2 , _pmL _pmR ]
+"290
+[; ;main.c: 290:                 turn_right_135(pmL, pmR);
+[e ( _turn_right_135 (2 , _pmL _pmR ]
+"291
+[; ;main.c: 291:             }
+}
+[e $U 2048  ]
+"294
+[; ;main.c: 294:             else if(action_to_do == 7){
+[e :U 2047 ]
+[e $ ! == _action_to_do -> 7 `i 2049  ]
+{
+"295
+[; ;main.c: 295:                 reverse_after_read(pmL, pmR);
+[e ( _reverse_after_read (2 , _pmL _pmR ]
+"296
+[; ;main.c: 296:                 turn_right_90(pmL, pmR);
+[e ( _turn_right_90 (2 , _pmL _pmR ]
+"297
+[; ;main.c: 297:                 turn_right_90(pmL, pmR);
+[e ( _turn_right_90 (2 , _pmL _pmR ]
+"298
+[; ;main.c: 298:                 break;
+[e $U 2032  ]
+"299
+[; ;main.c: 299:             }
 }
 [e :U 2049 ]
-"290
-[; ;main.c: 290:         _delay((unsigned long)((10)*(64000000/4000.0)));
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-"291
-[; ;main.c: 291:         }
+[e :U 2048 ]
+[e :U 2046 ]
+[e :U 2044 ]
+[e :U 2042 ]
+[e :U 2040 ]
+[e :U 2038 ]
+[e :U 2036 ]
+"300
+[; ;main.c: 300:         _delay((unsigned long)((5)*(64000000/4000.0)));
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+"301
+[; ;main.c: 301:         }
 }
-[e :U 2045 ]
-"268
-[; ;main.c: 268:     while(upcoming_action >= 0){
-[e $ >= _upcoming_action -> 0 `i 2046  ]
-[e :U 2047 ]
-"292
-[; ;main.c: 292:     stop(pmL, pmR);
+[e :U 2034 ]
+"302
+[; ;main.c: 302:     }
+}
+[e :U 2030 ]
+[e $U 2031  ]
+[e :U 2032 ]
+"308
+[; ;main.c: 308:     int upcoming_action = actions_completed - 2;
+[v _upcoming_action `i ~T0 @X0 1 a ]
+[e = _upcoming_action - _actions_completed -> 2 `i ]
+"311
+[; ;main.c: 311:     going_forward = 0;
+[e = _going_forward -> -> 0 `i `a ]
+"314
+[; ;main.c: 314:     while(upcoming_action >= 0){
+[e $U 2050  ]
+[e :U 2051 ]
+{
+"315
+[; ;main.c: 315:         if(!going_forward){
+[e $ ! ! != -> _going_forward `i -> 0 `i 2053  ]
+{
+"316
+[; ;main.c: 316:             resetTimer0();
+[e ( _resetTimer0 ..  ]
+"317
+[; ;main.c: 317:             fullSpeedAhead(pmL, pmR);
+[e ( _fullSpeedAhead (2 , _pmL _pmR ]
+"318
+[; ;main.c: 318:             going_forward = 1;
+[e = _going_forward -> -> 1 `i `a ]
+"319
+[; ;main.c: 319:         }
+}
+[e :U 2053 ]
+"321
+[; ;main.c: 321:         measured_time = get16bitTMR0val();
+[e = _measured_time ( _get16bitTMR0val ..  ]
+"322
+[; ;main.c: 322:         if(measured_time > timings[upcoming_action + 1]){
+[e $ ! > _measured_time *U + &U _timings * -> -> + _upcoming_action -> 1 `i `ui `ux -> -> # *U &U _timings `ui `ux 2054  ]
+{
+"323
+[; ;main.c: 323:             stop(pmL, pmR);
 [e ( _stop (2 , _pmL _pmR ]
-"293
-[; ;main.c: 293:     }
+"324
+[; ;main.c: 324:             going_forward = 0;
+[e = _going_forward -> -> 0 `i `a ]
+"327
+[; ;main.c: 327:             if(action_to_do == 0){;}
+[e $ ! == _action_to_do -> 0 `i 2055  ]
+{
+}
+[e $U 2056  ]
+"328
+[; ;main.c: 328:             else if(action_to_do == 1){;}
+[e :U 2055 ]
+[e $ ! == _action_to_do -> 1 `i 2057  ]
+{
+}
+[e $U 2058  ]
+"329
+[; ;main.c: 329:             else if(action_to_do == 2){;}
+[e :U 2057 ]
+[e $ ! == _action_to_do -> 2 `i 2059  ]
+{
+}
+[e $U 2060  ]
+"330
+[; ;main.c: 330:             else if(action_to_do == 3){;}
+[e :U 2059 ]
+[e $ ! == _action_to_do -> 3 `i 2061  ]
+{
+}
+[e $U 2062  ]
+"331
+[; ;main.c: 331:             else if(action_to_do == 4){;}
+[e :U 2061 ]
+[e $ ! == _action_to_do -> 4 `i 2063  ]
+{
+}
+[e $U 2064  ]
+"332
+[; ;main.c: 332:             else if(action_to_do == 5){;}
+[e :U 2063 ]
+[e $ ! == _action_to_do -> 5 `i 2065  ]
+{
+}
+[e $U 2066  ]
+"333
+[; ;main.c: 333:             else if(action_to_do == 6){;}
+[e :U 2065 ]
+[e $ ! == _action_to_do -> 6 `i 2067  ]
+{
+}
+[e :U 2067 ]
+[e :U 2066 ]
+[e :U 2064 ]
+[e :U 2062 ]
+[e :U 2060 ]
+[e :U 2058 ]
+[e :U 2056 ]
+"334
+[; ;main.c: 334:             upcoming_action -=1 ;
+[e =- _upcoming_action -> 1 `i ]
+"335
+[; ;main.c: 335:             }
+}
+[e :U 2054 ]
+"336
+[; ;main.c: 336:         _delay((unsigned long)((10)*(64000000/4000.0)));
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+"337
+[; ;main.c: 337:         }
+}
+[e :U 2050 ]
+"314
+[; ;main.c: 314:     while(upcoming_action >= 0){
+[e $ >= _upcoming_action -> 0 `i 2051  ]
+[e :U 2052 ]
+"338
+[; ;main.c: 338:     stop(pmL, pmR);
+[e ( _stop (2 , _pmL _pmR ]
+"339
+[; ;main.c: 339:     }
 [e :UE 2019 ]
 }
 [p f _sprintf 8388736 ]
-[a 4C 99 108 101 97 114 32 61 32 37 100 32 13 10 0 ]
-[a 2C 103 114 101 101 110 32 61 32 37 100 32 13 10 0 ]
-[a 3C 98 108 117 101 32 61 32 37 100 32 13 10 0 ]
-[a 1C 114 101 100 32 61 32 37 100 32 13 10 0 ]
+[a 9C 99 108 101 97 114 32 61 32 37 100 32 13 10 0 ]
+[a 1C 97 99 116 105 111 110 32 61 32 37 100 32 13 10 0 ]
+[a 3C 103 114 101 101 110 32 61 32 37 100 32 13 10 0 ]
+[a 7C 103 114 101 101 110 32 61 32 37 100 32 13 10 0 ]
+[a 4C 98 108 117 101 32 61 32 37 100 32 13 10 0 ]
+[a 8C 98 108 117 101 32 61 32 37 100 32 13 10 0 ]
+[a 2C 114 101 100 32 61 32 37 100 32 13 10 0 ]
+[a 6C 114 101 100 32 61 32 37 100 32 13 10 0 ]
+[a 5C 99 108 101 97 114 32 61 32 37 100 32 13 10 13 10 0 ]

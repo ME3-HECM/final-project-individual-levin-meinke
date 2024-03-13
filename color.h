@@ -37,4 +37,7 @@ void color_read(struct RGBC_val *p);
 //function to turn LEDs on and off
 void color_click_toggleLED(void);
 
+//function to decide the next action
+char decide_action(void);
+
 #endif

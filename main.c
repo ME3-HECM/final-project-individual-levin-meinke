@@ -129,7 +129,52 @@ void main(void){
     //}
     
     //----------------- testing stopping & color readings --------------------
-    // test loop
+    // test loop for color calibration
+    while(1){
+        if(!going_forward){
+            // if in here : started program or just finished action.
+            // time to reset timer and start moving forward
+            resetTimer0();
+            fullSpeedAhead(pmL, pmR);
+            going_forward = true;
+        }
+        // read the clear sensor
+        lum = color_read_Clear();
+        //if above threshold you want to stop and find card color
+        if (lum > 30){
+            //stop buggy
+            measured_time = get16bitTMR0val(); //measure time going forward
+            stop(pmL, pmR);
+            //say you've stopped going forward to satisfy the if statement above later
+            going_forward = false;
+            __delay_ms(100); //wait for buggy to stop
+            
+            sprintf(red_val,"action = %d \r\n",decide_action());
+            sendStringSerial4(pred_val);
+            
+            color_writetoaddr(0x01, 0xD5); //set integration time
+            color_writetoaddr(0x03, 0xAB); //set wait time (WTIME)
+            __delay_ms(200);//let sensor adjust settings
+            
+            sprintf(red_val,"red = %d \r\n",color_read_Red());
+            sendStringSerial4(pred_val);
+            sprintf(green_val,"green = %d \r\n",color_read_Green());
+            sendStringSerial4(pgreen_val);
+            sprintf(blue_val,"blue = %d \r\n",color_read_Blue());
+            sendStringSerial4(pblue_val);
+            sprintf(clear_val,"clear = %d \r\n\r\n",color_read_Clear());
+            sendStringSerial4(pclear_val);
+            __delay_ms(3000);
+            __delay_ms(3000);
+            __delay_ms(3000);
+            
+            //reset sensor vals
+            color_writetoaddr(0x01, 0xFF); //set integration time
+            color_writetoaddr(0x03, 0xFF); //set wait time (WTIME)
+        }    
+    }
+    
+    //test loop
     while(1){
         if(!going_forward){
             // if in here : started program or just finished action.
@@ -151,7 +196,8 @@ void main(void){
             // store the measured time so we can use it later in retracing
             timings[actions_completed] = measured_time;
             //get color info
-            color_read(pRGBC);
+            __delay_ms(100); //wait for robot to stop
+            
             __delay_ms(500);
             //change the integration & write times for better performance
             color_writetoaddr(0x01, 0xD5); //set integration time
@@ -195,6 +241,7 @@ void main(void){
             //stop buggy
             measured_time = get16bitTMR0val(); //measure time going forward
             stop(pmL, pmR);
+            __delay_ms(250); //wait for buggy to settle
 
             //say you've stopped going forward to satisfy the if statement above later
             going_forward = false;

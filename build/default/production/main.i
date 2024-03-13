@@ -24305,6 +24305,9 @@ void color_read(struct RGBC_val *p);
 
 
 void color_click_toggleLED(void);
+
+
+char decide_action(void);
 # 13 "main.c" 2
 
 # 1 "./dc_motor.h" 1
@@ -24525,11 +24528,56 @@ void main(void){
             stop(pmL, pmR);
 
             going_forward = 0;
+            _delay((unsigned long)((100)*(64000000/4000.0)));
+
+            sprintf(red_val,"action = %d \r\n",decide_action());
+            sendStringSerial4(pred_val);
+
+            color_writetoaddr(0x01, 0xD5);
+            color_writetoaddr(0x03, 0xAB);
+            _delay((unsigned long)((200)*(64000000/4000.0)));
+            sprintf(red_val,"red = %d \r\n",color_read_Red());
+            sendStringSerial4(pred_val);
+            sprintf(green_val,"green = %d \r\n",color_read_Green());
+            sendStringSerial4(pgreen_val);
+            sprintf(blue_val,"blue = %d \r\n",color_read_Blue());
+            sendStringSerial4(pblue_val);
+            sprintf(clear_val,"clear = %d \r\n\r\n",color_read_Clear());
+            sendStringSerial4(pclear_val);
+            _delay((unsigned long)((3000)*(64000000/4000.0)));
+            _delay((unsigned long)((3000)*(64000000/4000.0)));
+            _delay((unsigned long)((3000)*(64000000/4000.0)));
+
+
+            color_writetoaddr(0x01, 0xFF);
+            color_writetoaddr(0x03, 0xFF);
+        }
+    }
+
+
+    while(1){
+        if(!going_forward){
+
+
+            resetTimer0();
+            fullSpeedAhead(pmL, pmR);
+            going_forward = 1;
+        }
+
+        lum = color_read_Clear();
+
+        if (lum > 30){
+
+            measured_time = get16bitTMR0val();
+            stop(pmL, pmR);
+
+            going_forward = 0;
 
 
             timings[actions_completed] = measured_time;
 
-            color_read(pRGBC);
+            _delay((unsigned long)((100)*(64000000/4000.0)));
+
             _delay((unsigned long)((500)*(64000000/4000.0)));
 
             color_writetoaddr(0x01, 0xD5);
@@ -24573,6 +24621,7 @@ void main(void){
 
             measured_time = get16bitTMR0val();
             stop(pmL, pmR);
+            _delay((unsigned long)((250)*(64000000/4000.0)));
 
 
             going_forward = 0;
