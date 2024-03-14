@@ -2490,18 +2490,18 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;dc_motor.c: 101:     mR->direction = 0;
 [e = . *U _mR 1 -> -> 0 `i `uc ]
 "103
-[; ;dc_motor.c: 103:     while ((mL->power) < 100 || (mR->power) < 100){
+[; ;dc_motor.c: 103:     while ((mL->power) < 70 || (mR->power) < 70){
 [e $U 2023  ]
 [e :U 2024 ]
 {
 "104
-[; ;dc_motor.c: 104:         if ((mL->power) < 100) (mL->power) += 1;
-[e $ ! < -> . *U _mL 0 `i -> 100 `i 2026  ]
+[; ;dc_motor.c: 104:         if ((mL->power) < 70) (mL->power) += 1;
+[e $ ! < -> . *U _mL 0 `i -> 70 `i 2026  ]
 [e =+ . *U _mL 0 -> -> 1 `i `uc ]
 [e :U 2026 ]
 "105
-[; ;dc_motor.c: 105:         if ((mR->power) < 100) (mR->power) += 1;
-[e $ ! < -> . *U _mR 0 `i -> 100 `i 2027  ]
+[; ;dc_motor.c: 105:         if ((mR->power) < 70) (mR->power) += 1;
+[e $ ! < -> . *U _mR 0 `i -> 70 `i 2027  ]
 [e =+ . *U _mR 0 -> -> 1 `i `uc ]
 [e :U 2027 ]
 "107
@@ -2518,8 +2518,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e :U 2023 ]
 "103
-[; ;dc_motor.c: 103:     while ((mL->power) < 100 || (mR->power) < 100){
-[e $ || < -> . *U _mL 0 `i -> 100 `i < -> . *U _mR 0 `i -> 100 `i 2024  ]
+[; ;dc_motor.c: 103:     while ((mL->power) < 70 || (mR->power) < 70){
+[e $ || < -> . *U _mL 0 `i -> 70 `i < -> . *U _mR 0 `i -> 70 `i 2024  ]
 [e :U 2025 ]
 "111
 [; ;dc_motor.c: 111: }
@@ -2616,8 +2616,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ || < -> . *U _mL 0 `i -> 70 `i < -> . *U _mR 0 `i -> 70 `i 2036  ]
 [e :U 2037 ]
 "138
-[; ;dc_motor.c: 138:     _delay((unsigned long)((440)*(64000000/4000.0)));
-[e ( __delay (1 -> * -> -> 440 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[; ;dc_motor.c: 138:     _delay((unsigned long)((450)*(64000000/4000.0)));
+[e ( __delay (1 -> * -> -> 450 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
 "139
 [; ;dc_motor.c: 139:     stop(mL, mR);
 [e ( _stop (2 , _mL _mR ]
@@ -2672,8 +2672,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ || < -> . *U _mL 0 `i -> 70 `i < -> . *U _mR 0 `i -> 70 `i 2042  ]
 [e :U 2043 ]
 "155
-[; ;dc_motor.c: 155:     _delay((unsigned long)((440)*(64000000/4000.0)));
-[e ( __delay (1 -> * -> -> 440 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[; ;dc_motor.c: 155:     _delay((unsigned long)((450)*(64000000/4000.0)));
+[e ( __delay (1 -> * -> -> 450 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
 "156
 [; ;dc_motor.c: 156:     stop(mL, mR);
 [e ( _stop (2 , _mL _mR ]
@@ -2910,4 +2910,60 @@ Version 4.0 HI-TECH Software Intermediate Code
 "225
 [; ;dc_motor.c: 225: }
 [e :UE 2064 ]
+}
+"227
+[; ;dc_motor.c: 227: void inch_forward(struct DC_motor *mL, struct DC_motor *mR){
+[v _inch_forward `(v ~T0 @X0 1 ef2`*S2015`*S2015 ]
+{
+[e :U _inch_forward ]
+[v _mL `*S2015 ~T0 @X0 1 r1 ]
+[v _mR `*S2015 ~T0 @X0 1 r2 ]
+[f ]
+"228
+[; ;dc_motor.c: 228:     mL->direction = 0;
+[e = . *U _mL 1 -> -> 0 `i `uc ]
+"229
+[; ;dc_motor.c: 229:     mR->direction = 0;
+[e = . *U _mR 1 -> -> 0 `i `uc ]
+"231
+[; ;dc_motor.c: 231:     while ((mL->power) < 20 || (mR->power) < 20){
+[e $U 2071  ]
+[e :U 2072 ]
+{
+"232
+[; ;dc_motor.c: 232:         if ((mL->power) < 20) (mL->power) += 1;
+[e $ ! < -> . *U _mL 0 `i -> 20 `i 2074  ]
+[e =+ . *U _mL 0 -> -> 1 `i `uc ]
+[e :U 2074 ]
+"233
+[; ;dc_motor.c: 233:         if ((mR->power) < 20) (mR->power) += 1;
+[e $ ! < -> . *U _mR 0 `i -> 20 `i 2075  ]
+[e =+ . *U _mR 0 -> -> 1 `i `uc ]
+[e :U 2075 ]
+"235
+[; ;dc_motor.c: 235:         setMotorPWM(mL);
+[e ( _setMotorPWM (1 _mL ]
+"236
+[; ;dc_motor.c: 236:         setMotorPWM(mR);
+[e ( _setMotorPWM (1 _mR ]
+"237
+[; ;dc_motor.c: 237:         _delay((unsigned long)((1)*(64000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+"238
+[; ;dc_motor.c: 238:     }
+}
+[e :U 2071 ]
+"231
+[; ;dc_motor.c: 231:     while ((mL->power) < 20 || (mR->power) < 20){
+[e $ || < -> . *U _mL 0 `i -> 20 `i < -> . *U _mR 0 `i -> 20 `i 2072  ]
+[e :U 2073 ]
+"239
+[; ;dc_motor.c: 239:     _delay((unsigned long)((50)*(64000000/4000.0)));
+[e ( __delay (1 -> * -> -> 50 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+"240
+[; ;dc_motor.c: 240:     stop(mL, mR);
+[e ( _stop (2 , _mL _mR ]
+"241
+[; ;dc_motor.c: 241: }
+[e :UE 2070 ]
 }

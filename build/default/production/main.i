@@ -24323,6 +24323,7 @@ void turn_left_135(struct DC_motor *mL, struct DC_motor *mR);
 void turn_right_135(struct DC_motor *mL, struct DC_motor *mR);
 void reverse_after_read(struct DC_motor *mL, struct DC_motor *mR);
 void reverse_one_square(struct DC_motor *mL, struct DC_motor *mR);
+void inch_forward(struct DC_motor *mL, struct DC_motor *mR);
 # 14 "main.c" 2
 
 # 1 "./i2c.h" 1
@@ -24422,6 +24423,7 @@ unsigned int get16bitTMR0val(void);
 void main(void){
 
     Timer0_init();
+    ADC_init();
     Interrupts_init();
     I2C_2_Master_Init();
     color_click_init();
@@ -24476,6 +24478,7 @@ void main(void){
     pblue_val = &blue_val[0];
 
     unsigned int lum;
+    unsigned int lum_threshold;
     unsigned int redm, greenm, bluem;
     char action;
     _Bool going_forward = 0;
@@ -24484,45 +24487,12 @@ void main(void){
     unsigned int timings[20];
     int actions[20];
     int actions_completed = 0;
-# 100 "main.c"
+# 102 "main.c"
     _delay((unsigned long)((2000)*(64000000/4000.0)));
 
-
-
-    while(1){
-        color_writetoaddr(0x01, 0xFF);
-        color_writetoaddr(0x03, 0xFF);
-        _delay((unsigned long)((200)*(64000000/4000.0)));
-
-        sprintf(clear_val,"clear = %d \r\n",color_read_Clear());
-        sendStringSerial4(pclear_val);
-
-        color_writetoaddr(0x01, 0xD5);
-        color_writetoaddr(0x03, 0xAB);
-        _delay((unsigned long)((200)*(64000000/4000.0)));
-
-        redm = color_read_Red();
-        greenm = color_read_Green();
-        bluem = color_read_Blue();
-
-        sprintf(red_val,"red = %d \r\n",redm);
-        sendStringSerial4(pred_val);
-        sprintf(green_val,"green = %d \r\n",greenm);
-        sendStringSerial4(pgreen_val);
-        sprintf(blue_val,"blue = %d \r\n\r\n",bluem);
-        sendStringSerial4(pblue_val);
-
-
-
-
-
-
-
-        _delay((unsigned long)((3000)*(64000000/4000.0)));
-        _delay((unsigned long)((3000)*(64000000/4000.0)));
-        _delay((unsigned long)((3000)*(64000000/4000.0)));
-    }
-# 196 "main.c"
+    lum = color_read_Clear();
+    lum_threshold = lum + 10;
+# 217 "main.c"
     while(1){
         if(!going_forward){
 
@@ -24534,11 +24504,23 @@ void main(void){
 
         lum = color_read_Clear();
 
-        if (lum > 32){
+        if (lum > lum_threshold){
 
             measured_time = get16bitTMR0val();
             stop(pmL, pmR);
             _delay((unsigned long)((250)*(64000000/4000.0)));
+
+
+            while(1){
+                lum = color_read_Clear();
+                if(lum < 80){
+                inch_forward(pmL, pmR);
+                _delay((unsigned long)((100)*(64000000/4000.0)));
+                }
+                else{
+                    break;
+                }
+            }
 
 
             going_forward = 0;
@@ -24618,9 +24600,9 @@ void main(void){
 
 
     for(char i = 0; i < 20; i +=1){
-        timings[i] -= 2000;
+        timings[i] -= 150;
         if(i > 7){
-              timings[i] -= 4000;
+              timings[i] -= 300;
         }
     }
 

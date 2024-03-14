@@ -100,9 +100,9 @@ void fullSpeedAhead(struct DC_motor *mL, struct DC_motor *mR){
     mL->direction = 0; //left side forward
     mR->direction = 0; //right side forward
     
-    while ((mL->power) < 100 || (mR->power) < 100){ //while motors are below 100 power
-        if ((mL->power) < 100) (mL->power) += 1; //increment left
-        if ((mR->power) < 100) (mR->power) += 1; //increment right
+    while ((mL->power) < 70 || (mR->power) < 70){ //while motors are below 70 power
+        if ((mL->power) < 70) (mL->power) += 1; //increment left
+        if ((mR->power) < 70) (mR->power) += 1; //increment right
         //call set motorPWM functions
         setMotorPWM(mL);
         setMotorPWM(mR);
@@ -135,7 +135,7 @@ void turn_left_90(struct DC_motor *mL, struct DC_motor *mR){
         setMotorPWM(mR);
         __delay_ms(1); //delay before repeating (gradual decrease in speed)
     }    
-    __delay_ms(440); //calibrate for how long it takes to turn
+    __delay_ms(450); //calibrate for how long it takes to turn
     stop(mL, mR);
 }
 
@@ -152,7 +152,7 @@ void turn_right_90(struct DC_motor *mL, struct DC_motor *mR){
         setMotorPWM(mR);
         __delay_ms(1); //delay before repeating (gradual decrease in speed)
     }
-    __delay_ms(440); //calibrate for how long it takes to turn
+    __delay_ms(450); //calibrate for how long it takes to turn
     stop(mL, mR);
 }
 
@@ -222,6 +222,22 @@ void reverse_one_square(struct DC_motor *mL, struct DC_motor *mR){
     __delay_ms(500); //calibrate for how long it takes to go back
     stop(mL, mR);
     __delay_ms(250); //let the buggy settle
+}
+
+void inch_forward(struct DC_motor *mL, struct DC_motor *mR){
+    mL->direction = 0; //left side back
+    mR->direction = 0; //right side back
+    
+    while ((mL->power) < 20 || (mR->power) < 20){ //while motors are below 100 power
+        if ((mL->power) < 20) (mL->power) += 1; //increment left
+        if ((mR->power) < 20) (mR->power) += 1; //increment right
+        //call set motorPWM functions
+        setMotorPWM(mL);
+        setMotorPWM(mR);
+        __delay_ms(1); //delay before repeating (gradual increase in speed)
+    }
+    __delay_ms(50); //calibrate for how long it takes to go back
+    stop(mL, mR);
 }
 
 

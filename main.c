@@ -23,6 +23,7 @@
 void main(void){
     //init all inits for used modules
     Timer0_init(); //timer
+    ADC_init(); //initialise the ADC module
     Interrupts_init(); //interrupts
     I2C_2_Master_Init(); //i2c coms
     color_click_init(); //color click module
@@ -77,6 +78,7 @@ void main(void){
     pblue_val = &blue_val[0];
     
     unsigned int lum; //luminosity reading to detect wall/color card
+    unsigned int lum_threshold; //luminosity threshold
     unsigned int redm, greenm, bluem; //readings for red, green & blue values (in main code)
     char action; //action to be done
     bool going_forward = false; //boolean whether buggy is moving forward
@@ -98,9 +100,28 @@ void main(void){
 
     
     __delay_ms(2000); //delay to allow operator to turn on buggy
+    //adjust luminosity threshold to the ambient light
+    lum = color_read_Clear();
+    lum_threshold = lum + 10;
     
     //----------------- testing stopping & color readings --------------------
-    // test loop for color calibration
+    // test loop for turning calibration
+
+    /*
+    while(1){
+        sprintf(clear_val,"volt = %d \r\n",ADC_getval());
+        sendStringSerial4(pclear_val);
+        __delay_ms(1000);
+    }
+    */
+    
+    /*
+    while(1){
+        turn_left_90(pmL, pmR);
+        __delay_ms(3000);
+    }
+    
+    /*
     while(1){
         color_writetoaddr(0x01, 0xFF); //set integration time
         color_writetoaddr(0x03, 0xFF); //set wait time (WTIME)
@@ -121,13 +142,13 @@ void main(void){
         sendStringSerial4(pred_val);
         sprintf(green_val,"green = %d \r\n",greenm);
         sendStringSerial4(pgreen_val);
-        sprintf(blue_val,"blue = %d \r\n\r\n",bluem);
+        sprintf(blue_val,"blue = %d \r\n",bluem);
         sendStringSerial4(pblue_val);
             
-        //action = decide_action(redm, greenm, bluem);
+        action = decide_action(redm, greenm, bluem);
             
-        //sprintf(clear_val,"action = %d \r\n",action);
-        //sendStringSerial4(pclear_val);
+        sprintf(clear_val,"action = %d \r\n\r\n",action);
+        sendStringSerial4(pclear_val);
         
 
         __delay_ms(3000);
@@ -135,7 +156,7 @@ void main(void){
         __delay_ms(3000);
     }
     //-------------- testing for color calibration ---------------
-    /*
+    
     while(1){
         if(!going_forward){
             // if in here : started program or just finished action.
@@ -191,7 +212,7 @@ void main(void){
         }    
     }
     */
-
+    
     //main loop 
     while(1){
         if(!going_forward){
@@ -204,12 +225,24 @@ void main(void){
         // read the colour sensor
         lum = color_read_Clear();
         //if above 30 you want to stop and find color
-        if (lum > 32){
+        if (lum > lum_threshold){
             //stop buggy
             measured_time = get16bitTMR0val(); //measure time going forward
             stop(pmL, pmR);
             __delay_ms(250); //wait for buggy to settle
-
+            
+            //inch forward to get more accurate color reading
+            while(1){
+                lum = color_read_Clear();
+                if(lum < 80){ //go until lum reading is at least 80
+                inch_forward(pmL, pmR);
+                __delay_ms(100);
+                }
+                else{
+                    break;
+                }
+            }
+            
             //say you've stopped going forward to satisfy the if statement above later
             going_forward = false;
 
@@ -288,9 +321,9 @@ void main(void){
     
     //remove the 'reverse after read' equivalent value from timings
     for(char i = 0; i < 20; i +=1){ //iterate through the comparison array and find the smallest value
-        timings[i] -= 2000; // calibrated value
+        timings[i] -= 150; // calibrated value
         if(i > 7){ //remove more from the actions which reversed one square
-              timings[i] -= 4000; // calibrated value
+              timings[i] -= 300; // calibrated value
         }
     }
     

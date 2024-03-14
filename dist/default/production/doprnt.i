@@ -847,9 +847,6 @@ void *memccpy (void *restrict, const void *restrict, int, size_t);
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\c99\\stdbool.h" 1 3
 # 12 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\sources\\c99\\common\\doprnt.c" 2
-# 97 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\sources\\c99\\common\\doprnt.c"
-typedef signed int vfpf_sint_t;
-typedef unsigned int vfpf_uint_t;
 # 153 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\sources\\c99\\common\\doprnt.c"
 static int prec, width;
 static char flags;
@@ -1122,8 +1119,8 @@ vfpfcnvrt(FILE *fp, char *fmt[], va_list ap)
 
  union {
 
-  vfpf_sint_t sint;
-  vfpf_uint_t uint;
+
+
 
   long double f;
  } convarg;
@@ -1133,42 +1130,6 @@ vfpfcnvrt(FILE *fp, char *fmt[], va_list ap)
 
         flags = width = 0;
         prec = -1;
-# 1291 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\sources\\c99\\common\\doprnt.c"
-  cp = *fmt;
-# 1361 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\sources\\c99\\common\\doprnt.c"
-  if (*cp == 'd' || *cp == 'i') {
-# 1404 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\sources\\c99\\common\\doprnt.c"
-   convarg.sint = (vfpf_sint_t)(int)(*(int *)__va_arg(*(int **)ap, (int)0));
-
-   *fmt = cp+1;
-
-   c = sizeof(dbuf);
-   done = convarg.sint < 0;
-   do {
-    dbuf[--c] = abs(convarg.sint % 10) + '0';
-    convarg.sint /= 10;
-
-
-
-   } while (convarg.sint != 0 && c != 0);
-   if (c != 0 && done) {
-    dbuf[--c] = '-';
-
-
-
-   }
-   while (c != sizeof(dbuf)) {
-    fputc(dbuf[c++], fp);
-   }
-
-
-
-   return;
-
-
-
-
-  }
 # 1689 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\sources\\c99\\common\\doprnt.c"
   cp = *fmt;
   c = *cp;

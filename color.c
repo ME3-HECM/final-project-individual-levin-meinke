@@ -137,13 +137,13 @@ char decide_action(unsigned int red_unsigned, unsigned int green_unsigned, unsig
     blue = (float)blue_unsigned;
     
     //pre-processing of rgb values
-    if(red < 666){red = 0;} else{red -= 666;} //remove the red value from black card calibration
-    if(green < 446){green = 0;} else{green -= 446;} //remove the green value from black card calibration
-    if(blue < 295){blue = 0;} else{blue -= 295;} //remove the blue value from black card calibration
+    if(red < 666){red = 0;} else{red -= 699;} //remove the red value from black card calibration
+    if(green < 446){green = 0;} else{green -= 443;} //remove the green value from black card calibration
+    if(blue < 295){blue = 0;} else{blue -= 315;} //remove the blue value from black card calibration
     
-    red = red/1341; //divide by the range of red values from calibration
-    green = green/795; //divide by the range of green values from calibration
-    blue = blue/756; //divide by the range of blue values from calibration
+    red = red/1621; //divide by the range of red values from calibration
+    green = green/1191; //divide by the range of green values from calibration
+    blue = blue/885; //divide by the range of blue values from calibration
     
     float total = red + green + blue;
     //find the ratio of the colors

@@ -2446,7 +2446,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;color.c: 137:     blue = (float)blue_unsigned;
 [e = _blue -> _blue_unsigned `f ]
 "140
-[; ;color.c: 140:     if(red < 666){red = 0;} else{red -= 666;}
+[; ;color.c: 140:     if(red < 666){red = 0;} else{red -= 699;}
 [e $ ! < _red -> -> 666 `i `f 2025  ]
 {
 [e = _red -> -> 0 `i `f ]
@@ -2454,11 +2454,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $U 2026  ]
 [e :U 2025 ]
 {
-[e =- _red -> -> 666 `i `f ]
+[e =- _red -> -> 699 `i `f ]
 }
 [e :U 2026 ]
 "141
-[; ;color.c: 141:     if(green < 446){green = 0;} else{green -= 446;}
+[; ;color.c: 141:     if(green < 446){green = 0;} else{green -= 443;}
 [e $ ! < _green -> -> 446 `i `f 2027  ]
 {
 [e = _green -> -> 0 `i `f ]
@@ -2466,11 +2466,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $U 2028  ]
 [e :U 2027 ]
 {
-[e =- _green -> -> 446 `i `f ]
+[e =- _green -> -> 443 `i `f ]
 }
 [e :U 2028 ]
 "142
-[; ;color.c: 142:     if(blue < 295){blue = 0;} else{blue -= 295;}
+[; ;color.c: 142:     if(blue < 295){blue = 0;} else{blue -= 315;}
 [e $ ! < _blue -> -> 295 `i `f 2029  ]
 {
 [e = _blue -> -> 0 `i `f ]
@@ -2478,18 +2478,18 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $U 2030  ]
 [e :U 2029 ]
 {
-[e =- _blue -> -> 295 `i `f ]
+[e =- _blue -> -> 315 `i `f ]
 }
 [e :U 2030 ]
 "144
-[; ;color.c: 144:     red = red/1341;
-[e = _red / _red -> -> 1341 `i `f ]
+[; ;color.c: 144:     red = red/1621;
+[e = _red / _red -> -> 1621 `i `f ]
 "145
-[; ;color.c: 145:     green = green/795;
-[e = _green / _green -> -> 795 `i `f ]
+[; ;color.c: 145:     green = green/1191;
+[e = _green / _green -> -> 1191 `i `f ]
 "146
-[; ;color.c: 146:     blue = blue/756;
-[e = _blue / _blue -> -> 756 `i `f ]
+[; ;color.c: 146:     blue = blue/885;
+[e = _blue / _blue -> -> 885 `i `f ]
 "148
 [; ;color.c: 148:     float total = red + green + blue;
 [v _total `f ~T0 @X0 1 a ]

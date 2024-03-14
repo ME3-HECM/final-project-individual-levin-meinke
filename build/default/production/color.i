@@ -24823,13 +24823,13 @@ char decide_action(unsigned int red_unsigned, unsigned int green_unsigned, unsig
     blue = (float)blue_unsigned;
 
 
-    if(red < 666){red = 0;} else{red -= 666;}
-    if(green < 446){green = 0;} else{green -= 446;}
-    if(blue < 295){blue = 0;} else{blue -= 295;}
+    if(red < 666){red = 0;} else{red -= 699;}
+    if(green < 446){green = 0;} else{green -= 443;}
+    if(blue < 295){blue = 0;} else{blue -= 315;}
 
-    red = red/1341;
-    green = green/795;
-    blue = blue/756;
+    red = red/1621;
+    green = green/1191;
+    blue = blue/885;
 
     float total = red + green + blue;
 

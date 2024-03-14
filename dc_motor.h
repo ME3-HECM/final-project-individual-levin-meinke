@@ -26,5 +26,6 @@ void turn_left_135(struct DC_motor *mL, struct DC_motor *mR); //left 135 deg
 void turn_right_135(struct DC_motor *mL, struct DC_motor *mR); //right 135 deg
 void reverse_after_read(struct DC_motor *mL, struct DC_motor *mR); //reverse after reading color card
 void reverse_one_square(struct DC_motor *mL, struct DC_motor *mR); //reverse one square
+void inch_forward(struct DC_motor *mL, struct DC_motor *mR); //inch forward
 
 #endif
