@@ -24603,7 +24603,7 @@ void main(void){
 
 
     for(char i = 0; i < 20; i +=1){
-        timings[i] -= 130;
+        timings[i] -= 135;
         if(i > 7){
               timings[i] -= 250;
         }
@@ -24656,4 +24656,8 @@ void main(void){
     _delay((unsigned long)((10)*(64000000/4000.0)));
     }
     stop(pmL, pmR);
+    while(1){
+        LATHbits.LATH3 = !LATHbits.LATH3;
+        _delay((unsigned long)((500)*(64000000/4000.0)));
+    }
 }

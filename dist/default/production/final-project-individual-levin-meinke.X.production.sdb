@@ -925,7 +925,7 @@
 [v main@lum_threshold lum_threshold `ui  1 a 2 160 ]
 "84
 [v main@going_forward going_forward `a  1 a 1 174 ]
-"381
+"385
 } 0
 "143 C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
 [v _turn_right_90 turn_right_90 `(v  1 e 1 0 ]

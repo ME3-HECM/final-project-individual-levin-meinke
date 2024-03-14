@@ -2645,8 +2645,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 2044 ]
 {
 "328
-[; ;main.c: 328:         timings[i] -= 130;
-[e =- *U + &U _timings * -> _i `ux -> -> # *U &U _timings `ui `ux -> -> 130 `i `ui ]
+[; ;main.c: 328:         timings[i] -= 135;
+[e =- *U + &U _timings * -> _i `ux -> -> # *U &U _timings `ui `ux -> -> 135 `i `ui ]
 "329
 [; ;main.c: 329:         if(i > 7){
 [e $ ! > -> _i `i -> 7 `i 2047  ]
@@ -2829,7 +2829,23 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 380:     stop(pmL, pmR);
 [e ( _stop (2 , _pmL _pmR ]
 "381
-[; ;main.c: 381: }
+[; ;main.c: 381:     while(1){
+[e :U 2067 ]
+{
+"382
+[; ;main.c: 382:         LATHbits.LATH3 = !LATHbits.LATH3;
+[e = . . _LATHbits 0 3 -> -> ! != -> . . _LATHbits 0 3 `i -> 0 `i `i `uc ]
+"383
+[; ;main.c: 383:         _delay((unsigned long)((500)*(64000000/4000.0)));
+[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+"384
+[; ;main.c: 384:     }
+}
+[e :U 2066 ]
+[e $U 2067  ]
+[e :U 2068 ]
+"385
+[; ;main.c: 385: }
 [e :UE 2018 ]
 }
 [p f _sprintf 8388736 ]

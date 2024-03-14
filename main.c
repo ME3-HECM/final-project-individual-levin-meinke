@@ -325,7 +325,7 @@ void main(void){
     
     //remove the 'reverse after read' equivalent value from timings
     for(char i = 0; i < 20; i +=1){ //iterate through the comparison array and find the smallest value
-        timings[i] -= 130; // calibrated value
+        timings[i] -= 135; // calibrated value
         if(i > 7){ //remove more from the actions which reversed one square
               timings[i] -= 250; // calibrated value??
         }
@@ -378,6 +378,10 @@ void main(void){
     __delay_ms(10);
     }
     stop(pmL, pmR); //make sure buggy is stopped
+    while(1){
+        LATHbits.LATH3 = !LATHbits.LATH3; //victory blink
+        __delay_ms(500);
+    }
 }
 
 
