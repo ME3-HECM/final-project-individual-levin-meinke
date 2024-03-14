@@ -2840,8 +2840,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ || < -> . *U _mL 0 `i -> 70 `i < -> . *U _mR 0 `i -> 70 `i 2060  ]
 [e :U 2061 ]
 "205
-[; ;dc_motor.c: 205:     _delay((unsigned long)((225)*(64000000/4000.0)));
-[e ( __delay (1 -> * -> -> 225 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[; ;dc_motor.c: 205:     _delay((unsigned long)((250)*(64000000/4000.0)));
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
 "206
 [; ;dc_motor.c: 206:     stop(mL, mR);
 [e ( _stop (2 , _mL _mR ]

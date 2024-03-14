@@ -24837,14 +24837,6 @@ char decide_action(unsigned int red_unsigned, unsigned int green_unsigned, unsig
     green_r = green / total;
     blue_r = blue / total;
 
-    sprintf(red_val,"redr = %f \r\n",red_r);
-    sendStringSerial4(pred_val);
-    sprintf(green_val,"greenr = %f \r\n",green_r);
-    sendStringSerial4(pgreen_val);
-    sprintf(blue_val,"bluer = %f \r\n",blue_r);
-    sendStringSerial4(pblue_val);
-
-
 
     rgb_comp[0] = sqrtf(powf((red_r - 0.747),2) + powf((green_r - 0.071),2) + powf((blue_r - 0.182),2));
     rgb_comp[1] = sqrtf(powf((red_r - 0.147),2) + powf((green_r - 0.489),2) + powf((blue_r - 0.363),2));
@@ -24895,6 +24887,7 @@ char invert_action(char input_action){
             output_action = 5;
             break;
 
-        return output_action;
+
     }
+    return output_action;
 }

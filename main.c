@@ -106,7 +106,7 @@ void main(void){
     
     //----------------- testing stopping & color readings --------------------
     // test loop for turning calibration
-
+    
     /*
     while(1){
         sprintf(clear_val,"volt = %d \r\n",ADC_getval());
@@ -120,6 +120,7 @@ void main(void){
         turn_left_90(pmL, pmR);
         __delay_ms(3000);
     }
+    */
     
     /*
     while(1){
@@ -260,11 +261,9 @@ void main(void){
             
             action_to_do = decide_action(redm, greenm, bluem);
             
-            //store the action to do so you can use it later when retracing
-            actions[actions_completed] = action_to_do;
-
-            // we have stored all data from this action. We now can increment 'actions completed'
-            actions_completed += 1;
+            
+            actions[actions_completed] = action_to_do; //store the action to do so you can use it later when retracing
+            actions_completed += 1; // we have stored all data from this action. We now can increment 'actions completed'
 
             //give the robot a command based on the actions its supposed to do
             if(action_to_do == 0){ //turn right 90
@@ -303,9 +302,14 @@ void main(void){
             else if(action_to_do == 7){
                 reverse_after_read(pmL, pmR);
                 turn_right_90(pmL, pmR);
+                __delay_ms(250);//allow buggy to settle
                 turn_right_90(pmL, pmR);
                 break;
             }
+            __delay_ms(250); //allow buggy to settle
+            //debugging
+            sprintf(clear_val,"action = %d \r\n",action_to_do);
+            sendStringSerial4(pclear_val);
         __delay_ms(5);
         }
     }
@@ -314,33 +318,33 @@ void main(void){
     //example history could be:
     //timings: [2,5,4,7,8,3,8]
     //actions: [R,L,R,R,R,L,END]
-    int upcoming_action = actions_completed - 2;
+    actions_completed -= 1;
     // we will iterate backwards through the array of actions done in our history
     // this while loop ends once the index is less than 0 (we have completed all actions)
     going_forward = false;
     
     //remove the 'reverse after read' equivalent value from timings
     for(char i = 0; i < 20; i +=1){ //iterate through the comparison array and find the smallest value
-        timings[i] -= 150; // calibrated value
+        timings[i] -= 130; // calibrated value
         if(i > 7){ //remove more from the actions which reversed one square
-              timings[i] -= 300; // calibrated value
+              timings[i] -= 250; // calibrated value??
         }
     }
     
 
     // RETRACE LOOP
-    while(upcoming_action >= 0){
+    while(actions_completed >= 0){
         if(!going_forward){
             resetTimer0();
             fullSpeedAhead(pmL, pmR);
             going_forward = true;
         }
-        //instead of measuring a colour, you meaure if you're above the length of time you went forwarrd when you were on this path
+        //instead of measuring a colour, you measure if you're above the length of time you went forward when you were on this path
         measured_time = get16bitTMR0val();
-        if(measured_time > timings[upcoming_action + 1]){
+        if(measured_time > timings[actions_completed]){
             stop(pmL, pmR);
             going_forward = false;
-            action_to_do = invert_action(actions[upcoming_action]);
+            action_to_do = invert_action(actions[actions_completed - 1]);
             // DO THIS ACTION
             if(action_to_do == 0){ //turn right 90
                 turn_right_90(pmL, pmR);
@@ -350,6 +354,7 @@ void main(void){
             }
             else if(action_to_do == 2){ //180 turn -> turn right twice (less calibration error)
                 turn_right_90(pmL, pmR);
+                __delay_ms(250);//allow buggy to settle
                 turn_right_90(pmL, pmR);
             }
             else if(action_to_do == 5){ //reverse one square and then turn right 90
@@ -364,7 +369,11 @@ void main(void){
             else if(action_to_do == 9){
                 turn_right_90;
             }
-        upcoming_action -=1 ;
+            __delay_ms(250);//allow buggy to settle
+            //debugging
+            sprintf(clear_val,"action = %d \r\n",action_to_do);
+            sendStringSerial4(pclear_val);
+        actions_completed -=1 ;
         }
     __delay_ms(10);
     }

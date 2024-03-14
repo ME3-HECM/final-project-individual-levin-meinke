@@ -24322,7 +24322,7 @@ void reverse_after_read(struct DC_motor *mL, struct DC_motor *mR){
         setMotorPWM(mR);
         _delay((unsigned long)((1)*(64000000/4000.0)));
     }
-    _delay((unsigned long)((225)*(64000000/4000.0)));
+    _delay((unsigned long)((250)*(64000000/4000.0)));
     stop(mL, mR);
     _delay((unsigned long)((250)*(64000000/4000.0)));
 }

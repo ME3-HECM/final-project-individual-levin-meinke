@@ -202,7 +202,7 @@ void reverse_after_read(struct DC_motor *mL, struct DC_motor *mR){
         setMotorPWM(mR);
         __delay_ms(1); //delay before repeating (gradual increase in speed)
     }
-    __delay_ms(225); //calibrate for how long it takes to go back
+    __delay_ms(250); //calibrate for how long it takes to go back
     stop(mL, mR);
     __delay_ms(250); //let buggy settle before proceeding
 }

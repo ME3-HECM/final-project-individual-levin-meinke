@@ -24492,7 +24492,7 @@ void main(void){
 
     lum = color_read_Clear();
     lum_threshold = lum + 10;
-# 217 "main.c"
+# 218 "main.c"
     while(1){
         if(!going_forward){
 
@@ -24541,8 +24541,6 @@ void main(void){
 
 
             actions[actions_completed] = action_to_do;
-
-
             actions_completed += 1;
 
 
@@ -24582,9 +24580,14 @@ void main(void){
             else if(action_to_do == 7){
                 reverse_after_read(pmL, pmR);
                 turn_right_90(pmL, pmR);
+                _delay((unsigned long)((250)*(64000000/4000.0)));
                 turn_right_90(pmL, pmR);
                 break;
             }
+            _delay((unsigned long)((250)*(64000000/4000.0)));
+
+            sprintf(clear_val,"action = %d \r\n",action_to_do);
+            sendStringSerial4(pclear_val);
         _delay((unsigned long)((5)*(64000000/4000.0)));
         }
     }
@@ -24593,22 +24596,22 @@ void main(void){
 
 
 
-    int upcoming_action = actions_completed - 2;
+    actions_completed -= 1;
 
 
     going_forward = 0;
 
 
     for(char i = 0; i < 20; i +=1){
-        timings[i] -= 150;
+        timings[i] -= 130;
         if(i > 7){
-              timings[i] -= 300;
+              timings[i] -= 250;
         }
     }
 
 
 
-    while(upcoming_action >= 0){
+    while(actions_completed >= 0){
         if(!going_forward){
             resetTimer0();
             fullSpeedAhead(pmL, pmR);
@@ -24616,10 +24619,10 @@ void main(void){
         }
 
         measured_time = get16bitTMR0val();
-        if(measured_time > timings[upcoming_action + 1]){
+        if(measured_time > timings[actions_completed]){
             stop(pmL, pmR);
             going_forward = 0;
-            action_to_do = invert_action(actions[upcoming_action]);
+            action_to_do = invert_action(actions[actions_completed - 1]);
 
             if(action_to_do == 0){
                 turn_right_90(pmL, pmR);
@@ -24629,6 +24632,7 @@ void main(void){
             }
             else if(action_to_do == 2){
                 turn_right_90(pmL, pmR);
+                _delay((unsigned long)((250)*(64000000/4000.0)));
                 turn_right_90(pmL, pmR);
             }
             else if(action_to_do == 5){
@@ -24643,7 +24647,11 @@ void main(void){
             else if(action_to_do == 9){
                 turn_right_90;
             }
-        upcoming_action -=1 ;
+            _delay((unsigned long)((250)*(64000000/4000.0)));
+
+            sprintf(clear_val,"action = %d \r\n",action_to_do);
+            sendStringSerial4(pclear_val);
+        actions_completed -=1 ;
         }
     _delay((unsigned long)((10)*(64000000/4000.0)));
     }
