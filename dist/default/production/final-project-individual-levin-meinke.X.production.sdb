@@ -923,17 +923,23 @@
 [v main@clear_val clear_val `[20]uc  1 a 20 40 ]
 [s S1083 DC_motor 9 `uc 1 power 1 0 `uc 1 direction 1 1 `uc 1 brakemode 1 2 `ui 1 PWMperiod 2 3 `*.39uc 1 posDutyHighByte 2 5 `*.39uc 1 negDutyHighByte 2 7 ]
 "44
-[v main@motorR motorR `S1083  1 a 9 172 ]
-[v main@motorL motorL `S1083  1 a 9 163 ]
-"63
-[v main@pmR pmR `*.39S1083  1 a 2 183 ]
-"62
-[v main@pmL pmL `*.39S1083  1 a 2 181 ]
+[v main@motorR motorR `S1083  1 a 9 185 ]
+[v main@motorL motorL `S1083  1 a 9 176 ]
 "87
-[v main@actions_completed actions_completed `i  1 a 2 160 ]
-"82
-[v main@going_forward going_forward `a  1 a 1 162 ]
-"343
+[v main@actions_completed actions_completed `i  1 a 2 174 ]
+"80
+[v main@bluem bluem `ui  1 a 2 172 ]
+[v main@greenm greenm `ui  1 a 2 170 ]
+[v main@redm redm `ui  1 a 2 168 ]
+"73
+[v main@pgreen_val pgreen_val `*.39uc  1 a 2 166 ]
+"72
+[v main@pblue_val pblue_val `*.39uc  1 a 2 164 ]
+"71
+[v main@pred_val pred_val `*.39uc  1 a 2 162 ]
+"70
+[v main@pclear_val pclear_val `*.39uc  1 a 2 160 ]
+"339
 } 0
 "143 C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
 [v _turn_right_90 turn_right_90 `(v  1 e 1 0 ]

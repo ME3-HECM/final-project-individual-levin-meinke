@@ -160,14 +160,14 @@ char decide_action(unsigned int red_unsigned, unsigned int green_unsigned, unsig
     
     
     //compare ratios of the colors with the measured values from our calibration cards
-    rgb_comp[0] = sqrt(pow((red_r - 0.668),2) + pow((green_r - 0.144),2) + pow((blue_r - 0.188),2)); //red
-    rgb_comp[1] = sqrt(pow((red_r - 0.106),2) + pow((green_r - 0.612),2) + pow((blue_r - 0.281),2)); //green
-    rgb_comp[2] = sqrt(pow((red_r - 0.061),2) + pow((green_r - 0.470),2) + pow((blue_r - 0.470),2)); //blue
-    rgb_comp[3] = sqrt(pow((red_r - 0.403),2) + pow((green_r - 0.442),2) + pow((blue_r - 0.154),2)); //yellow
-    rgb_comp[4] = sqrt(pow((red_r - 0.705),2) + pow((green_r - 0.088),2) + pow((blue_r - 0.207),2)); //pink
-    rgb_comp[5] = sqrt(pow((red_r - 0.711),2) + pow((green_r - 0.127),2) + pow((blue_r - 0.163),2)); //orange
-    rgb_comp[6] = sqrt(pow((red_r - 0.194),2) + pow((green_r - 0.457),2) + pow((blue_r - 0.349),2)); //light blue
-    rgb_comp[7] = sqrt(pow((red_r - 0.291),2) + pow((green_r - 0.398),2) + pow((blue_r - 0.311),2)); //white
+    rgb_comp[0] = sqrt(pow((red_r - 0.747),2) + pow((green_r - 0.071),2) + pow((blue_r - 0.182),2)); //red
+    rgb_comp[1] = sqrt(pow((red_r - 0.147),2) + pow((green_r - 0.489),2) + pow((blue_r - 0.363),2)); //green
+    rgb_comp[2] = sqrt(pow((red_r - 0.110),2) + pow((green_r - 0.421),2) + pow((blue_r - 0.469),2)); //blue
+    rgb_comp[3] = sqrt(pow((red_r - 0.423),2) + pow((green_r - 0.325),2) + pow((blue_r - 0.252),2)); //yellow
+    rgb_comp[4] = sqrt(pow((red_r - 0.431),2) + pow((green_r - 0.263),2) + pow((blue_r - 0.306),2)); //pink
+    rgb_comp[5] = sqrt(pow((red_r - 0.664),2) + pow((green_r - 0.137),2) + pow((blue_r - 0.198),2)); //orange
+    rgb_comp[6] = sqrt(pow((red_r - 0.271),2) + pow((green_r - 0.366),2) + pow((blue_r - 0.363),2)); //light blue
+    rgb_comp[7] = sqrt(pow((red_r - 0.329),2) + pow((green_r - 0.335),2) + pow((blue_r - 0.335),2)); //white
 
     action = 0; //set initial value for action  
     for(char i = 0; i < 8; i +=1){ //iterate through the comparison array and find the smallest value

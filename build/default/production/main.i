@@ -24489,12 +24489,40 @@ void main(void){
 
 
 
-
     while(1){
-        turn_left_135(pmL, pmR);
-        _delay((unsigned long)((1000)*(64000000/4000.0)));
+        color_writetoaddr(0x01, 0xFF);
+        color_writetoaddr(0x03, 0xFF);
+        _delay((unsigned long)((200)*(64000000/4000.0)));
+
+        sprintf(clear_val,"clear = %d \r\n",color_read_Clear());
+        sendStringSerial4(pclear_val);
+
+        color_writetoaddr(0x01, 0xD5);
+        color_writetoaddr(0x03, 0xAB);
+        _delay((unsigned long)((200)*(64000000/4000.0)));
+
+        redm = color_read_Red();
+        greenm = color_read_Green();
+        bluem = color_read_Blue();
+
+        sprintf(red_val,"red = %d \r\n",redm);
+        sendStringSerial4(pred_val);
+        sprintf(green_val,"green = %d \r\n",greenm);
+        sendStringSerial4(pgreen_val);
+        sprintf(blue_val,"blue = %d \r\n\r\n",bluem);
+        sendStringSerial4(pblue_val);
+
+
+
+
+
+
+
+        _delay((unsigned long)((3000)*(64000000/4000.0)));
+        _delay((unsigned long)((3000)*(64000000/4000.0)));
+        _delay((unsigned long)((3000)*(64000000/4000.0)));
     }
-# 143 "main.c"
+# 196 "main.c"
     while(1){
         if(!going_forward){
 
@@ -24506,64 +24534,7 @@ void main(void){
 
         lum = color_read_Clear();
 
-        if (lum > 30){
-
-            measured_time = get16bitTMR0val();
-            stop(pmL, pmR);
-
-            going_forward = 0;
-            _delay((unsigned long)((100)*(64000000/4000.0)));
-
-
-
-
-
-
-            color_writetoaddr(0x01, 0xD5);
-            color_writetoaddr(0x03, 0xAB);
-            _delay((unsigned long)((200)*(64000000/4000.0)));
-
-            redm = color_read_Red();
-            greenm = color_read_Green();
-            bluem = color_read_Blue();
-
-            sprintf(red_val,"red = %d \r\n",redm);
-            sendStringSerial4(pred_val);
-            sprintf(green_val,"green = %d \r\n",greenm);
-            sendStringSerial4(pgreen_val);
-            sprintf(blue_val,"bluee = %d \r\n",bluem);
-            sendStringSerial4(pblue_val);
-
-            action = decide_action(redm, greenm, bluem);
-
-            sprintf(clear_val,"action = %d \r\n",action);
-            sendStringSerial4(pclear_val);
-
-
-            color_writetoaddr(0x01, 0xFF);
-            color_writetoaddr(0x03, 0xFF);
-
-            _delay((unsigned long)((3000)*(64000000/4000.0)));
-            _delay((unsigned long)((3000)*(64000000/4000.0)));
-            _delay((unsigned long)((3000)*(64000000/4000.0)));
-
-        }
-    }
-
-
-
-    while(1){
-        if(!going_forward){
-
-
-            resetTimer0();
-            fullSpeedAhead(pmL, pmR);
-            going_forward = 1;
-        }
-
-        lum = color_read_Clear();
-
-        if (lum > 1500){
+        if (lum > 32){
 
             measured_time = get16bitTMR0val();
             stop(pmL, pmR);

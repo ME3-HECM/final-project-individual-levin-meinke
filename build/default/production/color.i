@@ -24846,14 +24846,14 @@ char decide_action(unsigned int red_unsigned, unsigned int green_unsigned, unsig
 
 
 
-    rgb_comp[0] = sqrtf(powf((red_r - 0.668),2) + powf((green_r - 0.144),2) + powf((blue_r - 0.188),2));
-    rgb_comp[1] = sqrtf(powf((red_r - 0.106),2) + powf((green_r - 0.612),2) + powf((blue_r - 0.281),2));
-    rgb_comp[2] = sqrtf(powf((red_r - 0.061),2) + powf((green_r - 0.470),2) + powf((blue_r - 0.470),2));
-    rgb_comp[3] = sqrtf(powf((red_r - 0.403),2) + powf((green_r - 0.442),2) + powf((blue_r - 0.154),2));
-    rgb_comp[4] = sqrtf(powf((red_r - 0.705),2) + powf((green_r - 0.088),2) + powf((blue_r - 0.207),2));
-    rgb_comp[5] = sqrtf(powf((red_r - 0.711),2) + powf((green_r - 0.127),2) + powf((blue_r - 0.163),2));
-    rgb_comp[6] = sqrtf(powf((red_r - 0.194),2) + powf((green_r - 0.457),2) + powf((blue_r - 0.349),2));
-    rgb_comp[7] = sqrtf(powf((red_r - 0.291),2) + powf((green_r - 0.398),2) + powf((blue_r - 0.311),2));
+    rgb_comp[0] = sqrtf(powf((red_r - 0.747),2) + powf((green_r - 0.071),2) + powf((blue_r - 0.182),2));
+    rgb_comp[1] = sqrtf(powf((red_r - 0.147),2) + powf((green_r - 0.489),2) + powf((blue_r - 0.363),2));
+    rgb_comp[2] = sqrtf(powf((red_r - 0.110),2) + powf((green_r - 0.421),2) + powf((blue_r - 0.469),2));
+    rgb_comp[3] = sqrtf(powf((red_r - 0.423),2) + powf((green_r - 0.325),2) + powf((blue_r - 0.252),2));
+    rgb_comp[4] = sqrtf(powf((red_r - 0.431),2) + powf((green_r - 0.263),2) + powf((blue_r - 0.306),2));
+    rgb_comp[5] = sqrtf(powf((red_r - 0.664),2) + powf((green_r - 0.137),2) + powf((blue_r - 0.198),2));
+    rgb_comp[6] = sqrtf(powf((red_r - 0.271),2) + powf((green_r - 0.366),2) + powf((blue_r - 0.363),2));
+    rgb_comp[7] = sqrtf(powf((red_r - 0.329),2) + powf((green_r - 0.335),2) + powf((blue_r - 0.335),2));
 
     action = 0;
     for(char i = 0; i < 8; i +=1){

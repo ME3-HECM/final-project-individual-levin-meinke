@@ -2522,29 +2522,29 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;color.c: 159:     sendStringSerial4(pblue_val);
 [e ( _sendStringSerial4 (1 _pblue_val ]
 "163
-[; ;color.c: 163:     rgb_comp[0] = sqrtf(powf((red_r - 0.668),2) + powf((green_r - 0.144),2) + powf((blue_r - 0.188),2));
-[e = *U + &U _rgb_comp * -> -> -> 0 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.668 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.144 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.188 `f -> -> 2 `i `f ]
+[; ;color.c: 163:     rgb_comp[0] = sqrtf(powf((red_r - 0.747),2) + powf((green_r - 0.071),2) + powf((blue_r - 0.182),2));
+[e = *U + &U _rgb_comp * -> -> -> 0 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.747 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.071 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.182 `f -> -> 2 `i `f ]
 "164
-[; ;color.c: 164:     rgb_comp[1] = sqrtf(powf((red_r - 0.106),2) + powf((green_r - 0.612),2) + powf((blue_r - 0.281),2));
-[e = *U + &U _rgb_comp * -> -> -> 1 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.106 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.612 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.281 `f -> -> 2 `i `f ]
+[; ;color.c: 164:     rgb_comp[1] = sqrtf(powf((red_r - 0.147),2) + powf((green_r - 0.489),2) + powf((blue_r - 0.363),2));
+[e = *U + &U _rgb_comp * -> -> -> 1 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.147 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.489 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.363 `f -> -> 2 `i `f ]
 "165
-[; ;color.c: 165:     rgb_comp[2] = sqrtf(powf((red_r - 0.061),2) + powf((green_r - 0.470),2) + powf((blue_r - 0.470),2));
-[e = *U + &U _rgb_comp * -> -> -> 2 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.061 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.470 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.470 `f -> -> 2 `i `f ]
+[; ;color.c: 165:     rgb_comp[2] = sqrtf(powf((red_r - 0.110),2) + powf((green_r - 0.421),2) + powf((blue_r - 0.469),2));
+[e = *U + &U _rgb_comp * -> -> -> 2 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.110 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.421 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.469 `f -> -> 2 `i `f ]
 "166
-[; ;color.c: 166:     rgb_comp[3] = sqrtf(powf((red_r - 0.403),2) + powf((green_r - 0.442),2) + powf((blue_r - 0.154),2));
-[e = *U + &U _rgb_comp * -> -> -> 3 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.403 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.442 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.154 `f -> -> 2 `i `f ]
+[; ;color.c: 166:     rgb_comp[3] = sqrtf(powf((red_r - 0.423),2) + powf((green_r - 0.325),2) + powf((blue_r - 0.252),2));
+[e = *U + &U _rgb_comp * -> -> -> 3 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.423 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.325 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.252 `f -> -> 2 `i `f ]
 "167
-[; ;color.c: 167:     rgb_comp[4] = sqrtf(powf((red_r - 0.705),2) + powf((green_r - 0.088),2) + powf((blue_r - 0.207),2));
-[e = *U + &U _rgb_comp * -> -> -> 4 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.705 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.088 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.207 `f -> -> 2 `i `f ]
+[; ;color.c: 167:     rgb_comp[4] = sqrtf(powf((red_r - 0.431),2) + powf((green_r - 0.263),2) + powf((blue_r - 0.306),2));
+[e = *U + &U _rgb_comp * -> -> -> 4 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.431 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.263 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.306 `f -> -> 2 `i `f ]
 "168
-[; ;color.c: 168:     rgb_comp[5] = sqrtf(powf((red_r - 0.711),2) + powf((green_r - 0.127),2) + powf((blue_r - 0.163),2));
-[e = *U + &U _rgb_comp * -> -> -> 5 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.711 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.127 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.163 `f -> -> 2 `i `f ]
+[; ;color.c: 168:     rgb_comp[5] = sqrtf(powf((red_r - 0.664),2) + powf((green_r - 0.137),2) + powf((blue_r - 0.198),2));
+[e = *U + &U _rgb_comp * -> -> -> 5 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.664 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.137 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.198 `f -> -> 2 `i `f ]
 "169
-[; ;color.c: 169:     rgb_comp[6] = sqrtf(powf((red_r - 0.194),2) + powf((green_r - 0.457),2) + powf((blue_r - 0.349),2));
-[e = *U + &U _rgb_comp * -> -> -> 6 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.194 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.457 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.349 `f -> -> 2 `i `f ]
+[; ;color.c: 169:     rgb_comp[6] = sqrtf(powf((red_r - 0.271),2) + powf((green_r - 0.366),2) + powf((blue_r - 0.363),2));
+[e = *U + &U _rgb_comp * -> -> -> 6 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.271 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.366 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.363 `f -> -> 2 `i `f ]
 "170
-[; ;color.c: 170:     rgb_comp[7] = sqrtf(powf((red_r - 0.291),2) + powf((green_r - 0.398),2) + powf((blue_r - 0.311),2));
-[e = *U + &U _rgb_comp * -> -> -> 7 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.291 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.398 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.311 `f -> -> 2 `i `f ]
+[; ;color.c: 170:     rgb_comp[7] = sqrtf(powf((red_r - 0.329),2) + powf((green_r - 0.335),2) + powf((blue_r - 0.335),2));
+[e = *U + &U _rgb_comp * -> -> -> 7 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.329 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.335 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.335 `f -> -> 2 `i `f ]
 "172
 [; ;color.c: 172:     action = 0;
 [e = _action -> -> 0 `i `uc ]

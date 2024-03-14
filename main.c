@@ -100,46 +100,42 @@ void main(void){
     __delay_ms(2000); //delay to allow operator to turn on buggy
     
     //----------------- testing stopping & color readings --------------------
-    
-    
-    while(1){
-        turn_left_135(pmL, pmR);
-        __delay_ms(1000);
-    }
     // test loop for color calibration
-    /*
     while(1){
+        color_writetoaddr(0x01, 0xFF); //set integration time
+        color_writetoaddr(0x03, 0xFF); //set wait time (WTIME)
+        __delay_ms(200);//let sensor adjust settings
+        
+        sprintf(clear_val,"clear = %d \r\n",color_read_Clear());
+        sendStringSerial4(pclear_val);
         
         color_writetoaddr(0x01, 0xD5); //set integration time
         color_writetoaddr(0x03, 0xAB); //set wait time (WTIME)
-        __delay_ms(200);//let sensor adjust settings
+        __delay_ms(200); //let sensor settle
         
         redm = color_read_Red();
         greenm = color_read_Green();
         bluem = color_read_Blue();
             
-        sprintf(red_val,"mred = %d \r\n",redm);
+        sprintf(red_val,"red = %d \r\n",redm);
         sendStringSerial4(pred_val);
-        sprintf(green_val,"mgreen = %d \r\n",greenm);
+        sprintf(green_val,"green = %d \r\n",greenm);
         sendStringSerial4(pgreen_val);
-        sprintf(blue_val,"mblue = %d \r\n",bluem);
+        sprintf(blue_val,"blue = %d \r\n\r\n",bluem);
         sendStringSerial4(pblue_val);
             
-        action = decide_action(redm, greenm, bluem);
+        //action = decide_action(redm, greenm, bluem);
             
-        sprintf(clear_val,"action = %d \r\n",action);
-        sendStringSerial4(pclear_val);
-            
-        //reset sensor vals
-        color_writetoaddr(0x01, 0xFF); //set integration time
-        color_writetoaddr(0x03, 0xFF); //set wait time (WTIME)
+        //sprintf(clear_val,"action = %d \r\n",action);
+        //sendStringSerial4(pclear_val);
+        
 
         __delay_ms(3000);
         __delay_ms(3000);
         __delay_ms(3000);
     }
-    */
-    
+    //-------------- testing for color calibration ---------------
+    /*
     while(1){
         if(!going_forward){
             // if in here : started program or just finished action.
@@ -194,7 +190,7 @@ void main(void){
             
         }    
     }
-    
+    */
 
     //main loop 
     while(1){
@@ -207,8 +203,8 @@ void main(void){
         }
         // read the colour sensor
         lum = color_read_Clear();
-        //if above 1500 you want to stop and find color
-        if (lum > 1500){
+        //if above 30 you want to stop and find color
+        if (lum > 32){
             //stop buggy
             measured_time = get16bitTMR0val(); //measure time going forward
             stop(pmL, pmR);
