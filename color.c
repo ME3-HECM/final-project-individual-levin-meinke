@@ -43,13 +43,14 @@ void color_writetoaddr(char address, char value){
     I2C_2_Master_Stop();          //Stop condition
 }
 
-
+/* not used anymore
 void color_read(struct RGBC_val *p){
     (p->R) = color_read_Red();
     (p->G) = color_read_Green();
     (p->B) = color_read_Blue();
     (p->C) = color_read_Clear();
 }
+ */
 
 unsigned int color_read_Clear(void){
 	unsigned int tmp;
@@ -110,7 +111,7 @@ void color_click_toggleLED(void){
     LATEbits.LATE7 = !LATEbits.LATE7;
 }
 
-char decide_action(void){ //reads the colour values and outputs which color it is (numbered 1 - 7)
+char decide_action(unsigned int red_unsigned, unsigned int green_unsigned, unsigned int blue_unsigned){ //reads the colour values and outputs which color it is (numbered 1 - 7)
     
     //----------USED FOR DEBUGGING OVER SERIAL-----------
     char clear_val[20];
@@ -126,55 +127,37 @@ char decide_action(void){ //reads the colour values and outputs which color it i
     pgreen_val = &green_val[0];
     pblue_val = &blue_val[0];
     //-------------------debugging delete later --------------
-    
-    float red, green, blue; //define integers to store color values
+    float red, green, blue;
     float red_r, green_r, blue_r; //define floats to store ratio of colors
     float rgb_comp[8]; //define array of 8 floats to store comparison values
     char action; //char to assign the action to be done
-    
-    //change the color sensor settings to get more accurate readings
-    color_writetoaddr(0x01, 0xD5); //set integration time
-    color_writetoaddr(0x03, 0xAB); //set wait time (WTIME)
-    __delay_ms(200);//let sensor settle
-    
-    red = color_read_Red(); //read red
-    green  = color_read_Green(); //read green
-    blue = color_read_Blue(); //read blue
-    
-    sprintf(red_val,"red = %d \r\n",red);
-    sendStringSerial4(pred_val);
-    sprintf(green_val,"green = %d \r\n",green);
-    sendStringSerial4(pgreen_val);
-    sprintf(blue_val,"blue = %d \r\n\r\n",blue);
-    sendStringSerial4(pblue_val);
+
+    red = (float)red_unsigned;
+    green = (float)green_unsigned;
+    blue = (float)blue_unsigned;
     
     //pre-processing of rgb values
-    if(red < 666){ red = 0; }else{red -= 666;} //remove the red value from black card calibration
-    if(green < 446){ green = 0; }else{red -= 446;} //remove the green value from black card calibration
-    if(blue < 295){ blue = 0; }else{red -= 295;} //remove the blue value from black card calibration
+    if(red < 666){red = 0;} else{red -= 666;} //remove the red value from black card calibration
+    if(green < 446){green = 0;} else{green -= 446;} //remove the green value from black card calibration
+    if(blue < 295){blue = 0;} else{blue -= 295;} //remove the blue value from black card calibration
     
     red = red/1341; //divide by the range of red values from calibration
     green = green/795; //divide by the range of green values from calibration
     blue = blue/756; //divide by the range of blue values from calibration
     
-    sprintf(red_val,"red = %d \r\n",red);
-    sendStringSerial4(pred_val);
-    sprintf(green_val,"green = %d \r\n",green);
-    sendStringSerial4(pgreen_val);
-    sprintf(blue_val,"blue = %d \r\n\r\n",blue);
-    sendStringSerial4(pblue_val);
-    
+    float total = red + green + blue;
     //find the ratio of the colors
-    red_r = red / (red + green + blue);
-    green_r = green / (red + green + blue);
-    blue_r = blue / (red + green + blue);
+    red_r = red / total;
+    green_r = green / total;
+    blue_r = blue / total;
     
-    sprintf(red_val,"red = %d \r\n",red_r);
+    sprintf(red_val,"redr = %f \r\n",red_r);
     sendStringSerial4(pred_val);
-    sprintf(green_val,"green = %d \r\n",green_r);
+    sprintf(green_val,"greenr = %f \r\n",green_r);
     sendStringSerial4(pgreen_val);
-    sprintf(blue_val,"blue = %d \r\n\r\n",blue_r);
+    sprintf(blue_val,"bluer = %f \r\n",blue_r);
     sendStringSerial4(pblue_val);
+    
     
     //compare ratios of the colors with the measured values from our calibration cards
     rgb_comp[0] = sqrt(pow((red_r - 0.668),2) + pow((green_r - 0.144),2) + pow((blue_r - 0.188),2)); //red
@@ -186,8 +169,7 @@ char decide_action(void){ //reads the colour values and outputs which color it i
     rgb_comp[6] = sqrt(pow((red_r - 0.194),2) + pow((green_r - 0.457),2) + pow((blue_r - 0.349),2)); //light blue
     rgb_comp[7] = sqrt(pow((red_r - 0.291),2) + pow((green_r - 0.398),2) + pow((blue_r - 0.311),2)); //white
 
-    action = 0; //set initial value for action
-        
+    action = 0; //set initial value for action  
     for(char i = 0; i < 8; i +=1){ //iterate through the comparison array and find the smallest value
         if(rgb_comp[i] < rgb_comp[action]){ 
             action = i;
@@ -201,3 +183,32 @@ char decide_action(void){ //reads the colour values and outputs which color it i
     return action; //return the action - the action numbers correlate to the color positions in the comparison array
 }																				
 
+
+char invert_action(char input_action){
+    char output_action;
+    switch(input_action){
+        case 0:
+            output_action = 1;
+            break;
+        case 1:
+            output_action = 0;
+            break;
+        case 2:
+            output_action = 2;
+            break;
+        case 3:
+            output_action = 8;
+            break;
+        case 4:
+            output_action = 9;
+            break;
+        case 5:
+            output_action = 6;
+            break;
+        case 6:
+            output_action = 5;
+            break;
+        //0-6 are the only possible wall colours (apart from white), so these are the only cases that should occur
+        return output_action;
+    }
+}

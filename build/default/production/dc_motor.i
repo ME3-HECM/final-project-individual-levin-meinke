@@ -24225,7 +24225,7 @@ void fullSpeedAhead(struct DC_motor *mL, struct DC_motor *mR){
 
         setMotorPWM(mL);
         setMotorPWM(mR);
-        _delay((unsigned long)((1)*(64000000/4000.0)));
+        _delay((unsigned long)((2)*(64000000/4000.0)));
     }
 }
 
@@ -24243,8 +24243,8 @@ void stop(struct DC_motor *mL, struct DC_motor *mR){
 
 
 void turn_left_90(struct DC_motor *mL, struct DC_motor *mR){
-    mL->direction = 0;
-    mR->direction = 1;
+    mL->direction = 1;
+    mR->direction = 0;
 
     while ((mL->power) < 70 || (mR->power) < 70){
         if ((mL->power) < 70) (mL->power) += 1;
@@ -24254,29 +24254,12 @@ void turn_left_90(struct DC_motor *mL, struct DC_motor *mR){
         setMotorPWM(mR);
         _delay((unsigned long)((1)*(64000000/4000.0)));
     }
-    _delay((unsigned long)((225)*(64000000/4000.0)));
+    _delay((unsigned long)((440)*(64000000/4000.0)));
     stop(mL, mR);
 }
 
 
 void turn_right_90(struct DC_motor *mL, struct DC_motor *mR){
-    mL->direction = 1;
-    mR->direction = 0;
-
-    while ((mL->power) < 70 || (mR->power) < 70){
-        if ((mL->power) < 70) (mL->power) += 1;
-        if ((mR->power) < 70) (mR->power) += 1;
-
-        setMotorPWM(mL);
-        setMotorPWM(mR);
-        _delay((unsigned long)((1)*(64000000/4000.0)));
-    }
-    _delay((unsigned long)((225)*(64000000/4000.0)));
-    stop(mL, mR);
-}
-
-
-void turn_left_135(struct DC_motor *mL, struct DC_motor *mR){
     mL->direction = 0;
     mR->direction = 1;
 
@@ -24288,12 +24271,12 @@ void turn_left_135(struct DC_motor *mL, struct DC_motor *mR){
         setMotorPWM(mR);
         _delay((unsigned long)((1)*(64000000/4000.0)));
     }
-    _delay((unsigned long)((500)*(64000000/4000.0)));
+    _delay((unsigned long)((440)*(64000000/4000.0)));
     stop(mL, mR);
 }
 
 
-void turn_right_135(struct DC_motor *mL, struct DC_motor *mR){
+void turn_left_135(struct DC_motor *mL, struct DC_motor *mR){
     mL->direction = 1;
     mR->direction = 0;
 
@@ -24305,13 +24288,14 @@ void turn_right_135(struct DC_motor *mL, struct DC_motor *mR){
         setMotorPWM(mR);
         _delay((unsigned long)((1)*(64000000/4000.0)));
     }
-    _delay((unsigned long)((500)*(64000000/4000.0)));
+    _delay((unsigned long)((700)*(64000000/4000.0)));
     stop(mL, mR);
 }
 
-void reverse_after_read(struct DC_motor *mL, struct DC_motor *mR){
+
+void turn_right_135(struct DC_motor *mL, struct DC_motor *mR){
     mL->direction = 0;
-    mR->direction = 0;
+    mR->direction = 1;
 
     while ((mL->power) < 70 || (mR->power) < 70){
         if ((mL->power) < 70) (mL->power) += 1;
@@ -24321,8 +24305,25 @@ void reverse_after_read(struct DC_motor *mL, struct DC_motor *mR){
         setMotorPWM(mR);
         _delay((unsigned long)((1)*(64000000/4000.0)));
     }
-    _delay((unsigned long)((100)*(64000000/4000.0)));
+    _delay((unsigned long)((700)*(64000000/4000.0)));
     stop(mL, mR);
+}
+
+void reverse_after_read(struct DC_motor *mL, struct DC_motor *mR){
+    mL->direction = 1;
+    mR->direction = 1;
+
+    while ((mL->power) < 70 || (mR->power) < 70){
+        if ((mL->power) < 70) (mL->power) += 1;
+        if ((mR->power) < 70) (mR->power) += 1;
+
+        setMotorPWM(mL);
+        setMotorPWM(mR);
+        _delay((unsigned long)((1)*(64000000/4000.0)));
+    }
+    _delay((unsigned long)((225)*(64000000/4000.0)));
+    stop(mL, mR);
+    _delay((unsigned long)((250)*(64000000/4000.0)));
 }
 
 void reverse_one_square(struct DC_motor *mL, struct DC_motor *mR){
@@ -24339,4 +24340,5 @@ void reverse_one_square(struct DC_motor *mL, struct DC_motor *mR){
     }
     _delay((unsigned long)((500)*(64000000/4000.0)));
     stop(mL, mR);
+    _delay((unsigned long)((250)*(64000000/4000.0)));
 }

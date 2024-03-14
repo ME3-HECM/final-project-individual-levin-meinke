@@ -5,13 +5,6 @@
 
 #define _XTAL_FREQ 64000000 //note intrinsic _delay function is 62.5ns at 64,000,000Hz  
 
-struct RGBC_val{
-    unsigned int R; //red
-    unsigned int G; //green
-    unsigned int B; //blue
-    unsigned int C; //clear
-};
-
 /********************************************//**
  *  Function to initialise the colour click module using I2C
  ***********************************************/
@@ -31,13 +24,13 @@ unsigned int color_read_Red(void);
 unsigned int color_read_Green(void);
 unsigned int color_read_Blue(void);
 
-//function to read all colors and store in struct RGBC_val
-void color_read(struct RGBC_val *p);
-
 //function to turn LEDs on and off
 void color_click_toggleLED(void);
 
 //function to decide the next action
-char decide_action(void);
+char decide_action(unsigned int red, unsigned int green, unsigned int blue);
+
+//function to invert the actions (maybe somewhere else?)
+char invert_action(char input_action);
 
 #endif

@@ -24617,7 +24617,23 @@ double yn(int, double);
 # 3 "color.c" 2
 
 # 1 "./color.h" 1
-# 11 "./color.h"
+
+
+
+
+
+
+
+struct RGBC_val{
+    unsigned int R;
+    unsigned int G;
+    unsigned int B;
+    unsigned int C;
+};
+
+
+
+
 void color_click_init(void);
 
 
@@ -24635,13 +24651,13 @@ unsigned int color_read_Green(void);
 unsigned int color_read_Blue(void);
 
 
+void color_read(struct RGBC_val *p);
+
+
 void color_click_toggleLED(void);
 
 
 char decide_action(unsigned int red, unsigned int green, unsigned int blue);
-
-
-char invert_action(char input_action);
 # 4 "color.c" 2
 
 # 1 "./i2c.h" 1
@@ -24737,7 +24753,15 @@ void color_writetoaddr(char address, char value){
     I2C_2_Master_Write(value);
     I2C_2_Master_Stop();
 }
-# 55 "color.c"
+
+
+void color_read(struct RGBC_val *p){
+    (p->R) = color_read_Red();
+    (p->G) = color_read_Green();
+    (p->B) = color_read_Blue();
+    (p->C) = color_read_Clear();
+}
+
 unsigned int color_read_Clear(void){
  unsigned int tmp;
  I2C_2_Master_Start();
@@ -24818,32 +24842,39 @@ char decide_action(unsigned int red_unsigned, unsigned int green_unsigned, unsig
     float rgb_comp[8];
     char action;
 
-    red = (float)red_unsigned;
-    green = (float)green_unsigned;
-    blue = (float)blue_unsigned;
+    red = (float)(red_unsigned);
+    green = float(green_unsigned);
+    blue = float(blue_unsigned);
 
-
-    if(red < 666){red = 0;} else{red -= 666;}
-    if(green < 446){green = 0;} else{green -= 446;}
-    if(blue < 295){blue = 0;} else{blue -= 295;}
+    if(red < 666){ red = 0; }else{red -= 666;}
+    if(green < 446){ green = 0; }else{red -= 446;}
+    if(blue < 295){ blue = 0; }else{red -= 295;}
 
     red = red/1341;
     green = green/795;
     blue = blue/756;
 
+    sprintf(red_val,"red = %f \r\n",red);
+    sendStringSerial4(pred_val);
+    sprintf(green_val,"green = %f \r\n",green);
+    sendStringSerial4(pgreen_val);
+    sprintf(blue_val,"blue = %f \r\n\r\n",blue);
+    sendStringSerial4(pblue_val);
+
     float total = red + green + blue;
+    sprintf(blue_val,"total = %f \r\n\r\n",total);
+    sendStringSerial4(pblue_val);
 
     red_r = red / total;
     green_r = green / total;
     blue_r = blue / total;
 
-    sprintf(red_val,"redr = %f \r\n",red_r);
+    sprintf(red_val,"red = %f \r\n",red_r);
     sendStringSerial4(pred_val);
-    sprintf(green_val,"greenr = %f \r\n",green_r);
+    sprintf(green_val,"green = %f \r\n",green_r);
     sendStringSerial4(pgreen_val);
-    sprintf(blue_val,"bluer = %f \r\n",blue_r);
+    sprintf(blue_val,"blue = %f \r\n\r\n",blue_r);
     sendStringSerial4(pblue_val);
-
 
 
     rgb_comp[0] = sqrtf(powf((red_r - 0.668),2) + powf((green_r - 0.144),2) + powf((blue_r - 0.188),2));
@@ -24867,34 +24898,4 @@ char decide_action(unsigned int red_unsigned, unsigned int green_unsigned, unsig
     color_writetoaddr(0x03, 0xFF);
 
     return action;
-}
-
-
-char invert_action(char input_action){
-    char output_action;
-    switch(input_action){
-        case 0:
-            output_action = 1;
-            break;
-        case 1:
-            output_action = 0;
-            break;
-        case 2:
-            output_action = 2;
-            break;
-        case 3:
-            output_action = 8;
-            break;
-        case 4:
-            output_action = 9;
-            break;
-        case 5:
-            output_action = 6;
-            break;
-        case 6:
-            output_action = 5;
-            break;
-
-        return output_action;
-    }
 }

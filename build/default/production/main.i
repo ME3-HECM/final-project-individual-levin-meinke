@@ -24267,23 +24267,7 @@ unsigned int ADC_getval(void);
 # 12 "main.c" 2
 
 # 1 "./color.h" 1
-
-
-
-
-
-
-
-struct RGBC_val{
-    unsigned int R;
-    unsigned int G;
-    unsigned int B;
-    unsigned int C;
-};
-
-
-
-
+# 11 "./color.h"
 void color_click_init(void);
 
 
@@ -24301,13 +24285,13 @@ unsigned int color_read_Green(void);
 unsigned int color_read_Blue(void);
 
 
-void color_read(struct RGBC_val *p);
-
-
 void color_click_toggleLED(void);
 
 
-char decide_action(void);
+char decide_action(unsigned int red, unsigned int green, unsigned int blue);
+
+
+char invert_action(char input_action);
 # 13 "main.c" 2
 
 # 1 "./dc_motor.h" 1
@@ -24456,8 +24440,6 @@ void main(void){
     ANSELFbits.ANSELF2=0;
 
 
-
-
     struct DC_motor motorL, motorR;
     unsigned int PWMcycle = 99;
 
@@ -24480,16 +24462,6 @@ void main(void){
     struct DC_motor *pmR= &motorR;
 
 
-    struct RGBC_val RGBC;
-    RGBC.R = 0;
-    RGBC.B = 0;
-    RGBC.G = 0;
-    RGBC.C = 0;
-
-
-    struct RGBC_val *pRGBC= &RGBC;
-
-
     char clear_val[20];
     char red_val[20];
     char green_val[20];
@@ -24504,57 +24476,25 @@ void main(void){
     pblue_val = &blue_val[0];
 
     unsigned int lum;
+    unsigned int redm, greenm, bluem;
+    char action;
     _Bool going_forward = 0;
     unsigned int previously_measured_time, measured_time;
     int action_to_do;
     unsigned int timings[20];
     int actions[20];
     int actions_completed = 0;
-# 133 "main.c"
+# 100 "main.c"
+    _delay((unsigned long)((2000)*(64000000/4000.0)));
+
+
+
+
     while(1){
-        if(!going_forward){
-
-
-            resetTimer0();
-            fullSpeedAhead(pmL, pmR);
-            going_forward = 1;
-        }
-
-        lum = color_read_Clear();
-
-        if (lum > 30){
-
-            measured_time = get16bitTMR0val();
-            stop(pmL, pmR);
-
-            going_forward = 0;
-            _delay((unsigned long)((100)*(64000000/4000.0)));
-
-            sprintf(red_val,"action = %d \r\n",decide_action());
-            sendStringSerial4(pred_val);
-
-            color_writetoaddr(0x01, 0xD5);
-            color_writetoaddr(0x03, 0xAB);
-            _delay((unsigned long)((200)*(64000000/4000.0)));
-            sprintf(red_val,"red = %d \r\n",color_read_Red());
-            sendStringSerial4(pred_val);
-            sprintf(green_val,"green = %d \r\n",color_read_Green());
-            sendStringSerial4(pgreen_val);
-            sprintf(blue_val,"blue = %d \r\n",color_read_Blue());
-            sendStringSerial4(pblue_val);
-            sprintf(clear_val,"clear = %d \r\n\r\n",color_read_Clear());
-            sendStringSerial4(pclear_val);
-            _delay((unsigned long)((3000)*(64000000/4000.0)));
-            _delay((unsigned long)((3000)*(64000000/4000.0)));
-            _delay((unsigned long)((3000)*(64000000/4000.0)));
-
-
-            color_writetoaddr(0x01, 0xFF);
-            color_writetoaddr(0x03, 0xFF);
-        }
+        turn_left_135(pmL, pmR);
+        _delay((unsigned long)((1000)*(64000000/4000.0)));
     }
-
-
+# 143 "main.c"
     while(1){
         if(!going_forward){
 
@@ -24572,36 +24512,42 @@ void main(void){
             stop(pmL, pmR);
 
             going_forward = 0;
-
-
-            timings[actions_completed] = measured_time;
-
             _delay((unsigned long)((100)*(64000000/4000.0)));
 
-            _delay((unsigned long)((500)*(64000000/4000.0)));
+
+
+
+
 
             color_writetoaddr(0x01, 0xD5);
             color_writetoaddr(0x03, 0xAB);
             _delay((unsigned long)((200)*(64000000/4000.0)));
 
-            sprintf(red_val,"red = %d \r\n",color_read_Red());
+            redm = color_read_Red();
+            greenm = color_read_Green();
+            bluem = color_read_Blue();
+
+            sprintf(red_val,"red = %d \r\n",redm);
             sendStringSerial4(pred_val);
-            sprintf(green_val,"green = %d \r\n",color_read_Green());
+            sprintf(green_val,"green = %d \r\n",greenm);
             sendStringSerial4(pgreen_val);
-            sprintf(blue_val,"blue = %d \r\n",color_read_Blue());
+            sprintf(blue_val,"bluee = %d \r\n",bluem);
             sendStringSerial4(pblue_val);
-            sprintf(clear_val,"clear = %d \r\n",color_read_Clear());
+
+            action = decide_action(redm, greenm, bluem);
+
+            sprintf(clear_val,"action = %d \r\n",action);
             sendStringSerial4(pclear_val);
-            _delay((unsigned long)((3000)*(64000000/4000.0)));
-            _delay((unsigned long)((3000)*(64000000/4000.0)));
-            _delay((unsigned long)((3000)*(64000000/4000.0)));
 
 
             color_writetoaddr(0x01, 0xFF);
             color_writetoaddr(0x03, 0xFF);
 
+            _delay((unsigned long)((3000)*(64000000/4000.0)));
+            _delay((unsigned long)((3000)*(64000000/4000.0)));
+            _delay((unsigned long)((3000)*(64000000/4000.0)));
+
         }
-        _delay((unsigned long)((1)*(64000000/4000.0)));
     }
 
 
@@ -24629,8 +24575,16 @@ void main(void){
 
             timings[actions_completed] = measured_time;
 
-            color_read(pRGBC);
 
+            color_writetoaddr(0x01, 0xD5);
+            color_writetoaddr(0x03, 0xAB);
+            _delay((unsigned long)((200)*(64000000/4000.0)));
+
+            redm = color_read_Red();
+            greenm = color_read_Green();
+            bluem = color_read_Blue();
+
+            action_to_do = decide_action(redm, greenm, bluem);
 
 
             actions[actions_completed] = action_to_do;
@@ -24692,6 +24646,15 @@ void main(void){
     going_forward = 0;
 
 
+    for(char i = 0; i < 20; i +=1){
+        timings[i] -= 2000;
+        if(i > 7){
+              timings[i] -= 4000;
+        }
+    }
+
+
+
     while(upcoming_action >= 0){
         if(!going_forward){
             resetTimer0();
@@ -24703,18 +24666,33 @@ void main(void){
         if(measured_time > timings[upcoming_action + 1]){
             stop(pmL, pmR);
             going_forward = 0;
+            action_to_do = invert_action(actions[upcoming_action]);
 
-
-            if(action_to_do == 0){;}
-            else if(action_to_do == 1){;}
-            else if(action_to_do == 2){;}
-            else if(action_to_do == 3){;}
-            else if(action_to_do == 4){;}
-            else if(action_to_do == 5){;}
-            else if(action_to_do == 6){;}
-            upcoming_action -=1 ;
+            if(action_to_do == 0){
+                turn_right_90(pmL, pmR);
             }
-        _delay((unsigned long)((10)*(64000000/4000.0)));
+            else if(action_to_do == 1){
+                turn_left_90(pmL, pmR);
+            }
+            else if(action_to_do == 2){
+                turn_right_90(pmL, pmR);
+                turn_right_90(pmL, pmR);
+            }
+            else if(action_to_do == 5){
+                turn_right_135(pmL, pmR);
+            }
+            else if(action_to_do == 6){
+                turn_left_135(pmL, pmR);
+            }
+            else if(action_to_do == 8){
+                turn_left_90;
+            }
+            else if(action_to_do == 9){
+                turn_right_90;
+            }
+        upcoming_action -=1 ;
         }
-    stop(pmL, pmR);
+    _delay((unsigned long)((10)*(64000000/4000.0)));
     }
+    stop(pmL, pmR);
+}
