@@ -52,7 +52,7 @@ The algorithm and calibration settings are calculated using this [sheet](https:/
 
 There is an exception: if a luminosity of 85 can not be reached, the wall is black and the buggy knows it is lost and returns to starts.
 
-##Navigation Logic
+## Navigation Logic
 
 Once the color has been determined, the buggy executes the instruction said. Each color has a corresponding action code (0-7) which correlates to a set of movement instruction in the main code. Once the navigation instruction is done, a timer starts and times the amount of time until the next wall is detected. Each of the times and actions is logged so we can retrace later. When white is detected, the buggy turns around and then main loop is broken. We then remove a calibrated value from each time to account for reversal after reading a color. A seperate statement removes another preset time from yellow and pink, since they reverse one square.
 
