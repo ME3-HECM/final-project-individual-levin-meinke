@@ -208,8 +208,8 @@ void reverse_after_read(struct DC_motor *mL, struct DC_motor *mR){
 }
 
 void reverse_one_square(struct DC_motor *mL, struct DC_motor *mR){
-    mL->direction = 0; //left side forward
-    mR->direction = 0; //right side forward
+    mL->direction = 1; //left side back
+    mR->direction = 1; //right side back
     
     while ((mL->power) < 70 || (mR->power) < 70){ //while motors are below 100 power
         if ((mL->power) < 70) (mL->power) += 1; //increment left
@@ -219,7 +219,7 @@ void reverse_one_square(struct DC_motor *mL, struct DC_motor *mR){
         setMotorPWM(mR);
         __delay_ms(1); //delay before repeating (gradual increase in speed)
     }
-    __delay_ms(500); //calibrate for how long it takes to go back
+    __delay_ms(750); //calibrate for how long it takes to go back
     stop(mL, mR);
     __delay_ms(250); //let the buggy settle
 }

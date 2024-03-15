@@ -24638,7 +24638,7 @@ unsigned int color_read_Blue(void);
 void color_click_toggleLED(void);
 
 
-char decide_action(unsigned int red, unsigned int green, unsigned int blue);
+char decide_action();
 
 
 char invert_action(char input_action);
@@ -24797,30 +24797,25 @@ void color_click_toggleLED(void){
     LATEbits.LATE7 = !LATEbits.LATE7;
 }
 
-char decide_action(unsigned int red_unsigned, unsigned int green_unsigned, unsigned int blue_unsigned){
-
-
-    char clear_val[20];
-    char red_val[20];
-    char green_val[20];
-    char blue_val[20];
-    char *pclear_val;
-    char *pred_val;
-    char *pblue_val;
-    char *pgreen_val;
-    pclear_val = &clear_val[0];
-    pred_val = &red_val[0];
-    pgreen_val = &green_val[0];
-    pblue_val = &blue_val[0];
-
+char decide_action(){
+# 132 "color.c"
     float red, green, blue;
     float red_r, green_r, blue_r;
     float rgb_comp[8];
     char action;
 
-    red = (float)red_unsigned;
-    green = (float)green_unsigned;
-    blue = (float)blue_unsigned;
+
+    color_writetoaddr(0x01, 0xD5);
+    color_writetoaddr(0x03, 0xAB);
+    _delay((unsigned long)((200)*(64000000/4000.0)));
+
+    red = color_read_Red();
+    green = color_read_Green();
+    blue = color_read_Blue();
+
+
+    color_writetoaddr(0x01, 0xFF);
+    color_writetoaddr(0x03, 0xFF);
 
 
     if(red < 666){red = 0;} else{red -= 699;}
@@ -24853,10 +24848,6 @@ char decide_action(unsigned int red_unsigned, unsigned int green_unsigned, unsig
             action = i;
         }
     }
-
-
-    color_writetoaddr(0x01, 0xFF);
-    color_writetoaddr(0x03, 0xFF);
 
     return action;
 }

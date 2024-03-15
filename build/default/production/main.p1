@@ -126,21 +126,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "29
 [; ;./dc_motor.h: 29: void inch_forward(struct DC_motor *mL, struct DC_motor *mR);
 [v _inch_forward `(v ~T0 @X0 0 ef2`*S2017`*S2017 ]
-"18 ./color.h
-[; ;./color.h: 18: void color_writetoaddr(char address, char value);
-[v _color_writetoaddr `(v ~T0 @X0 0 ef2`uc`uc ]
-"23
-[; ;./color.h: 23: unsigned int color_read_Red(void);
-[v _color_read_Red `(ui ~T0 @X0 0 ef ]
-"24
-[; ;./color.h: 24: unsigned int color_read_Green(void);
-[v _color_read_Green `(ui ~T0 @X0 0 ef ]
-"25
-[; ;./color.h: 25: unsigned int color_read_Blue(void);
-[v _color_read_Blue `(ui ~T0 @X0 0 ef ]
-"31
-[; ;./color.h: 31: char decide_action(unsigned int red, unsigned int green, unsigned int blue);
-[v _decide_action `(uc ~T0 @X0 0 ef3`ui`ui`ui ]
+"31 ./color.h
+[; ;./color.h: 31: char decide_action();
+[v _decide_action `(uc ~T0 @X0 0 e? ]
 "27 ./dc_motor.h
 [; ;./dc_motor.h: 27: void reverse_after_read(struct DC_motor *mL, struct DC_motor *mR);
 [v _reverse_after_read `(v ~T0 @X0 0 ef2`*S2017`*S2017 ]
@@ -159,15 +147,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 "26
 [; ;./dc_motor.h: 26: void turn_right_135(struct DC_motor *mL, struct DC_motor *mR);
 [v _turn_right_135 `(v ~T0 @X0 0 ef2`*S2017`*S2017 ]
+"34 ./color.h
+[; ;./color.h: 34: char invert_action(char input_action);
+[v _invert_action `(uc ~T0 @X0 0 ef1`uc ]
 "121 C:\Program Files\Microchip\xc8\v2.45\pic\include\c99\stdio.h
 [; ;C:\Program Files\Microchip\xc8\v2.45\pic\include\c99\stdio.h: 121: int sprintf(char *restrict, const char *restrict, ...);
 [v _sprintf `(i ~T0 @X0 0 e1v`*uc`*Cuc ]
 "26 ./serial.h
 [; ;./serial.h: 26: void sendStringSerial4(char *string);
 [v _sendStringSerial4 `(v ~T0 @X0 0 ef1`*uc ]
-"34 ./color.h
-[; ;./color.h: 34: char invert_action(char input_action);
-[v _invert_action `(uc ~T0 @X0 0 ef1`uc ]
 "2 main.c
 [p x FEXTOSC  =  HS      ]
 "3
@@ -2355,499 +2343,506 @@ Version 4.0 HI-TECH Software Intermediate Code
 "105
 [; ;main.c: 105:     lum_threshold = lum + 10;
 [e = _lum_threshold + _lum -> -> 10 `i `ui ]
-"218
-[; ;main.c: 218:     while(1){
+"107
+[; ;main.c: 107:     unsigned int lost_detection = 0;
+[v _lost_detection `ui ~T0 @X0 1 a ]
+[e = _lost_detection -> -> 0 `i `ui ]
+"119
+[; ;main.c: 119:     while(1){
 [e :U 2020 ]
 {
-"219
-[; ;main.c: 219:         if(!going_forward){
+"120
+[; ;main.c: 120:         if(!going_forward){
 [e $ ! ! != -> _going_forward `i -> 0 `i 2022  ]
 {
-"222
-[; ;main.c: 222:             resetTimer0();
+"123
+[; ;main.c: 123:             resetTimer0();
 [e ( _resetTimer0 ..  ]
-"223
-[; ;main.c: 223:             fullSpeedAhead(pmL, pmR);
+"124
+[; ;main.c: 124:             fullSpeedAhead(pmL, pmR);
 [e ( _fullSpeedAhead (2 , _pmL _pmR ]
-"224
-[; ;main.c: 224:             going_forward = 1;
+"125
+[; ;main.c: 125:             going_forward = 1;
 [e = _going_forward -> -> 1 `i `a ]
-"225
-[; ;main.c: 225:         }
+"126
+[; ;main.c: 126:         }
 }
 [e :U 2022 ]
-"227
-[; ;main.c: 227:         lum = color_read_Clear();
+"128
+[; ;main.c: 128:         lum = color_read_Clear();
 [e = _lum ( _color_read_Clear ..  ]
-"229
-[; ;main.c: 229:         if (lum > lum_threshold){
+"130
+[; ;main.c: 130:         if (lum > lum_threshold){
 [e $ ! > _lum _lum_threshold 2023  ]
 {
-"231
-[; ;main.c: 231:             measured_time = get16bitTMR0val();
+"132
+[; ;main.c: 132:             measured_time = get16bitTMR0val();
 [e = _measured_time ( _get16bitTMR0val ..  ]
-"232
-[; ;main.c: 232:             stop(pmL, pmR);
+"133
+[; ;main.c: 133:             stop(pmL, pmR);
 [e ( _stop (2 , _pmL _pmR ]
-"233
-[; ;main.c: 233:             _delay((unsigned long)((250)*(64000000/4000.0)));
+"134
+[; ;main.c: 134:             _delay((unsigned long)((250)*(64000000/4000.0)));
 [e ( __delay (1 -> * -> -> 250 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-"236
-[; ;main.c: 236:             while(1){
+"137
+[; ;main.c: 137:             while(1){
 [e :U 2025 ]
 {
-"237
-[; ;main.c: 237:                 lum = color_read_Clear();
+"138
+[; ;main.c: 138:                 lum = color_read_Clear();
 [e = _lum ( _color_read_Clear ..  ]
-"238
-[; ;main.c: 238:                 if(lum < 80){
+"139
+[; ;main.c: 139:                 if(lum < 80){
 [e $ ! < _lum -> -> 80 `i `ui 2027  ]
 {
-"239
-[; ;main.c: 239:                 inch_forward(pmL, pmR);
+"140
+[; ;main.c: 140:                     inch_forward(pmL, pmR);
 [e ( _inch_forward (2 , _pmL _pmR ]
-"240
-[; ;main.c: 240:                 _delay((unsigned long)((100)*(64000000/4000.0)));
+"141
+[; ;main.c: 141:                     lost_detection += 1;
+[e =+ _lost_detection -> -> 1 `i `ui ]
+"142
+[; ;main.c: 142:                     _delay((unsigned long)((100)*(64000000/4000.0)));
 [e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-"241
-[; ;main.c: 241:                 }
+"144
+[; ;main.c: 144:                 }
 }
 [e $U 2028  ]
-"242
-[; ;main.c: 242:                 else{
+"145
+[; ;main.c: 145:                 else{
 [e :U 2027 ]
 {
-"243
-[; ;main.c: 243:                     break;
+"146
+[; ;main.c: 146:                     break;
 [e $U 2026  ]
-"244
-[; ;main.c: 244:                 }
+"148
+[; ;main.c: 148:                 }
 }
 [e :U 2028 ]
-"245
-[; ;main.c: 245:             }
+"149
+[; ;main.c: 149:                 if(lost_detection > 15){
+[e $ ! > _lost_detection -> -> 15 `i `ui 2029  ]
+{
+"150
+[; ;main.c: 150:                     action_to_do = 7;
+[e = _action_to_do -> 7 `i ]
+"151
+[; ;main.c: 151:                     break;
+[e $U 2026  ]
+"152
+[; ;main.c: 152:                 }
+}
+[e :U 2029 ]
+"153
+[; ;main.c: 153:             }
 }
 [e :U 2024 ]
 [e $U 2025  ]
 [e :U 2026 ]
-"248
-[; ;main.c: 248:             going_forward = 0;
+"155
+[; ;main.c: 155:             going_forward = 0;
 [e = _going_forward -> -> 0 `i `a ]
-"251
-[; ;main.c: 251:             timings[actions_completed] = measured_time;
+"156
+[; ;main.c: 156:             timings[actions_completed] = measured_time;
 [e = *U + &U _timings * -> -> _actions_completed `ui `ux -> -> # *U &U _timings `ui `ux _measured_time ]
-"254
-[; ;main.c: 254:             color_writetoaddr(0x01, 0xD5);
-[e ( _color_writetoaddr (2 , -> -> 1 `i `uc -> -> 213 `i `uc ]
-"255
-[; ;main.c: 255:             color_writetoaddr(0x03, 0xAB);
-[e ( _color_writetoaddr (2 , -> -> 3 `i `uc -> -> 171 `i `uc ]
-"256
-[; ;main.c: 256:             _delay((unsigned long)((200)*(64000000/4000.0)));
-[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-"258
-[; ;main.c: 258:             redm = color_read_Red();
-[e = _redm ( _color_read_Red ..  ]
-"259
-[; ;main.c: 259:             greenm = color_read_Green();
-[e = _greenm ( _color_read_Green ..  ]
-"260
-[; ;main.c: 260:             bluem = color_read_Blue();
-[e = _bluem ( _color_read_Blue ..  ]
-"262
-[; ;main.c: 262:             action_to_do = decide_action(redm, greenm, bluem);
-[e = _action_to_do -> ( _decide_action (3 , , _redm _greenm _bluem `i ]
-"265
-[; ;main.c: 265:             actions[actions_completed] = action_to_do;
-[e = *U + &U _actions * -> -> _actions_completed `ui `ux -> -> # *U &U _actions `ui `ux _action_to_do ]
-"266
-[; ;main.c: 266:             actions_completed += 1;
-[e =+ _actions_completed -> 1 `i ]
-"269
-[; ;main.c: 269:             if(action_to_do == 0){
-[e $ ! == _action_to_do -> 0 `i 2029  ]
+"159
+[; ;main.c: 159:             if(action_to_do != 7){
+[e $ ! != _action_to_do -> 7 `i 2030  ]
 {
-"270
-[; ;main.c: 270:                 reverse_after_read(pmL, pmR);
-[e ( _reverse_after_read (2 , _pmL _pmR ]
-"271
-[; ;main.c: 271:                 turn_right_90(pmL, pmR);
-[e ( _turn_right_90 (2 , _pmL _pmR ]
-"272
-[; ;main.c: 272:             }
+"160
+[; ;main.c: 160:                 action_to_do = decide_action();
+[e = _action_to_do -> ( _decide_action ..  `i ]
+"161
+[; ;main.c: 161:                 lost_detection = 0;
+[e = _lost_detection -> -> 0 `i `ui ]
+"162
+[; ;main.c: 162:             }
 }
-[e $U 2030  ]
-"273
-[; ;main.c: 273:             else if(action_to_do == 1){
-[e :U 2029 ]
-[e $ ! == _action_to_do -> 1 `i 2031  ]
+[e :U 2030 ]
+"164
+[; ;main.c: 164:             actions[actions_completed] = action_to_do;
+[e = *U + &U _actions * -> -> _actions_completed `ui `ux -> -> # *U &U _actions `ui `ux _action_to_do ]
+"165
+[; ;main.c: 165:             actions_completed += 1;
+[e =+ _actions_completed -> 1 `i ]
+"168
+[; ;main.c: 168:             if(action_to_do == 0){
+[e $ ! == _action_to_do -> 0 `i 2031  ]
 {
-"274
-[; ;main.c: 274:                 reverse_after_read(pmL, pmR);
+"169
+[; ;main.c: 169:                 reverse_after_read(pmL, pmR);
 [e ( _reverse_after_read (2 , _pmL _pmR ]
-"275
-[; ;main.c: 275:                 turn_left_90(pmL, pmR);
-[e ( _turn_left_90 (2 , _pmL _pmR ]
-"276
-[; ;main.c: 276:             }
+"170
+[; ;main.c: 170:                 turn_right_90(pmL, pmR);
+[e ( _turn_right_90 (2 , _pmL _pmR ]
+"171
+[; ;main.c: 171:             }
 }
 [e $U 2032  ]
-"277
-[; ;main.c: 277:             else if(action_to_do == 2){
+"172
+[; ;main.c: 172:             else if(action_to_do == 1){
 [e :U 2031 ]
-[e $ ! == _action_to_do -> 2 `i 2033  ]
+[e $ ! == _action_to_do -> 1 `i 2033  ]
 {
-"278
-[; ;main.c: 278:                 reverse_after_read(pmL, pmR);
+"173
+[; ;main.c: 173:                 reverse_after_read(pmL, pmR);
 [e ( _reverse_after_read (2 , _pmL _pmR ]
-"279
-[; ;main.c: 279:                 turn_right_90(pmL, pmR);
-[e ( _turn_right_90 (2 , _pmL _pmR ]
-"280
-[; ;main.c: 280:                 turn_right_90(pmL, pmR);
-[e ( _turn_right_90 (2 , _pmL _pmR ]
-"281
-[; ;main.c: 281:             }
+"174
+[; ;main.c: 174:                 turn_left_90(pmL, pmR);
+[e ( _turn_left_90 (2 , _pmL _pmR ]
+"175
+[; ;main.c: 175:             }
 }
 [e $U 2034  ]
-"282
-[; ;main.c: 282:             else if(action_to_do == 3){
+"176
+[; ;main.c: 176:             else if(action_to_do == 2){
 [e :U 2033 ]
-[e $ ! == _action_to_do -> 3 `i 2035  ]
+[e $ ! == _action_to_do -> 2 `i 2035  ]
 {
-"283
-[; ;main.c: 283:                 reverse_after_read(pmL, pmR);
+"177
+[; ;main.c: 177:                 reverse_after_read(pmL, pmR);
 [e ( _reverse_after_read (2 , _pmL _pmR ]
-"284
-[; ;main.c: 284:                 reverse_one_square(pmL, pmR);
-[e ( _reverse_one_square (2 , _pmL _pmR ]
-"285
-[; ;main.c: 285:                 turn_right_90(pmL, pmR);
+"178
+[; ;main.c: 178:                 turn_right_90(pmL, pmR);
 [e ( _turn_right_90 (2 , _pmL _pmR ]
-"286
-[; ;main.c: 286:             }
+"179
+[; ;main.c: 179:                 turn_right_90(pmL, pmR);
+[e ( _turn_right_90 (2 , _pmL _pmR ]
+"180
+[; ;main.c: 180:             }
 }
 [e $U 2036  ]
-"287
-[; ;main.c: 287:             else if(action_to_do == 4){
+"181
+[; ;main.c: 181:             else if(action_to_do == 3){
 [e :U 2035 ]
-[e $ ! == _action_to_do -> 4 `i 2037  ]
+[e $ ! == _action_to_do -> 3 `i 2037  ]
 {
-"288
-[; ;main.c: 288:                 reverse_after_read(pmL, pmR);
+"182
+[; ;main.c: 182:                 reverse_after_read(pmL, pmR);
 [e ( _reverse_after_read (2 , _pmL _pmR ]
-"289
-[; ;main.c: 289:                 reverse_one_square(pmL, pmR);
+"183
+[; ;main.c: 183:                 reverse_one_square(pmL, pmR);
 [e ( _reverse_one_square (2 , _pmL _pmR ]
-"290
-[; ;main.c: 290:                 turn_left_90(pmL, pmR);
-[e ( _turn_left_90 (2 , _pmL _pmR ]
-"291
-[; ;main.c: 291:             }
+"184
+[; ;main.c: 184:                 turn_right_90(pmL, pmR);
+[e ( _turn_right_90 (2 , _pmL _pmR ]
+"185
+[; ;main.c: 185:             }
 }
 [e $U 2038  ]
-"292
-[; ;main.c: 292:             else if(action_to_do == 5){
+"186
+[; ;main.c: 186:             else if(action_to_do == 4){
 [e :U 2037 ]
-[e $ ! == _action_to_do -> 5 `i 2039  ]
+[e $ ! == _action_to_do -> 4 `i 2039  ]
 {
-"293
-[; ;main.c: 293:                 reverse_after_read(pmL, pmR);
+"187
+[; ;main.c: 187:                 reverse_after_read(pmL, pmR);
 [e ( _reverse_after_read (2 , _pmL _pmR ]
-"294
-[; ;main.c: 294:                 turn_left_135(pmL, pmR);
-[e ( _turn_left_135 (2 , _pmL _pmR ]
-"295
-[; ;main.c: 295:             }
+"188
+[; ;main.c: 188:                 reverse_one_square(pmL, pmR);
+[e ( _reverse_one_square (2 , _pmL _pmR ]
+"189
+[; ;main.c: 189:                 turn_left_90(pmL, pmR);
+[e ( _turn_left_90 (2 , _pmL _pmR ]
+"190
+[; ;main.c: 190:             }
 }
 [e $U 2040  ]
-"296
-[; ;main.c: 296:             else if(action_to_do == 6){
+"191
+[; ;main.c: 191:             else if(action_to_do == 5){
 [e :U 2039 ]
-[e $ ! == _action_to_do -> 6 `i 2041  ]
+[e $ ! == _action_to_do -> 5 `i 2041  ]
 {
-"297
-[; ;main.c: 297:                 reverse_after_read(pmL, pmR);
+"192
+[; ;main.c: 192:                 reverse_after_read(pmL, pmR);
 [e ( _reverse_after_read (2 , _pmL _pmR ]
-"298
-[; ;main.c: 298:                 turn_right_135(pmL, pmR);
-[e ( _turn_right_135 (2 , _pmL _pmR ]
-"299
-[; ;main.c: 299:             }
+"193
+[; ;main.c: 193:                 turn_left_135(pmL, pmR);
+[e ( _turn_left_135 (2 , _pmL _pmR ]
+"194
+[; ;main.c: 194:             }
 }
 [e $U 2042  ]
-"302
-[; ;main.c: 302:             else if(action_to_do == 7){
+"195
+[; ;main.c: 195:             else if(action_to_do == 6){
 [e :U 2041 ]
-[e $ ! == _action_to_do -> 7 `i 2043  ]
+[e $ ! == _action_to_do -> 6 `i 2043  ]
 {
-"303
-[; ;main.c: 303:                 reverse_after_read(pmL, pmR);
+"196
+[; ;main.c: 196:                 reverse_after_read(pmL, pmR);
 [e ( _reverse_after_read (2 , _pmL _pmR ]
-"304
-[; ;main.c: 304:                 turn_right_90(pmL, pmR);
-[e ( _turn_right_90 (2 , _pmL _pmR ]
-"305
-[; ;main.c: 305:                 _delay((unsigned long)((250)*(64000000/4000.0)));
-[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-"306
-[; ;main.c: 306:                 turn_right_90(pmL, pmR);
-[e ( _turn_right_90 (2 , _pmL _pmR ]
-"307
-[; ;main.c: 307:                 break;
-[e $U 2021  ]
-"308
-[; ;main.c: 308:             }
+"197
+[; ;main.c: 197:                 turn_right_135(pmL, pmR);
+[e ( _turn_right_135 (2 , _pmL _pmR ]
+"198
+[; ;main.c: 198:             }
 }
+[e $U 2044  ]
+"201
+[; ;main.c: 201:             else if(action_to_do == 7){
 [e :U 2043 ]
+[e $ ! == _action_to_do -> 7 `i 2045  ]
+{
+"202
+[; ;main.c: 202:                 reverse_after_read(pmL, pmR);
+[e ( _reverse_after_read (2 , _pmL _pmR ]
+"203
+[; ;main.c: 203:                 turn_right_90(pmL, pmR);
+[e ( _turn_right_90 (2 , _pmL _pmR ]
+"204
+[; ;main.c: 204:                 _delay((unsigned long)((250)*(64000000/4000.0)));
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+"205
+[; ;main.c: 205:                 turn_right_90(pmL, pmR);
+[e ( _turn_right_90 (2 , _pmL _pmR ]
+"206
+[; ;main.c: 206:                 break;
+[e $U 2021  ]
+"207
+[; ;main.c: 207:             }
+}
+[e :U 2045 ]
+[e :U 2044 ]
 [e :U 2042 ]
 [e :U 2040 ]
 [e :U 2038 ]
 [e :U 2036 ]
 [e :U 2034 ]
 [e :U 2032 ]
-[e :U 2030 ]
-"309
-[; ;main.c: 309:             _delay((unsigned long)((250)*(64000000/4000.0)));
+"208
+[; ;main.c: 208:             _delay((unsigned long)((250)*(64000000/4000.0)));
 [e ( __delay (1 -> * -> -> 250 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-"311
-[; ;main.c: 311:             sprintf(clear_val,"action = %d \r\n",action_to_do);
-[e ( _sprintf (1 , (. , &U _clear_val :s 1C _action_to_do ]
-"312
-[; ;main.c: 312:             sendStringSerial4(pclear_val);
-[e ( _sendStringSerial4 (1 _pclear_val ]
-"313
-[; ;main.c: 313:         _delay((unsigned long)((5)*(64000000/4000.0)));
+"209
+[; ;main.c: 209:         _delay((unsigned long)((5)*(64000000/4000.0)));
 [e ( __delay (1 -> * -> -> 5 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-"314
-[; ;main.c: 314:         }
+"210
+[; ;main.c: 210:         }
 }
 [e :U 2023 ]
-"315
-[; ;main.c: 315:     }
+"211
+[; ;main.c: 211:     }
 }
 [e :U 2019 ]
 [e $U 2020  ]
 [e :U 2021 ]
-"321
-[; ;main.c: 321:     actions_completed -= 1;
+"217
+[; ;main.c: 217:     actions_completed -= 1;
 [e =- _actions_completed -> 1 `i ]
-"324
-[; ;main.c: 324:     going_forward = 0;
+"220
+[; ;main.c: 220:     going_forward = 0;
 [e = _going_forward -> -> 0 `i `a ]
-"327
-[; ;main.c: 327:     for(char i = 0; i < 20; i +=1){
+"223
+[; ;main.c: 223:     for(char i = 0; i < 20; i +=1){
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 20 `i 2044  ]
-[e $U 2045  ]
-[e :U 2044 ]
+[e $ < -> _i `i -> 20 `i 2046  ]
+[e $U 2047  ]
+[e :U 2046 ]
 {
-"328
-[; ;main.c: 328:         timings[i] -= 135;
+"224
+[; ;main.c: 224:         timings[i] -= 135;
 [e =- *U + &U _timings * -> _i `ux -> -> # *U &U _timings `ui `ux -> -> 135 `i `ui ]
-"329
-[; ;main.c: 329:         if(i > 7){
-[e $ ! > -> _i `i -> 7 `i 2047  ]
+"225
+[; ;main.c: 225:         if(i > 7){
+[e $ ! > -> _i `i -> 7 `i 2049  ]
 {
-"330
-[; ;main.c: 330:               timings[i] -= 250;
-[e =- *U + &U _timings * -> _i `ux -> -> # *U &U _timings `ui `ux -> -> 250 `i `ui ]
-"331
-[; ;main.c: 331:         }
+"226
+[; ;main.c: 226:               timings[i] -= 280;
+[e =- *U + &U _timings * -> _i `ux -> -> # *U &U _timings `ui `ux -> -> 280 `i `ui ]
+"227
+[; ;main.c: 227:         }
 }
-[e :U 2047 ]
-"332
-[; ;main.c: 332:     }
+[e :U 2049 ]
+"228
+[; ;main.c: 228:     }
 }
 [e =+ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 20 `i 2044  ]
-[e :U 2045 ]
+[e $ < -> _i `i -> 20 `i 2046  ]
+[e :U 2047 ]
 }
-"336
-[; ;main.c: 336:     while(actions_completed >= 0){
-[e $U 2048  ]
-[e :U 2049 ]
-{
-"337
-[; ;main.c: 337:         if(!going_forward){
-[e $ ! ! != -> _going_forward `i -> 0 `i 2051  ]
-{
-"338
-[; ;main.c: 338:             resetTimer0();
-[e ( _resetTimer0 ..  ]
-"339
-[; ;main.c: 339:             fullSpeedAhead(pmL, pmR);
-[e ( _fullSpeedAhead (2 , _pmL _pmR ]
-"340
-[; ;main.c: 340:             going_forward = 1;
-[e = _going_forward -> -> 1 `i `a ]
-"341
-[; ;main.c: 341:         }
-}
+"232
+[; ;main.c: 232:     while(actions_completed >= 0){
+[e $U 2050  ]
 [e :U 2051 ]
-"343
-[; ;main.c: 343:         measured_time = get16bitTMR0val();
-[e = _measured_time ( _get16bitTMR0val ..  ]
-"344
-[; ;main.c: 344:         if(measured_time > timings[actions_completed]){
-[e $ ! > _measured_time *U + &U _timings * -> -> _actions_completed `ui `ux -> -> # *U &U _timings `ui `ux 2052  ]
 {
-"345
-[; ;main.c: 345:             stop(pmL, pmR);
-[e ( _stop (2 , _pmL _pmR ]
-"346
-[; ;main.c: 346:             going_forward = 0;
-[e = _going_forward -> -> 0 `i `a ]
-"347
-[; ;main.c: 347:             action_to_do = invert_action(actions[actions_completed - 1]);
-[e = _action_to_do -> ( _invert_action (1 -> *U + &U _actions * -> -> - _actions_completed -> 1 `i `ui `ux -> -> # *U &U _actions `ui `ux `uc `i ]
-"349
-[; ;main.c: 349:             if(action_to_do == 0){
-[e $ ! == _action_to_do -> 0 `i 2053  ]
+"233
+[; ;main.c: 233:         if(!going_forward){
+[e $ ! ! != -> _going_forward `i -> 0 `i 2053  ]
 {
-"350
-[; ;main.c: 350:                 turn_right_90(pmL, pmR);
-[e ( _turn_right_90 (2 , _pmL _pmR ]
-"351
-[; ;main.c: 351:             }
+"234
+[; ;main.c: 234:             resetTimer0();
+[e ( _resetTimer0 ..  ]
+"235
+[; ;main.c: 235:             fullSpeedAhead(pmL, pmR);
+[e ( _fullSpeedAhead (2 , _pmL _pmR ]
+"236
+[; ;main.c: 236:             going_forward = 1;
+[e = _going_forward -> -> 1 `i `a ]
+"237
+[; ;main.c: 237:         }
 }
-[e $U 2054  ]
-"352
-[; ;main.c: 352:             else if(action_to_do == 1){
 [e :U 2053 ]
-[e $ ! == _action_to_do -> 1 `i 2055  ]
+"239
+[; ;main.c: 239:         measured_time = get16bitTMR0val();
+[e = _measured_time ( _get16bitTMR0val ..  ]
+"240
+[; ;main.c: 240:         if(measured_time > timings[actions_completed]){
+[e $ ! > _measured_time *U + &U _timings * -> -> _actions_completed `ui `ux -> -> # *U &U _timings `ui `ux 2054  ]
 {
-"353
-[; ;main.c: 353:                 turn_left_90(pmL, pmR);
-[e ( _turn_left_90 (2 , _pmL _pmR ]
-"354
-[; ;main.c: 354:             }
+"241
+[; ;main.c: 241:             stop(pmL, pmR);
+[e ( _stop (2 , _pmL _pmR ]
+"242
+[; ;main.c: 242:             going_forward = 0;
+[e = _going_forward -> -> 0 `i `a ]
+"243
+[; ;main.c: 243:             action_to_do = invert_action(actions[actions_completed - 1]);
+[e = _action_to_do -> ( _invert_action (1 -> *U + &U _actions * -> -> - _actions_completed -> 1 `i `ui `ux -> -> # *U &U _actions `ui `ux `uc `i ]
+"245
+[; ;main.c: 245:             if(action_to_do == 0){
+[e $ ! == _action_to_do -> 0 `i 2055  ]
+{
+"246
+[; ;main.c: 246:                 turn_right_90(pmL, pmR);
+[e ( _turn_right_90 (2 , _pmL _pmR ]
+"247
+[; ;main.c: 247:             }
 }
 [e $U 2056  ]
-"355
-[; ;main.c: 355:             else if(action_to_do == 2){
+"248
+[; ;main.c: 248:             else if(action_to_do == 1){
 [e :U 2055 ]
-[e $ ! == _action_to_do -> 2 `i 2057  ]
+[e $ ! == _action_to_do -> 1 `i 2057  ]
 {
-"356
-[; ;main.c: 356:                 turn_right_90(pmL, pmR);
-[e ( _turn_right_90 (2 , _pmL _pmR ]
-"357
-[; ;main.c: 357:                 _delay((unsigned long)((250)*(64000000/4000.0)));
-[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-"358
-[; ;main.c: 358:                 turn_right_90(pmL, pmR);
-[e ( _turn_right_90 (2 , _pmL _pmR ]
-"359
-[; ;main.c: 359:             }
+"249
+[; ;main.c: 249:                 turn_left_90(pmL, pmR);
+[e ( _turn_left_90 (2 , _pmL _pmR ]
+"250
+[; ;main.c: 250:             }
 }
 [e $U 2058  ]
-"360
-[; ;main.c: 360:             else if(action_to_do == 5){
+"251
+[; ;main.c: 251:             else if(action_to_do == 2){
 [e :U 2057 ]
-[e $ ! == _action_to_do -> 5 `i 2059  ]
+[e $ ! == _action_to_do -> 2 `i 2059  ]
 {
-"361
-[; ;main.c: 361:                 turn_right_135(pmL, pmR);
-[e ( _turn_right_135 (2 , _pmL _pmR ]
-"362
-[; ;main.c: 362:             }
+"252
+[; ;main.c: 252:                 turn_right_90(pmL, pmR);
+[e ( _turn_right_90 (2 , _pmL _pmR ]
+"253
+[; ;main.c: 253:                 _delay((unsigned long)((250)*(64000000/4000.0)));
+[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+"254
+[; ;main.c: 254:                 turn_right_90(pmL, pmR);
+[e ( _turn_right_90 (2 , _pmL _pmR ]
+"255
+[; ;main.c: 255:             }
 }
 [e $U 2060  ]
-"363
-[; ;main.c: 363:             else if(action_to_do == 6){
+"256
+[; ;main.c: 256:             else if(action_to_do == 5){
 [e :U 2059 ]
-[e $ ! == _action_to_do -> 6 `i 2061  ]
+[e $ ! == _action_to_do -> 5 `i 2061  ]
 {
-"364
-[; ;main.c: 364:                 turn_left_135(pmL, pmR);
-[e ( _turn_left_135 (2 , _pmL _pmR ]
-"365
-[; ;main.c: 365:             }
+"257
+[; ;main.c: 257:                 turn_right_135(pmL, pmR);
+[e ( _turn_right_135 (2 , _pmL _pmR ]
+"258
+[; ;main.c: 258:             }
 }
 [e $U 2062  ]
-"366
-[; ;main.c: 366:             else if(action_to_do == 8){
+"259
+[; ;main.c: 259:             else if(action_to_do == 6){
 [e :U 2061 ]
-[e $ ! == _action_to_do -> 8 `i 2063  ]
+[e $ ! == _action_to_do -> 6 `i 2063  ]
 {
-"367
-[; ;main.c: 367:                 turn_left_90;
-[e &U _turn_left_90 ]
-"368
-[; ;main.c: 368:             }
+"260
+[; ;main.c: 260:                 turn_left_135(pmL, pmR);
+[e ( _turn_left_135 (2 , _pmL _pmR ]
+"261
+[; ;main.c: 261:             }
 }
 [e $U 2064  ]
-"369
-[; ;main.c: 369:             else if(action_to_do == 9){
+"262
+[; ;main.c: 262:             else if(action_to_do == 8){
 [e :U 2063 ]
-[e $ ! == _action_to_do -> 9 `i 2065  ]
+[e $ ! == _action_to_do -> 8 `i 2065  ]
 {
-"370
-[; ;main.c: 370:                 turn_right_90;
-[e &U _turn_right_90 ]
-"371
-[; ;main.c: 371:             }
+"263
+[; ;main.c: 263:                 turn_left_90(pmL, pmR);
+[e ( _turn_left_90 (2 , _pmL _pmR ]
+"264
+[; ;main.c: 264:             }
 }
+[e $U 2066  ]
+"265
+[; ;main.c: 265:             else if(action_to_do == 9){
 [e :U 2065 ]
+[e $ ! == _action_to_do -> 9 `i 2067  ]
+{
+"266
+[; ;main.c: 266:                 turn_right_90(pmL, pmR);
+[e ( _turn_right_90 (2 , _pmL _pmR ]
+"267
+[; ;main.c: 267:             }
+}
+[e :U 2067 ]
+[e :U 2066 ]
 [e :U 2064 ]
 [e :U 2062 ]
 [e :U 2060 ]
 [e :U 2058 ]
 [e :U 2056 ]
-[e :U 2054 ]
-"372
-[; ;main.c: 372:             _delay((unsigned long)((250)*(64000000/4000.0)));
+"268
+[; ;main.c: 268:             _delay((unsigned long)((250)*(64000000/4000.0)));
 [e ( __delay (1 -> * -> -> 250 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-"374
-[; ;main.c: 374:             sprintf(clear_val,"action = %d \r\n",action_to_do);
-[e ( _sprintf (1 , (. , &U _clear_val :s 2C _action_to_do ]
-"375
-[; ;main.c: 375:             sendStringSerial4(pclear_val);
+"270
+[; ;main.c: 270:             sprintf(clear_val,"action = %d \r\n",action_to_do);
+[e ( _sprintf (1 , (. , &U _clear_val :s 1C _action_to_do ]
+"271
+[; ;main.c: 271:             sendStringSerial4(pclear_val);
 [e ( _sendStringSerial4 (1 _pclear_val ]
-"376
-[; ;main.c: 376:         actions_completed -=1 ;
+"272
+[; ;main.c: 272:         actions_completed -=1 ;
 [e =- _actions_completed -> 1 `i ]
-"377
-[; ;main.c: 377:         }
+"273
+[; ;main.c: 273:         }
 }
-[e :U 2052 ]
-"378
-[; ;main.c: 378:     _delay((unsigned long)((10)*(64000000/4000.0)));
+[e :U 2054 ]
+"274
+[; ;main.c: 274:     _delay((unsigned long)((10)*(64000000/4000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-"379
-[; ;main.c: 379:     }
+"275
+[; ;main.c: 275:     }
 }
-[e :U 2048 ]
-"336
-[; ;main.c: 336:     while(actions_completed >= 0){
-[e $ >= _actions_completed -> 0 `i 2049  ]
 [e :U 2050 ]
-"380
-[; ;main.c: 380:     stop(pmL, pmR);
+"232
+[; ;main.c: 232:     while(actions_completed >= 0){
+[e $ >= _actions_completed -> 0 `i 2051  ]
+[e :U 2052 ]
+"276
+[; ;main.c: 276:     stop(pmL, pmR);
 [e ( _stop (2 , _pmL _pmR ]
-"381
-[; ;main.c: 381:     while(1){
-[e :U 2067 ]
+"277
+[; ;main.c: 277:     while(1){
+[e :U 2069 ]
 {
-"382
-[; ;main.c: 382:         LATHbits.LATH3 = !LATHbits.LATH3;
+"278
+[; ;main.c: 278:         LATHbits.LATH3 = !LATHbits.LATH3;
 [e = . . _LATHbits 0 3 -> -> ! != -> . . _LATHbits 0 3 `i -> 0 `i `i `uc ]
-"383
-[; ;main.c: 383:         _delay((unsigned long)((500)*(64000000/4000.0)));
+"279
+[; ;main.c: 279:         _delay((unsigned long)((500)*(64000000/4000.0)));
 [e ( __delay (1 -> * -> -> 500 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-"384
-[; ;main.c: 384:     }
+"280
+[; ;main.c: 280:     }
 }
-[e :U 2066 ]
-[e $U 2067  ]
 [e :U 2068 ]
-"385
-[; ;main.c: 385: }
+[e $U 2069  ]
+[e :U 2070 ]
+"281
+[; ;main.c: 281: }
 [e :UE 2018 ]
 }
 [p f _sprintf 8388736 ]
 [a 1C 97 99 116 105 111 110 32 61 32 37 100 32 13 10 0 ]
-[a 2C 97 99 116 105 111 110 32 61 32 37 100 32 13 10 0 ]

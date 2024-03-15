@@ -24328,8 +24328,8 @@ void reverse_after_read(struct DC_motor *mL, struct DC_motor *mR){
 }
 
 void reverse_one_square(struct DC_motor *mL, struct DC_motor *mR){
-    mL->direction = 0;
-    mR->direction = 0;
+    mL->direction = 1;
+    mR->direction = 1;
 
     while ((mL->power) < 70 || (mR->power) < 70){
         if ((mL->power) < 70) (mL->power) += 1;
@@ -24339,7 +24339,7 @@ void reverse_one_square(struct DC_motor *mL, struct DC_motor *mR){
         setMotorPWM(mR);
         _delay((unsigned long)((1)*(64000000/4000.0)));
     }
-    _delay((unsigned long)((500)*(64000000/4000.0)));
+    _delay((unsigned long)((750)*(64000000/4000.0)));
     stop(mL, mR);
     _delay((unsigned long)((250)*(64000000/4000.0)));
 }

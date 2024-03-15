@@ -104,113 +104,14 @@ void main(void){
     lum = color_read_Clear();
     lum_threshold = lum + 10;
     
-    //----------------- testing stopping & color readings --------------------
-    // test loop for turning calibration
+    unsigned int lost_detection = 0; //count to detect a black wall
     
+    //----------------- TEST LOOP  --------------------
     /*
     while(1){
-        sprintf(clear_val,"volt = %d \r\n",ADC_getval());
-        sendStringSerial4(pclear_val);
-        __delay_ms(1000);
-    }
-    */
-    
-    /*
-    while(1){
-        turn_left_90(pmL, pmR);
-        __delay_ms(3000);
-    }
-    */
-    
-    /*
-    while(1){
-        color_writetoaddr(0x01, 0xFF); //set integration time
-        color_writetoaddr(0x03, 0xFF); //set wait time (WTIME)
-        __delay_ms(200);//let sensor adjust settings
-        
         sprintf(clear_val,"clear = %d \r\n",color_read_Clear());
         sendStringSerial4(pclear_val);
-        
-        color_writetoaddr(0x01, 0xD5); //set integration time
-        color_writetoaddr(0x03, 0xAB); //set wait time (WTIME)
-        __delay_ms(200); //let sensor settle
-        
-        redm = color_read_Red();
-        greenm = color_read_Green();
-        bluem = color_read_Blue();
-            
-        sprintf(red_val,"red = %d \r\n",redm);
-        sendStringSerial4(pred_val);
-        sprintf(green_val,"green = %d \r\n",greenm);
-        sendStringSerial4(pgreen_val);
-        sprintf(blue_val,"blue = %d \r\n",bluem);
-        sendStringSerial4(pblue_val);
-            
-        action = decide_action(redm, greenm, bluem);
-            
-        sprintf(clear_val,"action = %d \r\n\r\n",action);
-        sendStringSerial4(pclear_val);
-        
-
         __delay_ms(3000);
-        __delay_ms(3000);
-        __delay_ms(3000);
-    }
-    //-------------- testing for color calibration ---------------
-    
-    while(1){
-        if(!going_forward){
-            // if in here : started program or just finished action.
-            // time to reset timer and start moving forward
-            resetTimer0();
-            fullSpeedAhead(pmL, pmR);
-            going_forward = true;
-        }
-        // read the clear sensor
-        lum = color_read_Clear();
-        //if above threshold you want to stop and find card color
-        if (lum > 30){
-            //stop buggy
-            measured_time = get16bitTMR0val(); //measure time going forward
-            stop(pmL, pmR);
-            //say you've stopped going forward to satisfy the if statement above later
-            going_forward = false;
-            __delay_ms(100); //wait for buggy to stop
-            
-            // sprintf(red_val,"action = %d \r\n",decide_action());
-            // sendStringSerial4(pred_val);
-            
-
-            //this gets your action (but make sure you declare red, green, blue, action)
-            color_writetoaddr(0x01, 0xD5); //set integration time
-            color_writetoaddr(0x03, 0xAB); //set wait time (WTIME)
-            __delay_ms(200);//let sensor adjust settings
-            
-            redm = color_read_Red();
-            greenm = color_read_Green();
-            bluem = color_read_Blue();
-            
-            sprintf(red_val,"red = %d \r\n",redm);
-            sendStringSerial4(pred_val);
-            sprintf(green_val,"green = %d \r\n",greenm);
-            sendStringSerial4(pgreen_val);
-            sprintf(blue_val,"bluee = %d \r\n",bluem);
-            sendStringSerial4(pblue_val);
-            
-            action = decide_action(redm, greenm, bluem);
-            
-            sprintf(clear_val,"action = %d \r\n",action);
-            sendStringSerial4(pclear_val);
-            
-            //reset sensor vals
-            color_writetoaddr(0x01, 0xFF); //set integration time
-            color_writetoaddr(0x03, 0xFF); //set wait time (WTIME)
-
-            __delay_ms(3000);
-            __delay_ms(3000);
-            __delay_ms(3000);
-            
-        }    
     }
     */
     
@@ -236,31 +137,29 @@ void main(void){
             while(1){
                 lum = color_read_Clear();
                 if(lum < 80){ //go until lum reading is at least 80
-                inch_forward(pmL, pmR);
-                __delay_ms(100);
+                    inch_forward(pmL, pmR);
+                    lost_detection += 1; //count the times we have inched forward
+                    __delay_ms(100);
+                    
                 }
                 else{
                     break;
+                
+                }
+                if(lost_detection > 15){ //if we inch forward more than 10 times without reading we've hit a black wall
+                    action_to_do = 7; //initiate lost and retrace (same as white)
+                    break; //leave loop
                 }
             }
             
-            //say you've stopped going forward to satisfy the if statement above later
-            going_forward = false;
-
-            // store the measured time so we can use it later in retracing
-            timings[actions_completed] = measured_time;
-            //decide what colour it is
+            going_forward = false; //say you've stopped going forward to satisfy the if statement above later
+            timings[actions_completed] = measured_time; // store the measured time so we can use it later in retracing
             
-            color_writetoaddr(0x01, 0xD5); //set integration time
-            color_writetoaddr(0x03, 0xAB); //set wait time (WTIME)
-            __delay_ms(200);//let sensor adjust settings
-            
-            redm = color_read_Red();
-            greenm = color_read_Green();
-            bluem = color_read_Blue();
-            
-            action_to_do = decide_action(redm, greenm, bluem);
-            
+            //---------- decide what colour it is ---------
+            if(action_to_do != 7){ //if we have to retrace (lost detection) do not overwrite value
+                action_to_do = decide_action(); //otherwise detect color
+                lost_detection = 0; //now that we've read the color reset the lost_detection
+            }
             
             actions[actions_completed] = action_to_do; //store the action to do so you can use it later when retracing
             actions_completed += 1; // we have stored all data from this action. We now can increment 'actions completed'
@@ -307,9 +206,6 @@ void main(void){
                 break;
             }
             __delay_ms(250); //allow buggy to settle
-            //debugging
-            sprintf(clear_val,"action = %d \r\n",action_to_do);
-            sendStringSerial4(pclear_val);
         __delay_ms(5);
         }
     }
@@ -327,7 +223,7 @@ void main(void){
     for(char i = 0; i < 20; i +=1){ //iterate through the comparison array and find the smallest value
         timings[i] -= 135; // calibrated value
         if(i > 7){ //remove more from the actions which reversed one square
-              timings[i] -= 250; // calibrated value??
+              timings[i] -= 280; // calibrated value
         }
     }
     
@@ -364,10 +260,10 @@ void main(void){
                 turn_left_135(pmL, pmR);
             }
             else if(action_to_do == 8){
-                turn_left_90;
+                turn_left_90(pmL, pmR);
             }
             else if(action_to_do == 9){
-                turn_right_90;
+                turn_right_90(pmL, pmR);
             }
             __delay_ms(250);//allow buggy to settle
             //debugging

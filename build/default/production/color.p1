@@ -2370,77 +2370,53 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 2023 ]
 }
 "114
-[; ;color.c: 114: char decide_action(unsigned int red_unsigned, unsigned int green_unsigned, unsigned int blue_unsigned){
-[v _decide_action `(uc ~T0 @X0 1 ef3`ui`ui`ui ]
+[; ;color.c: 114: char decide_action(){
+[v _decide_action `(uc ~T0 @X0 1 ef ]
 {
 [e :U _decide_action ]
-[v _red_unsigned `ui ~T0 @X0 1 r1 ]
-[v _green_unsigned `ui ~T0 @X0 1 r2 ]
-[v _blue_unsigned `ui ~T0 @X0 1 r3 ]
 [f ]
-"117
-[; ;color.c: 117:     char clear_val[20];
-[v _clear_val `uc ~T0 @X0 -> 20 `i a ]
-"118
-[; ;color.c: 118:     char red_val[20];
-[v _red_val `uc ~T0 @X0 -> 20 `i a ]
-"119
-[; ;color.c: 119:     char green_val[20];
-[v _green_val `uc ~T0 @X0 -> 20 `i a ]
-"120
-[; ;color.c: 120:     char blue_val[20];
-[v _blue_val `uc ~T0 @X0 -> 20 `i a ]
-"121
-[; ;color.c: 121:     char *pclear_val;
-[v _pclear_val `*uc ~T0 @X0 1 a ]
-"122
-[; ;color.c: 122:     char *pred_val;
-[v _pred_val `*uc ~T0 @X0 1 a ]
-"123
-[; ;color.c: 123:     char *pblue_val;
-[v _pblue_val `*uc ~T0 @X0 1 a ]
-"124
-[; ;color.c: 124:     char *pgreen_val;
-[v _pgreen_val `*uc ~T0 @X0 1 a ]
-"125
-[; ;color.c: 125:     pclear_val = &clear_val[0];
-[e = _pclear_val &U *U + &U _clear_val * -> -> -> 0 `i `ui `ux -> -> # *U &U _clear_val `ui `ux ]
-"126
-[; ;color.c: 126:     pred_val = &red_val[0];
-[e = _pred_val &U *U + &U _red_val * -> -> -> 0 `i `ui `ux -> -> # *U &U _red_val `ui `ux ]
-"127
-[; ;color.c: 127:     pgreen_val = &green_val[0];
-[e = _pgreen_val &U *U + &U _green_val * -> -> -> 0 `i `ui `ux -> -> # *U &U _green_val `ui `ux ]
-"128
-[; ;color.c: 128:     pblue_val = &blue_val[0];
-[e = _pblue_val &U *U + &U _blue_val * -> -> -> 0 `i `ui `ux -> -> # *U &U _blue_val `ui `ux ]
-"130
-[; ;color.c: 130:     float red, green, blue;
+"132
+[; ;color.c: 132:     float red, green, blue;
 [v _red `f ~T0 @X0 1 a ]
 [v _green `f ~T0 @X0 1 a ]
 [v _blue `f ~T0 @X0 1 a ]
-"131
-[; ;color.c: 131:     float red_r, green_r, blue_r;
+"133
+[; ;color.c: 133:     float red_r, green_r, blue_r;
 [v _red_r `f ~T0 @X0 1 a ]
 [v _green_r `f ~T0 @X0 1 a ]
 [v _blue_r `f ~T0 @X0 1 a ]
-"132
-[; ;color.c: 132:     float rgb_comp[8];
+"134
+[; ;color.c: 134:     float rgb_comp[8];
 [v _rgb_comp `f ~T0 @X0 -> 8 `i a ]
-"133
-[; ;color.c: 133:     char action;
-[v _action `uc ~T0 @X0 1 a ]
 "135
-[; ;color.c: 135:     red = (float)red_unsigned;
-[e = _red -> _red_unsigned `f ]
-"136
-[; ;color.c: 136:     green = (float)green_unsigned;
-[e = _green -> _green_unsigned `f ]
-"137
-[; ;color.c: 137:     blue = (float)blue_unsigned;
-[e = _blue -> _blue_unsigned `f ]
+[; ;color.c: 135:     char action;
+[v _action `uc ~T0 @X0 1 a ]
+"138
+[; ;color.c: 138:     color_writetoaddr(0x01, 0xD5);
+[e ( _color_writetoaddr (2 , -> -> 1 `i `uc -> -> 213 `i `uc ]
+"139
+[; ;color.c: 139:     color_writetoaddr(0x03, 0xAB);
+[e ( _color_writetoaddr (2 , -> -> 3 `i `uc -> -> 171 `i `uc ]
 "140
-[; ;color.c: 140:     if(red < 666){red = 0;} else{red -= 699;}
+[; ;color.c: 140:     _delay((unsigned long)((200)*(64000000/4000.0)));
+[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+"142
+[; ;color.c: 142:     red = color_read_Red();
+[e = _red -> ( _color_read_Red ..  `f ]
+"143
+[; ;color.c: 143:     green = color_read_Green();
+[e = _green -> ( _color_read_Green ..  `f ]
+"144
+[; ;color.c: 144:     blue = color_read_Blue();
+[e = _blue -> ( _color_read_Blue ..  `f ]
+"147
+[; ;color.c: 147:     color_writetoaddr(0x01, 0xFF);
+[e ( _color_writetoaddr (2 , -> -> 1 `i `uc -> -> 255 `i `uc ]
+"148
+[; ;color.c: 148:     color_writetoaddr(0x03, 0xFF);
+[e ( _color_writetoaddr (2 , -> -> 3 `i `uc -> -> 255 `i `uc ]
+"151
+[; ;color.c: 151:     if(red < 666){red = 0;} else{red -= 699;}
 [e $ ! < _red -> -> 666 `i `f 2025  ]
 {
 [e = _red -> -> 0 `i `f ]
@@ -2451,8 +2427,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e =- _red -> -> 699 `i `f ]
 }
 [e :U 2026 ]
-"141
-[; ;color.c: 141:     if(green < 446){green = 0;} else{green -= 443;}
+"152
+[; ;color.c: 152:     if(green < 446){green = 0;} else{green -= 443;}
 [e $ ! < _green -> -> 446 `i `f 2027  ]
 {
 [e = _green -> -> 0 `i `f ]
@@ -2463,8 +2439,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e =- _green -> -> 443 `i `f ]
 }
 [e :U 2028 ]
-"142
-[; ;color.c: 142:     if(blue < 295){blue = 0;} else{blue -= 315;}
+"153
+[; ;color.c: 153:     if(blue < 295){blue = 0;} else{blue -= 315;}
 [e $ ! < _blue -> -> 295 `i `f 2029  ]
 {
 [e = _blue -> -> 0 `i `f ]
@@ -2475,57 +2451,57 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e =- _blue -> -> 315 `i `f ]
 }
 [e :U 2030 ]
-"144
-[; ;color.c: 144:     red = red/1621;
+"155
+[; ;color.c: 155:     red = red/1621;
 [e = _red / _red -> -> 1621 `i `f ]
-"145
-[; ;color.c: 145:     green = green/1191;
+"156
+[; ;color.c: 156:     green = green/1191;
 [e = _green / _green -> -> 1191 `i `f ]
-"146
-[; ;color.c: 146:     blue = blue/885;
+"157
+[; ;color.c: 157:     blue = blue/885;
 [e = _blue / _blue -> -> 885 `i `f ]
-"148
-[; ;color.c: 148:     float total = red + green + blue;
+"159
+[; ;color.c: 159:     float total = red + green + blue;
 [v _total `f ~T0 @X0 1 a ]
 [e = _total + + _red _green _blue ]
-"150
-[; ;color.c: 150:     red_r = red / total;
-[e = _red_r / _red _total ]
-"151
-[; ;color.c: 151:     green_r = green / total;
-[e = _green_r / _green _total ]
-"152
-[; ;color.c: 152:     blue_r = blue / total;
-[e = _blue_r / _blue _total ]
-"155
-[; ;color.c: 155:     rgb_comp[0] = sqrtf(powf((red_r - 0.747),2) + powf((green_r - 0.071),2) + powf((blue_r - 0.182),2));
-[e = *U + &U _rgb_comp * -> -> -> 0 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.747 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.071 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.182 `f -> -> 2 `i `f ]
-"156
-[; ;color.c: 156:     rgb_comp[1] = sqrtf(powf((red_r - 0.147),2) + powf((green_r - 0.489),2) + powf((blue_r - 0.363),2));
-[e = *U + &U _rgb_comp * -> -> -> 1 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.147 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.489 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.363 `f -> -> 2 `i `f ]
-"157
-[; ;color.c: 157:     rgb_comp[2] = sqrtf(powf((red_r - 0.110),2) + powf((green_r - 0.421),2) + powf((blue_r - 0.469),2));
-[e = *U + &U _rgb_comp * -> -> -> 2 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.110 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.421 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.469 `f -> -> 2 `i `f ]
-"158
-[; ;color.c: 158:     rgb_comp[3] = sqrtf(powf((red_r - 0.423),2) + powf((green_r - 0.325),2) + powf((blue_r - 0.252),2));
-[e = *U + &U _rgb_comp * -> -> -> 3 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.423 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.325 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.252 `f -> -> 2 `i `f ]
-"159
-[; ;color.c: 159:     rgb_comp[4] = sqrtf(powf((red_r - 0.431),2) + powf((green_r - 0.263),2) + powf((blue_r - 0.306),2));
-[e = *U + &U _rgb_comp * -> -> -> 4 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.431 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.263 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.306 `f -> -> 2 `i `f ]
-"160
-[; ;color.c: 160:     rgb_comp[5] = sqrtf(powf((red_r - 0.664),2) + powf((green_r - 0.137),2) + powf((blue_r - 0.198),2));
-[e = *U + &U _rgb_comp * -> -> -> 5 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.664 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.137 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.198 `f -> -> 2 `i `f ]
 "161
-[; ;color.c: 161:     rgb_comp[6] = sqrtf(powf((red_r - 0.271),2) + powf((green_r - 0.366),2) + powf((blue_r - 0.363),2));
-[e = *U + &U _rgb_comp * -> -> -> 6 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.271 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.366 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.363 `f -> -> 2 `i `f ]
+[; ;color.c: 161:     red_r = red / total;
+[e = _red_r / _red _total ]
 "162
-[; ;color.c: 162:     rgb_comp[7] = sqrtf(powf((red_r - 0.329),2) + powf((green_r - 0.335),2) + powf((blue_r - 0.335),2));
+[; ;color.c: 162:     green_r = green / total;
+[e = _green_r / _green _total ]
+"163
+[; ;color.c: 163:     blue_r = blue / total;
+[e = _blue_r / _blue _total ]
+"166
+[; ;color.c: 166:     rgb_comp[0] = sqrtf(powf((red_r - 0.747),2) + powf((green_r - 0.071),2) + powf((blue_r - 0.182),2));
+[e = *U + &U _rgb_comp * -> -> -> 0 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.747 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.071 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.182 `f -> -> 2 `i `f ]
+"167
+[; ;color.c: 167:     rgb_comp[1] = sqrtf(powf((red_r - 0.147),2) + powf((green_r - 0.489),2) + powf((blue_r - 0.363),2));
+[e = *U + &U _rgb_comp * -> -> -> 1 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.147 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.489 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.363 `f -> -> 2 `i `f ]
+"168
+[; ;color.c: 168:     rgb_comp[2] = sqrtf(powf((red_r - 0.110),2) + powf((green_r - 0.421),2) + powf((blue_r - 0.469),2));
+[e = *U + &U _rgb_comp * -> -> -> 2 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.110 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.421 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.469 `f -> -> 2 `i `f ]
+"169
+[; ;color.c: 169:     rgb_comp[3] = sqrtf(powf((red_r - 0.423),2) + powf((green_r - 0.325),2) + powf((blue_r - 0.252),2));
+[e = *U + &U _rgb_comp * -> -> -> 3 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.423 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.325 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.252 `f -> -> 2 `i `f ]
+"170
+[; ;color.c: 170:     rgb_comp[4] = sqrtf(powf((red_r - 0.431),2) + powf((green_r - 0.263),2) + powf((blue_r - 0.306),2));
+[e = *U + &U _rgb_comp * -> -> -> 4 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.431 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.263 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.306 `f -> -> 2 `i `f ]
+"171
+[; ;color.c: 171:     rgb_comp[5] = sqrtf(powf((red_r - 0.664),2) + powf((green_r - 0.137),2) + powf((blue_r - 0.198),2));
+[e = *U + &U _rgb_comp * -> -> -> 5 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.664 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.137 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.198 `f -> -> 2 `i `f ]
+"172
+[; ;color.c: 172:     rgb_comp[6] = sqrtf(powf((red_r - 0.271),2) + powf((green_r - 0.366),2) + powf((blue_r - 0.363),2));
+[e = *U + &U _rgb_comp * -> -> -> 6 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.271 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.366 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.363 `f -> -> 2 `i `f ]
+"173
+[; ;color.c: 173:     rgb_comp[7] = sqrtf(powf((red_r - 0.329),2) + powf((green_r - 0.335),2) + powf((blue_r - 0.335),2));
 [e = *U + &U _rgb_comp * -> -> -> 7 `i `ui `ux -> -> # *U &U _rgb_comp `ui `ux ( _sqrtf (1 + + ( _powf (2 , -> - -> _red_r `d .0.329 `f -> -> 2 `i `f ( _powf (2 , -> - -> _green_r `d .0.335 `f -> -> 2 `i `f ( _powf (2 , -> - -> _blue_r `d .0.335 `f -> -> 2 `i `f ]
-"164
-[; ;color.c: 164:     action = 0;
+"175
+[; ;color.c: 175:     action = 0;
 [e = _action -> -> 0 `i `uc ]
-"165
-[; ;color.c: 165:     for(char i = 0; i < 8; i +=1){
+"176
+[; ;color.c: 176:     for(char i = 0; i < 8; i +=1){
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
@@ -2533,117 +2509,111 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $U 2032  ]
 [e :U 2031 ]
 {
-"166
-[; ;color.c: 166:         if(rgb_comp[i] < rgb_comp[action]){
+"177
+[; ;color.c: 177:         if(rgb_comp[i] < rgb_comp[action]){
 [e $ ! < *U + &U _rgb_comp * -> _i `ux -> -> # *U &U _rgb_comp `ui `ux *U + &U _rgb_comp * -> _action `ux -> -> # *U &U _rgb_comp `ui `ux 2034  ]
 {
-"167
-[; ;color.c: 167:             action = i;
+"178
+[; ;color.c: 178:             action = i;
 [e = _action _i ]
-"168
-[; ;color.c: 168:         }
+"179
+[; ;color.c: 179:         }
 }
 [e :U 2034 ]
-"169
-[; ;color.c: 169:     }
+"180
+[; ;color.c: 180:     }
 }
 [e =+ _i -> -> 1 `i `uc ]
 [e $ < -> _i `i -> 8 `i 2031  ]
 [e :U 2032 ]
 }
-"172
-[; ;color.c: 172:     color_writetoaddr(0x01, 0xFF);
-[e ( _color_writetoaddr (2 , -> -> 1 `i `uc -> -> 255 `i `uc ]
-"173
-[; ;color.c: 173:     color_writetoaddr(0x03, 0xFF);
-[e ( _color_writetoaddr (2 , -> -> 3 `i `uc -> -> 255 `i `uc ]
-"175
-[; ;color.c: 175:     return action;
+"182
+[; ;color.c: 182:     return action;
 [e ) _action ]
 [e $UE 2024  ]
-"176
-[; ;color.c: 176: }
+"183
+[; ;color.c: 183: }
 [e :UE 2024 ]
 }
-"179
-[; ;color.c: 179: char invert_action(char input_action){
+"186
+[; ;color.c: 186: char invert_action(char input_action){
 [v _invert_action `(uc ~T0 @X0 1 ef1`uc ]
 {
 [e :U _invert_action ]
 [v _input_action `uc ~T0 @X0 1 r1 ]
 [f ]
-"180
-[; ;color.c: 180:     char output_action;
+"187
+[; ;color.c: 187:     char output_action;
 [v _output_action `uc ~T0 @X0 1 a ]
-"181
-[; ;color.c: 181:     switch(input_action){
+"188
+[; ;color.c: 188:     switch(input_action){
 [e $U 2037  ]
 {
-"182
-[; ;color.c: 182:         case 0:
-[e :U 2038 ]
-"183
-[; ;color.c: 183:             output_action = 1;
-[e = _output_action -> -> 1 `i `uc ]
-"184
-[; ;color.c: 184:             break;
-[e $U 2036  ]
-"185
-[; ;color.c: 185:         case 1:
-[e :U 2039 ]
-"186
-[; ;color.c: 186:             output_action = 0;
-[e = _output_action -> -> 0 `i `uc ]
-"187
-[; ;color.c: 187:             break;
-[e $U 2036  ]
-"188
-[; ;color.c: 188:         case 2:
-[e :U 2040 ]
 "189
-[; ;color.c: 189:             output_action = 2;
-[e = _output_action -> -> 2 `i `uc ]
+[; ;color.c: 189:         case 0:
+[e :U 2038 ]
 "190
-[; ;color.c: 190:             break;
-[e $U 2036  ]
+[; ;color.c: 190:             output_action = 1;
+[e = _output_action -> -> 1 `i `uc ]
 "191
-[; ;color.c: 191:         case 3:
-[e :U 2041 ]
+[; ;color.c: 191:             break;
+[e $U 2036  ]
 "192
-[; ;color.c: 192:             output_action = 8;
-[e = _output_action -> -> 8 `i `uc ]
+[; ;color.c: 192:         case 1:
+[e :U 2039 ]
 "193
-[; ;color.c: 193:             break;
-[e $U 2036  ]
+[; ;color.c: 193:             output_action = 0;
+[e = _output_action -> -> 0 `i `uc ]
 "194
-[; ;color.c: 194:         case 4:
-[e :U 2042 ]
+[; ;color.c: 194:             break;
+[e $U 2036  ]
 "195
-[; ;color.c: 195:             output_action = 9;
-[e = _output_action -> -> 9 `i `uc ]
+[; ;color.c: 195:         case 2:
+[e :U 2040 ]
 "196
-[; ;color.c: 196:             break;
-[e $U 2036  ]
+[; ;color.c: 196:             output_action = 2;
+[e = _output_action -> -> 2 `i `uc ]
 "197
-[; ;color.c: 197:         case 5:
-[e :U 2043 ]
+[; ;color.c: 197:             break;
+[e $U 2036  ]
 "198
-[; ;color.c: 198:             output_action = 6;
-[e = _output_action -> -> 6 `i `uc ]
+[; ;color.c: 198:         case 3:
+[e :U 2041 ]
 "199
-[; ;color.c: 199:             break;
-[e $U 2036  ]
+[; ;color.c: 199:             output_action = 8;
+[e = _output_action -> -> 8 `i `uc ]
 "200
-[; ;color.c: 200:         case 6:
-[e :U 2044 ]
-"201
-[; ;color.c: 201:             output_action = 5;
-[e = _output_action -> -> 5 `i `uc ]
-"202
-[; ;color.c: 202:             break;
+[; ;color.c: 200:             break;
 [e $U 2036  ]
+"201
+[; ;color.c: 201:         case 4:
+[e :U 2042 ]
+"202
+[; ;color.c: 202:             output_action = 9;
+[e = _output_action -> -> 9 `i `uc ]
+"203
+[; ;color.c: 203:             break;
+[e $U 2036  ]
+"204
+[; ;color.c: 204:         case 5:
+[e :U 2043 ]
 "205
-[; ;color.c: 205:     }
+[; ;color.c: 205:             output_action = 6;
+[e = _output_action -> -> 6 `i `uc ]
+"206
+[; ;color.c: 206:             break;
+[e $U 2036  ]
+"207
+[; ;color.c: 207:         case 6:
+[e :U 2044 ]
+"208
+[; ;color.c: 208:             output_action = 5;
+[e = _output_action -> -> 5 `i `uc ]
+"209
+[; ;color.c: 209:             break;
+[e $U 2036  ]
+"212
+[; ;color.c: 212:     }
 }
 [e $U 2036  ]
 [e :U 2037 ]
@@ -2656,11 +2626,11 @@ Version 4.0 HI-TECH Software Intermediate Code
  , $ -> 6 `i 2044
  2036 ]
 [e :U 2036 ]
-"206
-[; ;color.c: 206:     return output_action;
+"213
+[; ;color.c: 213:     return output_action;
 [e ) _output_action ]
 [e $UE 2035  ]
-"207
-[; ;color.c: 207: }
+"214
+[; ;color.c: 214: }
 [e :UE 2035 ]
 }

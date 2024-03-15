@@ -111,9 +111,10 @@ void color_click_toggleLED(void){
     LATEbits.LATE7 = !LATEbits.LATE7;
 }
 
-char decide_action(unsigned int red_unsigned, unsigned int green_unsigned, unsigned int blue_unsigned){ //reads the colour values and outputs which color it is (numbered 1 - 7)
+char decide_action(){ //reads the colour values and outputs which color it is (numbered 1 - 7)
     
     //----------USED FOR DEBUGGING OVER SERIAL-----------
+    /*
     char clear_val[20];
     char red_val[20];
     char green_val[20];
@@ -126,15 +127,25 @@ char decide_action(unsigned int red_unsigned, unsigned int green_unsigned, unsig
     pred_val = &red_val[0];
     pgreen_val = &green_val[0];
     pblue_val = &blue_val[0];
-    //-------------------debugging delete later --------------
-    float red, green, blue;
+    */
+    
+    float red, green, blue; // define floats to store the color values
     float red_r, green_r, blue_r; //define floats to store ratio of colors
     float rgb_comp[8]; //define array of 8 floats to store comparison values
     char action; //char to assign the action to be done
 
-    red = (float)red_unsigned;
-    green = (float)green_unsigned;
-    blue = (float)blue_unsigned;
+    //change calibration on color sensor for better reading
+    color_writetoaddr(0x01, 0xD5); //set integration time
+    color_writetoaddr(0x03, 0xAB); //set wait time (WTIME)
+    __delay_ms(200);//let sensor settle
+            
+    red = color_read_Red();
+    green = color_read_Green();
+    blue = color_read_Blue();
+    
+    //reset the sensor values for quick luminosity readings
+    color_writetoaddr(0x01, 0xFF); //set integration time
+    color_writetoaddr(0x03, 0xFF); //set wait time (WTIME)
     
     //pre-processing of rgb values
     if(red < 666){red = 0;} else{red -= 699;} //remove the red value from black card calibration
@@ -167,10 +178,6 @@ char decide_action(unsigned int red_unsigned, unsigned int green_unsigned, unsig
             action = i;
         }
     }
- 
-    //reset the sensor values for quick luminosity readings
-    color_writetoaddr(0x01, 0xFF); //set integration time
-    color_writetoaddr(0x03, 0xFF); //set wait time (WTIME)
     
     return action; //return the action - the action numbers correlate to the color positions in the comparison array
 }																				

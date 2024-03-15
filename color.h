@@ -28,7 +28,7 @@ unsigned int color_read_Blue(void);
 void color_click_toggleLED(void);
 
 //function to decide the next action
-char decide_action(unsigned int red, unsigned int green, unsigned int blue);
+char decide_action();
 
 //function to invert the actions (maybe somewhere else?)
 char invert_action(char input_action);

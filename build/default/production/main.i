@@ -24288,7 +24288,7 @@ unsigned int color_read_Blue(void);
 void color_click_toggleLED(void);
 
 
-char decide_action(unsigned int red, unsigned int green, unsigned int blue);
+char decide_action();
 
 
 char invert_action(char input_action);
@@ -24492,7 +24492,9 @@ void main(void){
 
     lum = color_read_Clear();
     lum_threshold = lum + 10;
-# 218 "main.c"
+
+    unsigned int lost_detection = 0;
+# 119 "main.c"
     while(1){
         if(!going_forward){
 
@@ -24514,31 +24516,29 @@ void main(void){
             while(1){
                 lum = color_read_Clear();
                 if(lum < 80){
-                inch_forward(pmL, pmR);
-                _delay((unsigned long)((100)*(64000000/4000.0)));
+                    inch_forward(pmL, pmR);
+                    lost_detection += 1;
+                    _delay((unsigned long)((100)*(64000000/4000.0)));
+
                 }
                 else{
+                    break;
+
+                }
+                if(lost_detection > 15){
+                    action_to_do = 7;
                     break;
                 }
             }
 
-
             going_forward = 0;
-
-
             timings[actions_completed] = measured_time;
 
 
-            color_writetoaddr(0x01, 0xD5);
-            color_writetoaddr(0x03, 0xAB);
-            _delay((unsigned long)((200)*(64000000/4000.0)));
-
-            redm = color_read_Red();
-            greenm = color_read_Green();
-            bluem = color_read_Blue();
-
-            action_to_do = decide_action(redm, greenm, bluem);
-
+            if(action_to_do != 7){
+                action_to_do = decide_action();
+                lost_detection = 0;
+            }
 
             actions[actions_completed] = action_to_do;
             actions_completed += 1;
@@ -24585,9 +24585,6 @@ void main(void){
                 break;
             }
             _delay((unsigned long)((250)*(64000000/4000.0)));
-
-            sprintf(clear_val,"action = %d \r\n",action_to_do);
-            sendStringSerial4(pclear_val);
         _delay((unsigned long)((5)*(64000000/4000.0)));
         }
     }
@@ -24605,7 +24602,7 @@ void main(void){
     for(char i = 0; i < 20; i +=1){
         timings[i] -= 135;
         if(i > 7){
-              timings[i] -= 250;
+              timings[i] -= 280;
         }
     }
 
@@ -24642,10 +24639,10 @@ void main(void){
                 turn_left_135(pmL, pmR);
             }
             else if(action_to_do == 8){
-                turn_left_90;
+                turn_left_90(pmL, pmR);
             }
             else if(action_to_do == 9){
-                turn_right_90;
+                turn_right_90(pmL, pmR);
             }
             _delay((unsigned long)((250)*(64000000/4000.0)));
 
