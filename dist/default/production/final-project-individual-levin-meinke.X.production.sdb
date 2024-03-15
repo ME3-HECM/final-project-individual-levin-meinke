@@ -885,7 +885,7 @@
 "23 C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"223
+"238
 [v main@i i `uc  1 a 1 171 ]
 "87
 [v main@timings timings `[20]ui  1 a 40 120 ]
@@ -923,7 +923,7 @@
 [v main@pclear_val pclear_val `*.39uc  1 a 2 160 ]
 "84
 [v main@going_forward going_forward `a  1 a 1 170 ]
-"281
+"296
 } 0
 "143 C:\Users\Levin Meinke\OneDrive - Imperial College London\Year 3\ECM\final-project-individual-levin-meinke.X\dc_motor.c
 [v _turn_right_90 turn_right_90 `(v  1 e 1 0 ]

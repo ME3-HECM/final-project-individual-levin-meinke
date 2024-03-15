@@ -1,4 +1,4 @@
-# 1 "color.c"
+# 1 "main.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,16 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "color.c" 2
+# 1 "main.c" 2
+
+#pragma config FEXTOSC = HS
+#pragma config RSTOSC = EXTOSC_4PLL
+
+
+#pragma config WDTCPS = WDTCPS_31
+#pragma config WDTE = OFF
+
+
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -24086,7 +24095,7 @@ __attribute__((__unsupported__("The READTIMER" "0" "() macro is not available wi
 unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 33 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\xc.h" 2 3
-# 1 "color.c" 2
+# 9 "main.c" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\c99\\stdio.h" 1 3
 # 24 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\c99\\stdio.h" 3
@@ -24240,381 +24249,22 @@ char *ctermid(char *);
 
 
 char *tempnam(const char *, const char *);
-# 2 "color.c" 2
+# 10 "main.c" 2
 
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\c99\\math.h" 1 3
-# 15 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\c99\\math.h" 3
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\c99\\bits/alltypes.h" 1 3
-# 39 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef float float_t;
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\c99\\stdbool.h" 1 3
+# 11 "main.c" 2
 
+# 1 "./ADC.h" 1
 
 
 
-typedef double double_t;
-# 16 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\c99\\math.h" 2 3
-# 42 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\c99\\math.h" 3
-int __fpclassifyf(float);
 
 
 
 
-
-
-
-int __signbitf(float);
-# 59 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\c99\\math.h" 3
-double acos(double);
-float acosf(float);
-long double acosl(long double);
-
-
-
-double acosh(double);
-float acoshf(float);
-long double acoshl(long double);
-
-
-
-double asin(double);
-float asinf(float);
-long double asinl(long double);
-
-
-
-double asinh(double);
-float asinhf(float);
-long double asinhl(long double);
-
-
-
-double atan(double);
-float atanf(float);
-long double atanl(long double);
-
-
-
-double atan2(double, double);
-float atan2f(float, float);
-long double atan2l(long double, long double);
-
-
-
-double atanh(double);
-float atanhf(float);
-long double atanhl(long double);
-
-
-
-double cbrt(double);
-float cbrtf(float);
-long double cbrtl(long double);
-
-
-
-double ceil(double);
-float ceilf(float);
-long double ceill(long double);
-
-
-
-double copysign(double, double);
-float copysignf(float, float);
-long double copysignl(long double, long double);
-
-
-
-double cos(double);
-float cosf(float);
-long double cosl(long double);
-
-
-
-double cosh(double);
-float coshf(float);
-long double coshl(long double);
-
-
-
-double erf(double);
-float erff(float);
-long double erfl(long double);
-
-
-
-double erfc(double);
-float erfcf(float);
-long double erfcl(long double);
-
-
-
-double exp(double);
-float expf(float);
-long double expl(long double);
-
-
-
-double exp2(double);
-float exp2f(float);
-long double exp2l(long double);
-
-
-
-double expm1(double);
-float expm1f(float);
-long double expm1l(long double);
-
-
-
-double fabs(double);
-float fabsf(float);
-long double fabsl(long double);
-
-
-
-double fdim(double, double);
-float fdimf(float, float);
-long double fdiml(long double, long double);
-
-
-
-double floor(double);
-float floorf(float);
-long double floorl(long double);
-
-
-
-double fma(double, double, double);
-float fmaf(float, float, float);
-long double fmal(long double, long double, long double);
-
-
-
-double fmax(double, double);
-float fmaxf(float, float);
-long double fmaxl(long double, long double);
-
-
-
-double fmin(double, double);
-float fminf(float, float);
-long double fminl(long double, long double);
-
-
-
-double fmod(double, double);
-float fmodf(float, float);
-long double fmodl(long double, long double);
-
-
-
-double frexp(double, int *);
-float frexpf(float, int *);
-long double frexpl(long double, int *);
-
-
-
-double hypot(double, double);
-float hypotf(float, float);
-long double hypotl(long double, long double);
-
-
-
-int ilogb(double);
-int ilogbf(float);
-int ilogbl(long double);
-
-
-
-double ldexp(double, int);
-float ldexpf(float, int);
-long double ldexpl(long double, int);
-
-
-
-
-double lgamma(double);
-float lgammaf(float);
-long double lgammal(long double);
-
-
-
-
-long long llrint(double);
-long long llrintf(float);
-long long llrintl(long double);
-
-
-
-long long llround(double);
-long long llroundf(float);
-long long llroundl(long double);
-
-
-
-
-double log(double);
-float logf(float);
-long double logl(long double);
-
-
-
-double log10(double);
-float log10f(float);
-long double log10l(long double);
-
-
-
-double log1p(double);
-float log1pf(float);
-long double log1pl(long double);
-
-
-
-double log2(double);
-float log2f(float);
-long double log2l(long double);
-
-
-
-double logb(double);
-float logbf(float);
-long double logbl(long double);
-
-
-
-long lrint(double);
-long lrintf(float);
-long lrintl(long double);
-
-
-
-long lround(double);
-long lroundf(float);
-long lroundl(long double);
-
-
-
-double modf(double, double *);
-float modff(float, float *);
-long double modfl(long double, long double *);
-
-
-
-double nan(const char *);
-float nanf(const char *);
-long double nanl(const char *);
-
-
-
-double nearbyint(double);
-float nearbyintf(float);
-long double nearbyintl(long double);
-
-
-
-double nextafter(double, double);
-float nextafterf(float, float);
-long double nextafterl(long double, long double);
-
-
-
-double nexttoward(double, long double);
-float nexttowardf(float, long double);
-long double nexttowardl(long double, long double);
-# 326 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\c99\\math.h" 3
-double pow(double, double);
-__attribute__((nonreentrant)) float powf(float, float);
-long double powl(long double, long double);
-
-
-
-double remainder(double, double);
-float remainderf(float, float);
-long double remainderl(long double, long double);
-
-
-
-double remquo(double, double, int *);
-float remquof(float, float, int *);
-long double remquol(long double, long double, int *);
-
-
-
-double rint(double);
-float rintf(float);
-long double rintl(long double);
-
-
-
-double round(double);
-float roundf(float);
-long double roundl(long double);
-
-
-
-double scalbln(double, long);
-float scalblnf(float, long);
-long double scalblnl(long double, long);
-
-
-
-double scalbn(double, int);
-float scalbnf(float, int);
-long double scalbnl(long double, int);
-
-
-
-double sin(double);
-float sinf(float);
-long double sinl(long double);
-
-
-
-double sinh(double);
-float sinhf(float);
-long double sinhl(long double);
-
-
-
-double sqrt(double);
-float sqrtf(float);
-long double sqrtl(long double);
-
-
-
-double tan(double);
-float tanf(float);
-long double tanl(long double);
-
-
-
-double tanh(double);
-float tanhf(float);
-long double tanhl(long double);
-
-
-
-double tgamma(double);
-float tgammaf(float);
-long double tgammal(long double);
-
-
-
-double trunc(double);
-float truncf(float);
-long double truncl(long double);
-# 431 "C:\\Program Files\\Microchip\\xc8\\v2.45\\pic\\include\\c99\\math.h" 3
-extern int signgam;
-
-double j0(double);
-double j1(double);
-double jn(int, double);
-
-double y0(double);
-double y1(double);
-double yn(int, double);
-# 3 "color.c" 2
+void ADC_init(void);
+unsigned int ADC_getval(void);
+# 12 "main.c" 2
 
 # 1 "./color.h" 1
 # 11 "./color.h"
@@ -24642,7 +24292,39 @@ char decide_action();
 
 
 char invert_action(char input_action);
-# 4 "color.c" 2
+# 13 "main.c" 2
+
+# 1 "./dc_motor.h" 1
+
+
+
+
+
+
+
+struct DC_motor {
+    char power;
+    char direction;
+    char brakemode;
+    unsigned int PWMperiod;
+    unsigned char *posDutyHighByte;
+    unsigned char *negDutyHighByte;
+};
+
+
+
+void initDCmotorsPWM(int PWMperiod);
+void setMotorPWM(struct DC_motor *m);
+void fullSpeedAhead(struct DC_motor *mL, struct DC_motor *mR);
+void stop(struct DC_motor *mL, struct DC_motor *mR);
+void turn_left_90(struct DC_motor *mL, struct DC_motor *mR);
+void turn_right_90(struct DC_motor *mL, struct DC_motor *mR);
+void turn_left_135(struct DC_motor *mL, struct DC_motor *mR);
+void turn_right_135(struct DC_motor *mL, struct DC_motor *mR);
+void reverse_after_read(struct DC_motor *mL, struct DC_motor *mR);
+void reverse_one_square(struct DC_motor *mL, struct DC_motor *mR);
+void inch_forward(struct DC_motor *mL, struct DC_motor *mR);
+# 14 "main.c" 2
 
 # 1 "./i2c.h" 1
 # 13 "./i2c.h"
@@ -24677,7 +24359,19 @@ void I2C_2_Master_Write(unsigned char data_byte);
 
 
 unsigned char I2C_2_Master_Read(unsigned char ack);
-# 5 "color.c" 2
+# 15 "main.c" 2
+
+# 1 "./interrupts.h" 1
+
+
+
+
+
+
+
+void Interrupts_init(void);
+void __attribute__((picinterrupt(("high_priority")))) HighISR();
+# 16 "main.c" 2
 
 # 1 "./serial.h" 1
 # 13 "./serial.h"
@@ -24707,178 +24401,284 @@ void putCharToTxBuf(char byte);
 char isDataInTxBuf (void);
 void TxBufferedString(char *string);
 void sendTxBuf(void);
-# 6 "color.c" 2
+# 17 "main.c" 2
+
+# 1 "./timers.h" 1
 
 
-void color_click_init(void){
 
+
+
+
+
+void Timer0_init(void);
+void resetTimer0(void);
+unsigned int get16bitTMR0val(void);
+# 18 "main.c" 2
+
+
+
+
+
+void main(void){
+
+    Timer0_init();
+    ADC_init();
+    Interrupts_init();
     I2C_2_Master_Init();
- color_writetoaddr(0x00, 0x01);
-    _delay((unsigned long)((3)*(64000000/4000.0)));
- color_writetoaddr(0x00, 0x03);
- color_writetoaddr(0x01, 0xFF);
-    color_writetoaddr(0x03, 0xFF);
-# 27 "color.c"
-    LATGbits.LATG0=0;
-    LATAbits.LATA3=0;
-    LATEbits.LATE7=0;
+    color_click_init();
+    initDCmotorsPWM(99);
+    initUSART4();
 
 
-    TRISGbits.TRISG0=0;
-    TRISAbits.TRISA3=0;
-    TRISEbits.TRISE7=0;
-
-}
-
-void color_writetoaddr(char address, char value){
-    I2C_2_Master_Start();
-    I2C_2_Master_Write(0x52 | 0x00);
-    I2C_2_Master_Write(0x80 | address);
-    I2C_2_Master_Write(value);
-    I2C_2_Master_Stop();
-}
-# 55 "color.c"
-unsigned int color_read_Clear(void){
- unsigned int tmp;
- I2C_2_Master_Start();
- I2C_2_Master_Write(0x52 | 0x00);
- I2C_2_Master_Write(0xA0 | 0x14);
- I2C_2_Master_RepStart();
- I2C_2_Master_Write(0x52 | 0x01);
- tmp=I2C_2_Master_Read(1);
- tmp=tmp | (I2C_2_Master_Read(0)<<8);
- I2C_2_Master_Stop();
- return tmp;
-}
-
-unsigned int color_read_Red(void){
- unsigned int tmp;
- I2C_2_Master_Start();
- I2C_2_Master_Write(0x52 | 0x00);
- I2C_2_Master_Write(0xA0 | 0x16);
- I2C_2_Master_RepStart();
- I2C_2_Master_Write(0x52 | 0x01);
- tmp=I2C_2_Master_Read(1);
- tmp=tmp | (I2C_2_Master_Read(0)<<8);
- I2C_2_Master_Stop();
- return tmp;
-}
-
-unsigned int color_read_Green(void){
- unsigned int tmp;
- I2C_2_Master_Start();
- I2C_2_Master_Write(0x52 | 0x00);
- I2C_2_Master_Write(0xA0 | 0x18);
- I2C_2_Master_RepStart();
- I2C_2_Master_Write(0x52 | 0x01);
- tmp=I2C_2_Master_Read(1);
- tmp=tmp | (I2C_2_Master_Read(0)<<8);
- I2C_2_Master_Stop();
- return tmp;
-}
-
-unsigned int color_read_Blue(void){
- unsigned int tmp;
- I2C_2_Master_Start();
- I2C_2_Master_Write(0x52 | 0x00);
- I2C_2_Master_Write(0xA0 | 0x1A);
- I2C_2_Master_RepStart();
- I2C_2_Master_Write(0x52 | 0x01);
- tmp=I2C_2_Master_Read(1);
- tmp=tmp | (I2C_2_Master_Read(0)<<8);
- I2C_2_Master_Stop();
- return tmp;
-}
+    color_click_toggleLED();
 
 
-void color_click_toggleLED(void){
-    LATGbits.LATG0 = !LATGbits.LATG0;
-    LATAbits.LATA3 = !LATAbits.LATA3;
-    LATEbits.LATE7 = !LATEbits.LATE7;
-}
+    LATHbits.LATH3=1;
+    TRISHbits.TRISH3=0;
 
-char decide_action(){
-# 132 "color.c"
-    float red, green, blue;
-    float red_r, green_r, blue_r;
-    float rgb_comp[8];
+
+    TRISFbits.TRISF2=1;
+    ANSELFbits.ANSELF2=0;
+
+
+    struct DC_motor motorL, motorR;
+    unsigned int PWMcycle = 99;
+
+    motorL.power=0;
+    motorL.direction=1;
+    motorL.brakemode=1;
+    motorL.posDutyHighByte=(unsigned char *)(&CCPR1H);
+    motorL.negDutyHighByte=(unsigned char *)(&CCPR2H);
+    motorL.PWMperiod=PWMcycle;
+
+    motorR.power=0;
+    motorR.direction=1;
+    motorR.brakemode=1;
+    motorR.posDutyHighByte=(unsigned char *)(&CCPR3H);
+    motorR.negDutyHighByte=(unsigned char *)(&CCPR4H);
+    motorR.PWMperiod=PWMcycle;
+
+
+    struct DC_motor *pmL= &motorL;
+    struct DC_motor *pmR= &motorR;
+
+
+    char clear_val[20];
+    char red_val[20];
+    char green_val[20];
+    char blue_val[20];
+    char *pclear_val;
+    char *pred_val;
+    char *pblue_val;
+    char *pgreen_val;
+    pclear_val = &clear_val[0];
+    pred_val = &red_val[0];
+    pgreen_val = &green_val[0];
+    pblue_val = &blue_val[0];
+
+    unsigned int lum;
+    unsigned int lum_threshold;
+    unsigned int redm, greenm, bluem;
     char action;
+    _Bool going_forward = 0;
+    unsigned int previously_measured_time, measured_time;
+    int action_to_do;
+    unsigned int timings[20];
+    int actions[20];
+    int actions_completed = 0;
+# 102 "main.c"
+    _delay((unsigned long)((2000)*(64000000/4000.0)));
+
+    lum = color_read_Clear();
+    lum_threshold = lum + 10;
+
+    unsigned int lost_detection = 0;
 
 
-    color_writetoaddr(0x01, 0xD5);
-    color_writetoaddr(0x03, 0xAB);
-    _delay((unsigned long)((200)*(64000000/4000.0)));
 
-    red = color_read_Red();
-    green = color_read_Green();
-    blue = color_read_Blue();
+    while(1){
 
 
-    color_writetoaddr(0x01, 0xFF);
-    color_writetoaddr(0x03, 0xFF);
+
+        color_writetoaddr(0x01, 0xD5);
+        color_writetoaddr(0x03, 0xAB);
+        _delay((unsigned long)((200)*(64000000/4000.0)));
 
 
-    if(red < 666){red = 0;} else{red -= 699;}
-    if(green < 446){green = 0;} else{green -= 443;}
-    if(blue < 295){blue = 0;} else{blue -= 315;}
+        sprintf(clear_val,"red = %d \r\n",color_read_Red());
+        sendStringSerial4(pclear_val);
+        sprintf(clear_val,"green = %d \r\n",color_read_Green());
+        sendStringSerial4(pclear_val);
+        sprintf(clear_val,"blue = %d \r\n",color_read_Blue());
+        sendStringSerial4(pclear_val);
 
-    red = red/1621;
-    green = green/1191;
-    blue = blue/885;
-
-    float total = red + green + blue;
-
-    red_r = red / total;
-    green_r = green / total;
-    blue_r = blue / total;
+        _delay((unsigned long)((3000)*(64000000/4000.0)));
+    }
 
 
-    rgb_comp[0] = sqrtf(powf((red_r - 0.747),2) + powf((green_r - 0.071),2) + powf((blue_r - 0.120),2));
-    rgb_comp[1] = sqrtf(powf((red_r - 0.147),2) + powf((green_r - 0.489),2) + powf((blue_r - 0.363),2));
-    rgb_comp[2] = sqrtf(powf((red_r - 0.110),2) + powf((green_r - 0.421),2) + powf((blue_r - 0.469),2));
-    rgb_comp[3] = sqrtf(powf((red_r - 0.423),2) + powf((green_r - 0.325),2) + powf((blue_r - 0.252),2));
-    rgb_comp[4] = sqrtf(powf((red_r - 0.431),2) + powf((green_r - 0.263),2) + powf((blue_r - 0.306),2));
-    rgb_comp[5] = sqrtf(powf((red_r - 0.664),2) + powf((green_r - 0.110),2) + powf((blue_r - 0.160),2));
-    rgb_comp[6] = sqrtf(powf((red_r - 0.271),2) + powf((green_r - 0.366),2) + powf((blue_r - 0.363),2));
-    rgb_comp[7] = sqrtf(powf((red_r - 0.329),2) + powf((green_r - 0.335),2) + powf((blue_r - 0.335),2));
 
-    action = 0;
-    for(char i = 0; i < 8; i +=1){
-        if(rgb_comp[i] < rgb_comp[action]){
-            action = i;
+    while(1){
+        if(!going_forward){
+
+
+            resetTimer0();
+            fullSpeedAhead(pmL, pmR);
+            going_forward = 1;
+        }
+
+        lum = color_read_Clear();
+
+        if (lum > lum_threshold){
+
+            measured_time = get16bitTMR0val();
+            stop(pmL, pmR);
+            _delay((unsigned long)((250)*(64000000/4000.0)));
+
+
+            while(1){
+                lum = color_read_Clear();
+                if(lum < 90){
+                    inch_forward(pmL, pmR);
+                    lost_detection += 1;
+                    _delay((unsigned long)((100)*(64000000/4000.0)));
+
+                }
+                else{
+                    break;
+
+                }
+                if(lost_detection > 15){
+                    action_to_do = 7;
+                    break;
+                }
+            }
+
+            going_forward = 0;
+            timings[actions_completed] = measured_time;
+
+
+            if(action_to_do != 7){
+                action_to_do = decide_action();
+                lost_detection = 0;
+            }
+
+            actions[actions_completed] = action_to_do;
+            actions_completed += 1;
+
+
+            if(action_to_do == 0){
+                reverse_after_read(pmL, pmR);
+                turn_right_90(pmL, pmR);
+            }
+            else if(action_to_do == 1){
+                reverse_after_read(pmL, pmR);
+                turn_left_90(pmL, pmR);
+            }
+            else if(action_to_do == 2){
+                reverse_after_read(pmL, pmR);
+                turn_right_90(pmL, pmR);
+                _delay((unsigned long)((250)*(64000000/4000.0)));
+                turn_right_90(pmL, pmR);
+            }
+            else if(action_to_do == 3){
+                reverse_after_read(pmL, pmR);
+                reverse_one_square(pmL, pmR);
+                turn_right_90(pmL, pmR);
+            }
+            else if(action_to_do == 4){
+                reverse_after_read(pmL, pmR);
+                reverse_one_square(pmL, pmR);
+                turn_left_90(pmL, pmR);
+            }
+            else if(action_to_do == 5){
+                reverse_after_read(pmL, pmR);
+                turn_right_135(pmL, pmR);
+            }
+            else if(action_to_do == 6){
+                reverse_after_read(pmL, pmR);
+                turn_left_135(pmL, pmR);
+            }
+
+
+            else if(action_to_do == 7){
+                reverse_after_read(pmL, pmR);
+                turn_right_90(pmL, pmR);
+                _delay((unsigned long)((250)*(64000000/4000.0)));
+                turn_right_90(pmL, pmR);
+                break;
+            }
+            _delay((unsigned long)((250)*(64000000/4000.0)));
+        _delay((unsigned long)((5)*(64000000/4000.0)));
         }
     }
 
-    return action;
-}
 
 
-char invert_action(char input_action){
-    char output_action;
-    switch(input_action){
-        case 0:
-            output_action = 1;
-            break;
-        case 1:
-            output_action = 0;
-            break;
-        case 2:
-            output_action = 2;
-            break;
-        case 3:
-            output_action = 8;
-            break;
-        case 4:
-            output_action = 9;
-            break;
-        case 5:
-            output_action = 6;
-            break;
-        case 6:
-            output_action = 5;
-            break;
 
 
+    actions_completed -= 1;
+
+
+    going_forward = 0;
+
+
+    for(char i = 0; i < 20; i +=1){
+        timings[i] -= 135;
+        if(i > 7){
+              timings[i] -= 280;
+        }
     }
-    return output_action;
+
+
+
+    while(actions_completed >= 0){
+        if(!going_forward){
+            resetTimer0();
+            fullSpeedAhead(pmL, pmR);
+            going_forward = 1;
+        }
+
+        measured_time = get16bitTMR0val();
+        if(measured_time > timings[actions_completed]){
+            stop(pmL, pmR);
+            going_forward = 0;
+            action_to_do = invert_action(actions[actions_completed - 1]);
+
+            if(action_to_do == 0){
+                turn_right_90(pmL, pmR);
+            }
+            else if(action_to_do == 1){
+                turn_left_90(pmL, pmR);
+            }
+            else if(action_to_do == 2){
+                turn_right_90(pmL, pmR);
+                _delay((unsigned long)((250)*(64000000/4000.0)));
+                turn_right_90(pmL, pmR);
+            }
+            else if(action_to_do == 5){
+                turn_right_135(pmL, pmR);
+            }
+            else if(action_to_do == 6){
+                turn_left_135(pmL, pmR);
+            }
+            else if(action_to_do == 8){
+                turn_left_90(pmL, pmR);
+            }
+            else if(action_to_do == 9){
+                turn_right_90(pmL, pmR);
+            }
+            _delay((unsigned long)((250)*(64000000/4000.0)));
+
+            sprintf(clear_val,"action = %d \r\n",action_to_do);
+            sendStringSerial4(pclear_val);
+        actions_completed -=1 ;
+        }
+    _delay((unsigned long)((10)*(64000000/4000.0)));
+    }
+    stop(pmL, pmR);
+    while(1){
+        LATHbits.LATH3 = !LATHbits.LATH3;
+        _delay((unsigned long)((500)*(64000000/4000.0)));
+    }
 }

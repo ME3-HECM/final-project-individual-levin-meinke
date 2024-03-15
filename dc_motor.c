@@ -135,7 +135,7 @@ void turn_left_90(struct DC_motor *mL, struct DC_motor *mR){
         setMotorPWM(mR);
         __delay_ms(1); //delay before repeating (gradual decrease in speed)
     }    
-    __delay_ms(450); //calibrate for how long it takes to turn
+    __delay_ms(415); //calibrate for how long it takes to turn
     stop(mL, mR);
 }
 
@@ -152,7 +152,7 @@ void turn_right_90(struct DC_motor *mL, struct DC_motor *mR){
         setMotorPWM(mR);
         __delay_ms(1); //delay before repeating (gradual decrease in speed)
     }
-    __delay_ms(450); //calibrate for how long it takes to turn
+    __delay_ms(415); //calibrate for how long it takes to turn
     stop(mL, mR);
 }
 
@@ -169,7 +169,7 @@ void turn_left_135(struct DC_motor *mL, struct DC_motor *mR){
         setMotorPWM(mR);
         __delay_ms(1); //delay before repeating (gradual decrease in speed)
     }    
-    __delay_ms(700); //calibrate for how long it takes to turn
+    __delay_ms(600); //calibrate for how long it takes to turn
     stop(mL, mR);
 }
 
@@ -186,7 +186,7 @@ void turn_right_135(struct DC_motor *mL, struct DC_motor *mR){
         setMotorPWM(mR);
         __delay_ms(1); //delay before repeating (gradual decrease in speed)
     }
-    __delay_ms(700); //calibrate for how long it takes to turn
+    __delay_ms(630); //calibrate for how long it takes to turn
     stop(mL, mR);
 }
 
@@ -202,7 +202,7 @@ void reverse_after_read(struct DC_motor *mL, struct DC_motor *mR){
         setMotorPWM(mR);
         __delay_ms(1); //delay before repeating (gradual increase in speed)
     }
-    __delay_ms(250); //calibrate for how long it takes to go back
+    __delay_ms(330); //calibrate for how long it takes to go back
     stop(mL, mR);
     __delay_ms(250); //let buggy settle before proceeding
 }
@@ -219,7 +219,7 @@ void reverse_one_square(struct DC_motor *mL, struct DC_motor *mR){
         setMotorPWM(mR);
         __delay_ms(1); //delay before repeating (gradual increase in speed)
     }
-    __delay_ms(750); //calibrate for how long it takes to go back
+    __delay_ms(1350); //calibrate for how long it takes to go back
     stop(mL, mR);
     __delay_ms(250); //let the buggy settle
 }

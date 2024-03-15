@@ -24494,7 +24494,7 @@ void main(void){
     lum_threshold = lum + 10;
 
     unsigned int lost_detection = 0;
-# 119 "main.c"
+# 133 "main.c"
     while(1){
         if(!going_forward){
 
@@ -24515,7 +24515,7 @@ void main(void){
 
             while(1){
                 lum = color_read_Clear();
-                if(lum < 80){
+                if(lum < 65){
                     inch_forward(pmL, pmR);
                     lost_detection += 1;
                     _delay((unsigned long)((100)*(64000000/4000.0)));
@@ -24555,6 +24555,7 @@ void main(void){
             else if(action_to_do == 2){
                 reverse_after_read(pmL, pmR);
                 turn_right_90(pmL, pmR);
+                _delay((unsigned long)((250)*(64000000/4000.0)));
                 turn_right_90(pmL, pmR);
             }
             else if(action_to_do == 3){
@@ -24569,11 +24570,11 @@ void main(void){
             }
             else if(action_to_do == 5){
                 reverse_after_read(pmL, pmR);
-                turn_left_135(pmL, pmR);
+                turn_right_135(pmL, pmR);
             }
             else if(action_to_do == 6){
                 reverse_after_read(pmL, pmR);
-                turn_right_135(pmL, pmR);
+                turn_left_135(pmL, pmR);
             }
 
 
@@ -24600,9 +24601,9 @@ void main(void){
 
 
     for(char i = 0; i < 20; i +=1){
-        timings[i] -= 135;
+        timings[i] -= 125;
         if(i > 7){
-              timings[i] -= 280;
+              timings[i] -= 550;
         }
     }
 

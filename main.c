@@ -107,10 +107,24 @@ void main(void){
     unsigned int lost_detection = 0; //count to detect a black wall
     
     //----------------- TEST LOOP  --------------------
-    /*
+
+   /*
     while(1){
-        sprintf(clear_val,"clear = %d \r\n",color_read_Clear());
+        //use ADC_getval to read battery level
+        //sprintf(clear_val,"vol = %d \r\n",ADC_getval);
+        //sendStringSerial4(pclear_val);
+        color_writetoaddr(0x01, 0xD5); //set integration time
+        color_writetoaddr(0x03, 0xAB); //set wait time (WTIME)
+        __delay_ms(200);//let sensor settle
+        
+        
+        sprintf(clear_val,"red = %d \r\n",color_read_Red());
         sendStringSerial4(pclear_val);
+        sprintf(clear_val,"green = %d \r\n",color_read_Green());
+        sendStringSerial4(pclear_val);
+        sprintf(clear_val,"blue = %d \r\n",color_read_Blue());
+        sendStringSerial4(pclear_val);
+     
         __delay_ms(3000);
     }
     */
@@ -176,6 +190,7 @@ void main(void){
             else if(action_to_do == 2){ //180 turn -> turn right twice (less calibration error)
                 reverse_after_read(pmL, pmR);
                 turn_right_90(pmL, pmR);
+                __delay_ms(250); //let buggy settle
                 turn_right_90(pmL, pmR);
             }
             else if(action_to_do == 3){ //reverse one square and then turn right 90
@@ -190,11 +205,11 @@ void main(void){
             }
             else if(action_to_do == 5){ //turn left 135
                 reverse_after_read(pmL, pmR);
-                turn_left_135(pmL, pmR);
+                turn_right_135(pmL, pmR);
             }
             else if(action_to_do == 6){ //turn right 135
                 reverse_after_read(pmL, pmR);
-                turn_right_135(pmL, pmR);
+                turn_left_135(pmL, pmR);
             }
             // we've reached the white wall we need to turn around, and  leave this loop
             // then we will go to retrace loop
@@ -221,9 +236,9 @@ void main(void){
     
     //remove the 'reverse after read' equivalent value from timings
     for(char i = 0; i < 20; i +=1){ //iterate through the comparison array and find the smallest value
-        timings[i] -= 135; // calibrated value
+        timings[i] -= 125; // calibrated value
         if(i > 7){ //remove more from the actions which reversed one square
-              timings[i] -= 280; // calibrated value
+              timings[i] -= 550; // calibrated value
         }
     }
     

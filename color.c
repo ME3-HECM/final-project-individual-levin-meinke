@@ -163,12 +163,12 @@ char decide_action(){ //reads the colour values and outputs which color it is (n
     blue_r = blue / total;
     
     //compare ratios of the colors with the measured values from our calibration cards
-    rgb_comp[0] = sqrt(pow((red_r - 0.747),2) + pow((green_r - 0.071),2) + pow((blue_r - 0.182),2)); //red
+    rgb_comp[0] = sqrt(pow((red_r - 0.747),2) + pow((green_r - 0.071),2) + pow((blue_r - 0.120),2)); //red
     rgb_comp[1] = sqrt(pow((red_r - 0.147),2) + pow((green_r - 0.489),2) + pow((blue_r - 0.363),2)); //green
     rgb_comp[2] = sqrt(pow((red_r - 0.110),2) + pow((green_r - 0.421),2) + pow((blue_r - 0.469),2)); //blue
     rgb_comp[3] = sqrt(pow((red_r - 0.423),2) + pow((green_r - 0.325),2) + pow((blue_r - 0.252),2)); //yellow
     rgb_comp[4] = sqrt(pow((red_r - 0.431),2) + pow((green_r - 0.263),2) + pow((blue_r - 0.306),2)); //pink
-    rgb_comp[5] = sqrt(pow((red_r - 0.664),2) + pow((green_r - 0.137),2) + pow((blue_r - 0.198),2)); //orange
+    rgb_comp[5] = sqrt(pow((red_r - 0.664),2) + pow((green_r - 0.110),2) + pow((blue_r - 0.160),2)); //orange
     rgb_comp[6] = sqrt(pow((red_r - 0.271),2) + pow((green_r - 0.366),2) + pow((blue_r - 0.363),2)); //light blue
     rgb_comp[7] = sqrt(pow((red_r - 0.329),2) + pow((green_r - 0.335),2) + pow((blue_r - 0.335),2)); //white
 
