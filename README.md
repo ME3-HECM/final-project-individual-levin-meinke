@@ -7,7 +7,7 @@ The brief gives 5 functions which must be performed by the buggy and have been i
 4. When the final card is reached, navigate back to the starting position
 5. Handle exceptions and return back to the starting position if final card cannot be found
 
-*Further details are eprovided in the full brief at the bottom of the README*
+*Further details are provided in the full brief at the bottom of the README*
 
 ## User Instructions
 To use the buggy place down at the start of the maze paying attention to be perpendicular to the first color card. Then switch on, after two seconds the buggy start to navigate the maze, once it has completed the maze the LED LD2 will blink.
