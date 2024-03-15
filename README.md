@@ -60,7 +60,9 @@ The retrace loop then does through the recorded times and actions and does them 
 
 ## Improvements
 
-The main weakness of the buggy is the imprecise movements. This stems from a build up of errors across sll of the turns. The best way to improve this would be to implement a system to impact the cards after reading the color and straighten out the buggy. Then also impact them backwards when retracing. Additionally the subtracted times could be better calibrated. Finally an additional function to adjust the movements based on battery level could be implements, the battery level can be read using the ADC.c script. 
+The main weakness of the buggy is the imprecise movements. This stems from a build up of errors across sll of the turns. The best way to improve this would be to implement a system to impact the cards after reading the color and straighten out the buggy. Then also impact them backwards when retracing. Additionally the subtracted times could be better calibrated. Finally an additional function to adjust the movements based on battery level could be implements, the battery level can be read using the ADC.c script.
+
+Additionally on the day of testing, there proved to be issues with color sensing. It seems the light conditions were outside of the rooms that were previously tested in. To make the algorithm more precise, calibration of rbg values should be done. The values to be calibrated in the room should be baseline and range readings for red green and blue channels as well as the calibration ratios that are checked against. This could be done using a simple calibration routine before running the maze.
 
 
 
