@@ -1,6 +1,65 @@
 # Course project - Mine navigation search and rescue
+## Functionality Overview
+The brief gives 5 functions which must be performed by the buggy and have been implemented:
+1. Navigate towards a coloured card and stop before impacting the card
+2. Read the card colour
+3. Interpret the card colour using a predefined code and perform the navigation instruction
+4. When the final card is reached, navigate back to the starting position
+5. Handle exceptions and return back to the starting position if final card cannot be found
 
-## Challenge brief
+*Further details are provided in the full brief at the bottom of the README*
+
+## User Instructions
+To use the buggy place down at the start of the maze paying attention to be perpendicular to the first color card. Then switch on, after two seconds the buggy start to navigate the maze, once it has completed the maze the LED LD2 will blink.
+
+## Hardware Overview
+THe buggy is composed of three parts:
+1. MikroE Clicker 2 - PIC18(L)F67K40 64-Pin, Low-Power, High-Performance Microcontroller
+with XLP Technology
+2. MikroE Buggy - MICKROE-1670 Motorized Development Platform
+3. MikroE Color Click - TCS3471 Colot Light-to-DIgital Converter
+
+## Scripts and Code Structure
+Here is an overview of how the functionality of the code is split across the different scripts
+Script | Function
+---------|---------
+Main.c | Main contains the full logic and process control, only relying on the other scripts to gather information or execute a task
+dc_motor.c | Contains all functions to move the the buggy using the DC motors as well as intilise them
+color.c | Contains all functions to read data from the color click sensor, determine action required based on the color sensor as well as write to the color sensor
+i2c.c | I2C communication functions to communicate with the color sensor
+timers.c | Contains functions to use timer0
+serial.c | Functions to communicate over serial for debugging and calibration purposes
+ADC.c | Analogue to digital conversion to take battery readings
+interrupts.c | Code to manage interrupts *note: not used but code to use interrupts from color click included*
+
+## Navigation
+All navigation is done using the DC motors of the Buggy, these are controlled via functions broken down into functionality such as turn left or reverse one square. With the exception going forward, all navigation functions end with the buggy stopped. When going forward, the buggy monitors the color sensor then sends a stop command when it detects a wall approaching. The buggy currently runs at 70% to balance precision and speed.
+
+## Color Sensing
+The color sensing is a critical part of the project, and the most complicated. The Color click is an RGB+C sensor with an LED array to increase brightness and reading accuracies. We use the color sensor to detect upcoming walls and then read the color of the card.
+
+When intialising the code reads a value from the clear sensor to determine the background luminosity, then continously monitors the value from the clear sensor, if it passes a certain threshold above the background luminosity, it knows a wall is approaching due to the reflection of its LEDs. This value must be read quickly to react quickly to upcoming walls. To do this we set the color sensor wait time (WTIME) and the ADC integration time step size (ATIME) to 2.4ms. This allows a very high frequency of readings. 
+
+Once a wall is detected, the buggy inches forward until the luminosity reading is >85, this ensures we do not hit the wall but it is close enough for an accurate color reading. We then set the WTIME to 85ms and the ATIME to 101ms. This allows for accurate readings of the RGB values. Once these values have been read, we process them and find the color using a five step algorithm. 
+
+1. Remove black calibration readings - this takes away the "baseline reading" of each value
+2. Divide by range of reading values - each sensor has different sensitivites so we divide by the range of expected readings from calibration
+3. Find the ratio of all three readings - using a ratio of readings accounts for different brightnesses
+4. Calculate mean squared error to calibration readings - compare to calibration ratios found experimentally
+5. Smallest mean squared error is the color
+
+The algorithm and calibration settings are calculated using this [sheet](https://docs.google.com/spreadsheets/d/1r5Uu7KOo9ffYu27pvs4kMVMAYCxUALJtELAcMSgJ3Ts/edit?usp=sharing):
+
+There is an exception: if a luminosity of 85 can not be reached, the wall is black and the buggy knows it is lost and returns to starts. 
+
+
+
+
+
+
+---------|---------
+---------|---------
+## Appendix: Challenge Brief
 
 Your task is to develop an autonomous robot that can navigate a "mine" using a series of instructions coded in coloured cards and return to its starting position.  Your robot must be able to perform the following: 
 
