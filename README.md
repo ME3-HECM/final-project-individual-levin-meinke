@@ -35,6 +35,8 @@ interrupts.c | Code to manage interrupts *note: not used but code to use interru
 ## Navigation
 All navigation is done using the DC motors of the Buggy, these are controlled via functions broken down into functionality such as turn left or reverse one square. With the exception going forward, all navigation functions end with the buggy stopped. When going forward, the buggy monitors the color sensor then sends a stop command when it detects a wall approaching. The buggy currently runs at 70% to balance precision and speed.
 
+*note: as I was working alone, I was sadly not able to take videos of the buggy complete the mazes on the day*
+
 ## Color Sensing
 The color sensing is a critical part of the project, and the most complicated. The Color click is an RGB+C sensor with an LED array to increase brightness and reading accuracies. We use the color sensor to detect upcoming walls and then read the color of the card.
 
