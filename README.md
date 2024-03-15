@@ -50,8 +50,17 @@ Once a wall is detected, the buggy inches forward until the luminosity reading i
 
 The algorithm and calibration settings are calculated using this [sheet](https://docs.google.com/spreadsheets/d/1r5Uu7KOo9ffYu27pvs4kMVMAYCxUALJtELAcMSgJ3Ts/edit?usp=sharing):
 
-There is an exception: if a luminosity of 85 can not be reached, the wall is black and the buggy knows it is lost and returns to starts. 
+There is an exception: if a luminosity of 85 can not be reached, the wall is black and the buggy knows it is lost and returns to starts.
 
+##Navigation Logic
+
+Once the color has been determined, the buggy executes the instruction said. Each color has a corresponding action code (0-7) which correlates to a set of movement instruction in the main code. Once the navigation instruction is done, a timer starts and times the amount of time until the next wall is detected. Each of the times and actions is logged so we can retrace later. When white is detected, the buggy turns around and then main loop is broken. We then remove a calibrated value from each time to account for reversal after reading a color. A seperate statement removes another preset time from yellow and pink, since they reverse one square.
+
+The retrace loop then does through the recorded times and actions and does them in reverse. 
+
+## Improvements
+
+The main weakness of the buggy is the imprecise movements. This stems from a build up of errors across sll of the turns. The best way to improve this would be to implement a system to impact the cards after reading the color and straighten out the buggy. Then also impact them backwards when retracing. Additionally the subtracted times could be better calibrated. Finally an additional function to adjust the movements based on battery level could be implements, the battery level can be read using the ADC.c script. 
 
 
 
